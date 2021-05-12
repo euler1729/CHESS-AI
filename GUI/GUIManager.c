@@ -1,5 +1,5 @@
 #include "GUIManager.h"
-
+#include "Sound.h"
 GuiManager *ManagerCreate()
 {
 	GuiManager *res = (GuiManager *)malloc(sizeof(GuiManager));
@@ -247,8 +247,6 @@ MANAGER_EVENT loadEvent(GuiManager *src)
 MANAGER_EVENT handleManagerDueToGameEvent(GuiManager *src, GAME_EVENT event)
 {
 	if (event == GAME_EVENT_NONE || src == NULL){
-		// char* audiofile = "./sound/simple_move.wav";
-		// playAudio(audiofile);
 		return MANAGER_NONE;
 	}
 		

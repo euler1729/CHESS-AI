@@ -9,6 +9,7 @@
 #include "Button.h"
 #include "Panel.h"
 #include <SDL2/SDL_mixer.h>
+// #include "Sound.h"
 
 //Represernts all events in game window
 typedef enum
@@ -304,12 +305,5 @@ extern GAME_EVENT buttonUp(GameWindow *src, SDL_Event *event, int win, const cha
  * @return 0 if quit else NO_EVENT
  */
 extern int buttonDown(GameWindow *src, SDL_Event *event, int win, const char **board_images);
-/**
- * @brief plays wav type audio
- * 
- * @param audioFile 
- */
-
-extern void playAudio(char* audioFile);
 
 #endif

@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include "GUI/GUIManager.h"
+#include "GUI/Sound.h"
 
 extern int startGuiMode();
 extern int currentState( GuiManager* manager);

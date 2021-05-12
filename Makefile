@@ -1,13 +1,13 @@
 CC = gcc
 
 OBJS =  Main.o ConsoleMode.o Search.o XMLREADWRITE.o XMLGameParser.o XMLSettingsParser.o ChessGame.o  ArrayList.o \
-GuiMode.o GUIManager.o MainMenu.o LoadWindow.o SettingWindow.o Panel.o Cell.o Button.o GameWindow.o     
+GuiMode.o GUIManager.o MainMenu.o LoadWindow.o SettingWindow.o Panel.o Cell.o Button.o GameWindow.o Sound.o  
 
 EXEC = CHESSAI
 COMP_FLAG = -std=c99 -Wall -Wextra -Werror -pedantic-errors
 
 SDL_COMP_FLAG = -I/usr/local/lib/sdl_2.0.5/include/SDL2 -D_REENTRANT
-SDL_LIB = -L/usr/local/lib/sdl_2.0.5/lib -Wl,-rpath,/usr/local/lib/sdl_2.0.5/lib -Wl,--enable-new-dtags -lSDL2 -lSDL2main -lm
+SDL_LIB = -L/usr/local/lib/sdl_2.0.5/lib -Wl,-rpath,/usr/local/lib/sdl_2.0.5/lib -Wl,--enable-new-dtags -lSDL2 -lSDL2main -lm -lSDL_mixer
 
 
 VPATH = GUI
@@ -52,5 +52,8 @@ Cell.o: Cell.c Button.h ConsoleMode.h
 	$(CC) $(COMP_FLAG) $(SDL_COMP_FLAG) -c GUI/$*.c
 Button.o: GUI/Button.c
 	$(CC) $(COMP_FLAG) $(SDL_COMP_FLAG) -c GUI/$*.c
+Sound.o: GUI/Sound.c
+	$(CC) $(COMP_FLAG) $(SDL_COMP_FLAG) -c GUI/$*.c
+
 clean:
 	rm -f $(OBJS) $(EXEC)

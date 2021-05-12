@@ -1,5 +1,5 @@
 #include "MainMenu.h"
-
+#include "Sound.h"
 
 MainWin* CreateMainWindow()
 {
@@ -84,11 +84,20 @@ MAIN_EVENT HandleMainWindowEvent(MainWin* src, SDL_Event* event)
             switch(clk)
             {
                 case MAIN_START_BUTTON:
-                    return MAIN_START;
-                case MAIN_LOAD_BUTTON:
-                    return MAIN_LOAD;
-                case MAIN_QUIT_BUTTON:
-                    return MAIN_EXIT;
+				{
+					playSound("sound/click.wav",SDL_MIX_MAXVOLUME);
+					return MAIN_START;
+				}
+                    
+                case MAIN_LOAD_BUTTON:{
+					playSound("sound/click.wav",SDL_MIX_MAXVOLUME);
+					return MAIN_LOAD;
+				}
+                case MAIN_QUIT_BUTTON:{
+					playSound("sound/click.wav",SDL_MIX_MAXVOLUME);
+					return MAIN_EXIT;
+				}
+                    
             }
             break;
         case SDL_WINDOWEVENT:

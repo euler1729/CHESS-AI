@@ -1,5 +1,5 @@
 #include "LoadWindow.h"
-
+#include "Sound.h"
 int isClickedOnLoad(int x, int y, LoadWin *src)
 {
 	assert(src != NULL);
@@ -150,22 +150,29 @@ LOAD_EVENT LoadWindowHandleEvent(LoadWin *src, SDL_Event *event)
 		{ //checks which button was clicked
 		case SLOT1_BUTTON:
 			activateAfterClick(src, lOAD_EVENT_SLOT1);
+			playSound("sound/click.wav",SDL_MIX_MAXVOLUME);
 			return lOAD_EVENT_NONE;
 		case SLOT2_BUTTON:
 			activateAfterClick(src, lOAD_EVENT_SLOT2);
+			playSound("sound/click.wav",SDL_MIX_MAXVOLUME);
 			return lOAD_EVENT_NONE;
 		case SLOT3_BUTTON:
 			activateAfterClick(src, lOAD_EVENT_SLOT3);
+			playSound("sound/click.wav",SDL_MIX_MAXVOLUME);
 			return lOAD_EVENT_NONE;
 		case SLOT4_BUTTON:
 			activateAfterClick(src, lOAD_EVENT_SLOT4);
+			playSound("sound/click.wav",SDL_MIX_MAXVOLUME);
 			return lOAD_EVENT_NONE;
 		case SLOT5_BUTTON:
 			activateAfterClick(src, lOAD_EVENT_SLOT5);
+			playSound("sound/click.wav",SDL_MIX_MAXVOLUME);
 			return lOAD_EVENT_NONE;
 		case LOAD_BACK_BUTTON:
+			playSound("sound/click.wav",SDL_MIX_MAXVOLUME);
 			return lOAD_EVENT_BACK;
 		case LOAD_LOAD_BUTTON:
+			playSound("sound/click.wav",SDL_MIX_MAXVOLUME);
 			return lOAD_EVENT_lOAD;
 		}
 		break;

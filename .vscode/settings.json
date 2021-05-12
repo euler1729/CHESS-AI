@@ -32,7 +32,11 @@
         "settingwindow.h": "c",
         "consolemode.h": "c",
         "arraylist.h": "c",
-        "xmlreadwrite.h": "c"
+        "xmlreadwrite.h": "c",
+        "guimode.h": "c",
+        "sound.h": "c",
+        "sdl.h": "c",
+        "guimanager.h": "c"
     },
     "terminal.integrated.shell.windows": "cmd.exe"
 }

@@ -2,12 +2,15 @@
 
 int startGuiMode()
 {
-
+    //Initialize SDL_videos and Audio_system
     if (SDL_Init(SDL_INIT_VIDEO) | SDL_Init(SDL_INIT_AUDIO))
     {
         printf("ERROR: Unable to initialize GUI: %s\n", SDL_GetError());
         return 1;
     }
+    //Initializing sound
+    initAudio();
+
 
     GuiManager *manager = ManagerCreate();
     // printf("error\n");
@@ -19,7 +22,10 @@ int startGuiMode()
 
     SDL_Event event;
     int quit = 0;
+    ManagerDraw(manager);
+    playMusic("sound/mainWindowMusic.wav",SDL_MIX_MAXVOLUME);
 
+    pauseAudio();
     while (!quit)
     {
         if (currentState(manager)) // if there's a Quit request
@@ -30,6 +36,13 @@ int startGuiMode()
 
         while (SDL_PollEvent(&event))
         {
+            if(manager->activeWin!=GAME_WINDOW){
+                // playMusic("GUI/sound/mainWindowMusic.wav",SDL_MIX_MAXVOLUME);
+                unPauseAudio();
+            }
+            else{
+                pauseAudio();
+            }
             if (currentState(manager))
             {
                 quit = 1;
@@ -44,6 +57,7 @@ int startGuiMode()
         }
     }
     SDL_Delay(500);
+    endAudio();
     ManagerDestroy(manager);
     SDL_Quit();
     return 0;
