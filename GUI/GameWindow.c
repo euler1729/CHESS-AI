@@ -1,5 +1,5 @@
 #include "GameWindow.h"
-#include "Sound.h"
+
 
 int isClickedOnGame(int x, int y, GameWindow *src)
 {
@@ -373,12 +373,14 @@ void Drag(GameWindow *src)
 		{ //updates the diatance every 5
 			src->moving_cell->location->x = src->target_x;
 			src->moving_cell->location->y = src->target_y;
+			playSound("sound/click.wav",SDL_MIX_MAXVOLUME);
 		}
 	}
 	else if (press && src->to_drag)
 	{
 		src->target_x = borderX(mouse_x);
 		src->target_y = borderY(mouse_y);
+		playSound("sound/click.wav",SDL_MIX_MAXVOLUME);
 	}
 }
 

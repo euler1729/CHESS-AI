@@ -1,5 +1,5 @@
 #include "SettingWindow.h"
-#include "Sound.h"
+
 
 int isClickedOnSetting(int x, int y,SettingsWin* src) 
 {

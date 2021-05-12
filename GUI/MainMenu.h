@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include "Button.h"
 #include "Panel.h"
+#include "Sound.h"
+
 // Buttons defining
 #define MAIN_START_BUTTON 0
 #define MAIN_LOAD_BUTTON 1

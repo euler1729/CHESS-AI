@@ -6,6 +6,9 @@
 #include <assert.h>
 #include "Button.h"
 #include "../ConsoleMode.h"
+#include "Sound.h"
+
+
 
 // BUTTONS DEFINING
 #define NOOB_BUTTON 0

@@ -2,6 +2,12 @@
 #define PANEL_H_
 
 #include "Cell.h"
+#include "Sound.h"
+
+
+
+
+
 #define NUM_OF_SET_PANEL_BUTTONS 6
 
 //Window define

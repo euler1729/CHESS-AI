@@ -1,5 +1,5 @@
 #include "LoadWindow.h"
-#include "Sound.h"
+
 int isClickedOnLoad(int x, int y, LoadWin *src)
 {
 	assert(src != NULL);

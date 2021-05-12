@@ -7,6 +7,8 @@
 #include "GameWindow.h"
 #include "LoadWindow.h"
 #include "SettingWindow.h"
+#include "Sound.h"
+
 
 #define MAX_OF_SAVED_FILES 5
 #define NUM_OF_IMAGES 15

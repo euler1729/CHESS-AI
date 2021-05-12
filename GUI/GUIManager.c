@@ -1,5 +1,5 @@
 #include "GUIManager.h"
-#include "Sound.h"
+
 GuiManager *ManagerCreate()
 {
 	GuiManager *res = (GuiManager *)malloc(sizeof(GuiManager));

@@ -6,6 +6,7 @@
 #include <assert.h>
 #include "Button.h"
 #include "../ConsoleMode.h"
+#include "Sound.h"
 
 //BUTTONS
 #define SLOT1_BUTTON 0
