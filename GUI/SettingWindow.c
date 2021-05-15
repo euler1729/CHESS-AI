@@ -238,40 +238,40 @@ SETTINGS_EVENT SettingsWindowHandleEvent(SettingsWin* src, SDL_Event* event,CH_G
 				return SETTINGS_EVENT_NONE;
 			case EASY_BUTTON:
 				gameDiffChanges(src,game,EASY_BUTTON);
-				playSound("sound/click.wav",SDL_MIX_MAXVOLUME);
+				playSound("sound/click2.wav",SDL_MIX_MAXVOLUME);
 				return SETTINGS_EVENT_NONE;
 			case MODERATE_BUTTON:
 				gameDiffChanges(src,game,MODERATE_BUTTON);
-				playSound("sound/click.wav",SDL_MIX_MAXVOLUME);
+				playSound("sound/click2.wav",SDL_MIX_MAXVOLUME);
 				return SETTINGS_EVENT_NONE;
 			case HARD_BUTTON:
 				gameDiffChanges(src,game,HARD_BUTTON);
-				playSound("sound/click.wav",SDL_MIX_MAXVOLUME);
+				playSound("sound/click2.wav",SDL_MIX_MAXVOLUME);
 				return SETTINGS_EVENT_NONE;
 			case WHITE_BUTTON:
 				gameColorChanges(src,game,1);
-				playSound("sound/click.wav",SDL_MIX_MAXVOLUME);
+				playSound("sound/click2.wav",SDL_MIX_MAXVOLUME);
 				return SETTINGS_EVENT_NONE;
 			case BLACK_BUTTON:
 				gameColorChanges(src,game,0);
-				playSound("sound/click.wav",SDL_MIX_MAXVOLUME);
+				playSound("sound/click2.wav",SDL_MIX_MAXVOLUME);
 				return SETTINGS_EVENT_NONE;
 			case TWO_PLAYER:
 				gameModeChanges(src,game,false);
-				playSound("sound/click.wav",SDL_MIX_MAXVOLUME);
+				playSound("sound/click2.wav",SDL_MIX_MAXVOLUME);
 				return SETTINGS_EVENT_NONE;
 			case ONE_PLAYER:
 				gameModeChanges(src,game,true);
-				playSound("sound/click.wav",SDL_MIX_MAXVOLUME);
+				playSound("sound/click2.wav",SDL_MIX_MAXVOLUME);
 				return SETTINGS_EVENT_NONE;
 			case SET_BACK_BUTTON:
-				playSound("sound/click.wav",SDL_MIX_MAXVOLUME);
+				playSound("sound/click2.wav",SDL_MIX_MAXVOLUME);
 				return SETTINGS_EVENT_BACK;
 			case SET_START_BUTTON:
-				playSound("sound/click.wav",SDL_MIX_MAXVOLUME);
+				playSound("sound/click2.wav",SDL_MIX_MAXVOLUME);
 				return SETTINGS_EVENT_START;
 			case SET_NEXT_BUTTON:
-				playSound("sound/click.wav",SDL_MIX_MAXVOLUME);
+				playSound("sound/click2.wav",SDL_MIX_MAXVOLUME);
 				return SETTINGS_EVENT_NEXT;
 		}
 		break;

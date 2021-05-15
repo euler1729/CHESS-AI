@@ -333,8 +333,9 @@ GAME_EVENT buttonUp(GameWindow *src, SDL_Event *event, int res, const char **boa
 	if (inRange(res, 0, ((GRID * GRID) - 1)) && (event->button.button == SDL_BUTTON_RIGHT))
 	{ //right click
 		correct = boardUpdate(src->boardPanel, src->game, board_images);
-		if (!correct)
+		if (!correct){
 			return GAME_EVENT_QUIT;
+		}
 		return GAME_EVENT_NONE;
 	}
 	if (inRange(res, 0, ((GRID * GRID) - 1)) && (event->button.button == SDL_BUTTON_LEFT))
@@ -343,10 +344,13 @@ GAME_EVENT buttonUp(GameWindow *src, SDL_Event *event, int res, const char **boa
 		if (playerFig(src->game, cell_src / GRID, cell_src % GRID))
 		{
 			correct = Moving(src, cell_src, res, board_images); // make move
-			if (correct == QUIT)
+			if (correct == QUIT){
 				return GAME_EVENT_QUIT; // check if move succeeded
-			else if (correct == RESTART)
+			}
+			else if (correct == RESTART){
 				return GAME_EVENT_RESTART;
+			}
+			playSound("sound/simple_move.wav",SDL_MIX_MAXVOLUME);
 			return GAME_EVENT_NONE;
 		}
 	}
@@ -373,14 +377,12 @@ void Drag(GameWindow *src)
 		{ //updates the diatance every 5
 			src->moving_cell->location->x = src->target_x;
 			src->moving_cell->location->y = src->target_y;
-			playSound("sound/click.wav",SDL_MIX_MAXVOLUME);
 		}
 	}
 	else if (press && src->to_drag)
 	{
 		src->target_x = borderX(mouse_x);
 		src->target_y = borderY(mouse_y);
-		playSound("sound/click.wav",SDL_MIX_MAXVOLUME);
 	}
 }
 
@@ -445,7 +447,7 @@ int buttonDown(GameWindow *src, SDL_Event *event, int res, const char **board_im
 	bool check;
 	row = (res / GRID); // row of event
 	col = (res % GRID); // col of event
-	if ((event->button.button == SDL_BUTTON_RIGHT) && inRange(res, 0, ((GRID * GRID) - 1)) && (src->game->difficulty <= DEFAULT_DIFFICULTY) && (src->game->mode == DEFAULT_MODE))
+	if ((event->button.button == SDL_BUTTON_RIGHT) && inRange(res, 0, ((GRID * GRID) - 1)) && (src->game->difficulty <= DEFAULT_DIFFICULTY) /*&& (src->game->mode == DEFAULT_MODE)*/)
 	{															  // get move pre-requesits
 		check = getMovesGui(src, row + 1, col + 1, board_images); // get moves
 		if (!check)
