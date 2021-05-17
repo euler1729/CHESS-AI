@@ -68,7 +68,7 @@ GameWindow *GameWindowdowCreate(CH_Game *game, const char **board_images)
 		return NULL;
 	}
 	//creates board surface
-	SDL_Surface *boardSurface = SDL_LoadBMP("./images/Boards/600x600/brown.bmp");
+	SDL_Surface *boardSurface = SDL_LoadBMP("././resources/images/Boards/600x600/brown.bmp");
 	if (boardSurface == NULL)
 	{
 		failMessage("Couldn't create game window(Surface)!");
@@ -81,7 +81,7 @@ GameWindow *GameWindowdowCreate(CH_Game *game, const char **board_images)
 
 	SDL_FreeSurface(boardSurface);
 	//creates settings surface
-	SDL_Surface *settingSurface = SDL_LoadBMP("./images/pic/graySquare.bmp");
+	SDL_Surface *settingSurface = SDL_LoadBMP("./resources/images/pic/graySquare.bmp");
 	if (settingSurface == NULL)
 	{
 		failMessage("Couldn't create game window(settingSurface)!");
@@ -156,7 +156,7 @@ int boardUpdate(Panel *panel, CH_Game *game, const char **board_images)
 
 	const char *img = NULL;
 	SDL_Texture *cellTexture = NULL;
-	SDL_Surface *boardSurface = SDL_LoadBMP("./images/Boards/600x600/brown.bmp");
+	SDL_Surface *boardSurface = SDL_LoadBMP("./resources/images/Boards/600x600/brown.bmp");
 
 	if (boardSurface == NULL)
 	{
@@ -296,37 +296,37 @@ GAME_EVENT buttonUp(GameWindow *src, SDL_Event *event, int res, const char **boa
 
 	if (res == EXIT_GAME_BUTTON) //click on exit
 	{
-		playSound("sound/click.wav",SDL_MIX_MAXVOLUME);
+		playSound("./resources/sound/click.wav",SDL_MIX_MAXVOLUME);
 		SDL_Delay(400);
 		return exitMessage(src, true);
 	}	
 	if (res == MAIN_MENU_GAME_BUTTON) //click on main menu
 	{
-		playSound("sound/click.wav",SDL_MIX_MAXVOLUME);
+		playSound("./resources/sound/click.wav",SDL_MIX_MAXVOLUME);
 		SDL_Delay(500);
 		return exitMessage(src, false);
 	}	
 	if (res == RESTART_GAME_BUTTON) //click on restart
 	{
-		playSound("sound/click.wav",SDL_MIX_MAXVOLUME);
+		playSound("./resources/sound/click.wav",SDL_MIX_MAXVOLUME);
 		SDL_Delay(200);
 		return GAME_EVENT_RESTART;
 	}	
 	if (res == LOAD_GAME_BUTTON) //click on load
 	{
-		playSound("sound/click.wav",SDL_MIX_MAXVOLUME);
+		playSound("./resources/sound/click.wav",SDL_MIX_MAXVOLUME);
 		SDL_Delay(200);
 		return GAME_EVENT_LOAD;
 	}	
 	if (res == SAVE_GAME_BUTTON) //click on save
 	{
-		playSound("sound/click.wav",SDL_MIX_MAXVOLUME);
+		playSound("./resources/sound/click.wav",SDL_MIX_MAXVOLUME);
 		SDL_Delay(200);
 		return GAME_EVENT_SAVE;
 	}	
 	if (res == UNDO_GAME_BUTTON) //click on undo
 	{
-		playSound("sound/click.wav",SDL_MIX_MAXVOLUME);
+		playSound("./resources/sound/click.wav",SDL_MIX_MAXVOLUME);
 		SDL_Delay(200);
 		return GAME_EVENT_UNDO;
 	}	
@@ -350,7 +350,7 @@ GAME_EVENT buttonUp(GameWindow *src, SDL_Event *event, int res, const char **boa
 			else if (correct == RESTART){
 				return GAME_EVENT_RESTART;
 			}
-			playSound("sound/simple_move.wav",SDL_MIX_MAXVOLUME);
+			playSound("./resources/sound/simple_move.wav",SDL_MIX_MAXVOLUME);
 			return GAME_EVENT_NONE;
 		}
 	}
@@ -567,8 +567,7 @@ int statusMessage(GameWindow *src)
 		if (!(src->check_printed))
 		{							   //check wasnt printed this round
 			src->check_printed = true; // check is printed
-			SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION,
-									 "Game Status", "There is a CHECK!", NULL);
+			SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION,"Game Status", "There is a CHECK!", NULL);
 		}
 		return CHECK_FLAG;
 	}

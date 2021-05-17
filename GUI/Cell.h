@@ -2,7 +2,7 @@
 #define CELL_H_
 
 #include "Button.h"
-#include "../ConsoleMode.h"
+#include "../ENGINE/ConsoleMode.h"
 
 //Represents Board Cell in the game
 typedef struct cell

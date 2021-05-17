@@ -83,27 +83,27 @@ bool setButtonsInit(SettingsWin* src){
 
 	//create buttons
 	src->buttonList[NOOB_BUTTON] = Create_Button(&noob, src->renderer,
-			"./images/pic/noobFinal.bmp", "./images/pic/noob.bmp", false,false,false);
+			"./resources/images/pic/noobFinal.bmp", "./resources/images/pic/noob.bmp", false,false,false);
 	src->buttonList[EASY_BUTTON] = Create_Button(&easy, src->renderer,
-			"./images/pic/easyFinal.bmp", "./images/pic/easy.bmp", true,false,true);
+			"./resources/images/pic/easyFinal.bmp", "./resources/images/pic/easy.bmp", true,false,true);
 	src->buttonList[MODERATE_BUTTON] = Create_Button(&moderate, src->renderer,
-			"./images/pic/moderateFinal.bmp", "./images/pic/moderate.bmp", false, false,false);
+			"./resources/images/pic/moderateFinal.bmp", "./resources/images/pic/moderate.bmp", false, false,false);
 	src->buttonList[HARD_BUTTON] = Create_Button(&hard, src->renderer,
-			"./images/pic/hardFinal.bmp", "./images/pic/hard.bmp", false, false,false);
+			"./resources/images/pic/hardFinal.bmp", "./resources/images/pic/hard.bmp", false, false,false);
 	src->buttonList[WHITE_BUTTON] = Create_Button(&white, src->renderer,
-			"./images/pic/k_b_wFinal.bmp", "./images/pic/k_b_w.bmp", true, false,true);
+			"./resources/images/pic/k_b_wFinal.bmp", "./resources/images/pic/k_b_w.bmp", true, false,true);
 	src->buttonList[BLACK_BUTTON] = Create_Button(&black, src->renderer,
-			"./images/pic/k_b_bFinal.bmp", "./images/pic/k_b_b.bmp", false, false,false);
+			"./resources/images/pic/k_b_bFinal.bmp", "./resources/images/pic/k_b_b.bmp", false, false,false);
 	src->buttonList[TWO_PLAYER] = Create_Button(&twoPlayer, src->renderer,
-			"./images/pic/twoPlayersFinal.bmp", "./images/pic/twoPlayers.bmp", false, true,false);
+			"./resources/images/pic/twoPlayersFinal.bmp", "./resources/images/pic/twoPlayers.bmp", false, true,false);
 	src->buttonList[ONE_PLAYER] = Create_Button(&onePlayer, src->renderer,
-			"./images/pic/onePlayerFinal.bmp", "./images/pic/onePlayer.bmp", true, true,true);
+			"./resources/images/pic/onePlayerFinal.bmp", "./resources/images/pic/onePlayer.bmp", true, true,true);
 	src->buttonList[SET_BACK_BUTTON] = Create_Button(&backR, src->renderer,
-			"./images/pic/Back.bmp", "./images/pic/Back.bmp", true, true,false);
+			"./resources/images/pic/Back.bmp", "./resources/images/pic/Back.bmp", true, true,false);
 	src->buttonList[SET_START_BUTTON] = Create_Button(&startR, src->renderer,
-			"./images/pic/startGame.bmp", "./images/pic/startGame.bmp", false, false,false);
+			"./resources/images/pic/startGame.bmp", "./resources/images/pic/startGame.bmp", false, false,false);
 	src->buttonList[SET_NEXT_BUTTON] = Create_Button(&nextR, src->renderer,
-			"./images/pic/next.bmp", "./images/pic/next.bmp", false, true,false);
+			"./resources/images/pic/next.bmp", "./resources/images/pic/next.bmp", false, true,false);
 	for(int i=0;i<NUM_OF_SET_BUTTONS;i++){
 		if(src->buttonList[i] == NULL){ // check if all buttons created
 			failMessage("Couldn't create button!");
@@ -146,7 +146,7 @@ void SettingsWindowDraw(SettingsWin* src)
 		return;
 	}
 	//drawing background
-	SDL_Surface* mainMenuSurface = SDL_LoadBMP("./images/pic/mainbg.bmp");
+	SDL_Surface* mainMenuSurface = SDL_LoadBMP("./resources/images/pic/mainbg.bmp");
 	SDL_Texture* bgTexture = SDL_CreateTextureFromSurface(src->renderer, mainMenuSurface);
 	SDL_FreeSurface(mainMenuSurface);
 	SDL_RenderCopy(src->renderer, bgTexture, NULL, NULL);
@@ -234,44 +234,44 @@ SETTINGS_EVENT SettingsWindowHandleEvent(SettingsWin* src, SDL_Event* event,CH_G
         { // switch on which button was clicked
 			case NOOB_BUTTON:
 				gameDiffChanges(src,game,NOOB_BUTTON);
-				playSound("sound/click.wav",SDL_MIX_MAXVOLUME);
+				playSound("./resources/sound/click2.wav",SDL_MIX_MAXVOLUME);
 				return SETTINGS_EVENT_NONE;
 			case EASY_BUTTON:
 				gameDiffChanges(src,game,EASY_BUTTON);
-				playSound("sound/click2.wav",SDL_MIX_MAXVOLUME);
+				playSound("./resources/sound/click2.wav",SDL_MIX_MAXVOLUME);
 				return SETTINGS_EVENT_NONE;
 			case MODERATE_BUTTON:
 				gameDiffChanges(src,game,MODERATE_BUTTON);
-				playSound("sound/click2.wav",SDL_MIX_MAXVOLUME);
+				playSound("./resources/sound/click2.wav",SDL_MIX_MAXVOLUME);
 				return SETTINGS_EVENT_NONE;
 			case HARD_BUTTON:
 				gameDiffChanges(src,game,HARD_BUTTON);
-				playSound("sound/click2.wav",SDL_MIX_MAXVOLUME);
+				playSound("./resources/sound/click2.wav",SDL_MIX_MAXVOLUME);
 				return SETTINGS_EVENT_NONE;
 			case WHITE_BUTTON:
 				gameColorChanges(src,game,1);
-				playSound("sound/click2.wav",SDL_MIX_MAXVOLUME);
+				playSound("./resources/sound/click2.wav",SDL_MIX_MAXVOLUME);
 				return SETTINGS_EVENT_NONE;
 			case BLACK_BUTTON:
 				gameColorChanges(src,game,0);
-				playSound("sound/click2.wav",SDL_MIX_MAXVOLUME);
+				playSound("./resources/sound/click2.wav",SDL_MIX_MAXVOLUME);
 				return SETTINGS_EVENT_NONE;
 			case TWO_PLAYER:
 				gameModeChanges(src,game,false);
-				playSound("sound/click2.wav",SDL_MIX_MAXVOLUME);
+				playSound("./resources/sound/click2.wav",SDL_MIX_MAXVOLUME);
 				return SETTINGS_EVENT_NONE;
 			case ONE_PLAYER:
 				gameModeChanges(src,game,true);
-				playSound("sound/click2.wav",SDL_MIX_MAXVOLUME);
+				playSound("./resources/sound/click2.wav",SDL_MIX_MAXVOLUME);
 				return SETTINGS_EVENT_NONE;
 			case SET_BACK_BUTTON:
-				playSound("sound/click2.wav",SDL_MIX_MAXVOLUME);
+				playSound("./resources/sound/click2.wav",SDL_MIX_MAXVOLUME);
 				return SETTINGS_EVENT_BACK;
 			case SET_START_BUTTON:
-				playSound("sound/click2.wav",SDL_MIX_MAXVOLUME);
+				playSound("./resources/sound/click2.wav",SDL_MIX_MAXVOLUME);
 				return SETTINGS_EVENT_START;
 			case SET_NEXT_BUTTON:
-				playSound("sound/click2.wav",SDL_MIX_MAXVOLUME);
+				playSound("./resources/sound/click2.wav",SDL_MIX_MAXVOLUME);
 				return SETTINGS_EVENT_NEXT;
 		}
 		break;

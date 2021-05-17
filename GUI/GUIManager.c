@@ -44,33 +44,33 @@ GuiManager *ManagerCreate()
 void updateImages(GuiManager *src)
 {
 	//init all board images
-	src->board_images[WHITE_PAWN_IMG] = "./images/pic/WhiteP.bmp";
-	src->board_images[WHITE_BISHOP_IMG] = "./images/pic/WhiteB.bmp";
-	src->board_images[WHITE_ROOK_IMG] = "./images/pic/WhiteR.bmp";
-	src->board_images[WHITE_KNIGHT_IMG] = "./images/pic/WhiteN.bmp";
-	src->board_images[WHITE_QUEEN_IMG] = "./images/pic/WhiteQ.bmp";
-	src->board_images[WHITE_KING_IMG] = "./images/pic/WhiteK.bmp";
+	src->board_images[WHITE_PAWN_IMG] = "./resources/images/pic/WhiteP.bmp";
+	src->board_images[WHITE_BISHOP_IMG] = "./resources/images/pic/WhiteB.bmp";
+	src->board_images[WHITE_ROOK_IMG] = "./resources/images/pic/WhiteR.bmp";
+	src->board_images[WHITE_KNIGHT_IMG] = "./resources/images/pic/WhiteN.bmp";
+	src->board_images[WHITE_QUEEN_IMG] = "./resources/images/pic/WhiteQ.bmp";
+	src->board_images[WHITE_KING_IMG] = "./resources/images/pic/WhiteK.bmp";
 
-	src->board_images[BLACK_PAWN_IMG] = "./images/pic/BlackP.bmp";
-	src->board_images[BLACK_BISHOP_IMG] = "./images/pic/BlackB.bmp";
-	src->board_images[BLACK_ROOK_IMG] = "./images/pic/BlackR.bmp";
-	src->board_images[BLACK_KNIGHT_IMG] = "./images/pic/BlackN.bmp";
-	src->board_images[BLACK_QUEEN_IMG] = "./images/pic/BlackQ.bmp";
-	src->board_images[BLACK_KING_IMG] = "./images/pic/BlackK.bmp";
+	src->board_images[BLACK_PAWN_IMG] = "./resources/images/pic/BlackP.bmp";
+	src->board_images[BLACK_BISHOP_IMG] = "./resources/images/pic/BlackB.bmp";
+	src->board_images[BLACK_ROOK_IMG] = "./resources/images/pic/BlackR.bmp";
+	src->board_images[BLACK_KNIGHT_IMG] = "./resources/images/pic/BlackN.bmp";
+	src->board_images[BLACK_QUEEN_IMG] = "./resources/images/pic/BlackQ.bmp";
+	src->board_images[BLACK_KING_IMG] = "./resources/images/pic/BlackK.bmp";
 
-	src->board_images[RED_CELL_IMG] = "./images/pic/redCell.bmp";
-	src->board_images[YELLOW_CELL_IMG] = "./images/pic/yellowCell.bmp";
-	src->board_images[GREEN_CELL_IMG] = "./images/pic/greenCell.bmp";
+	src->board_images[RED_CELL_IMG] = "./resources/images/pic/redCell.bmp";
+	src->board_images[YELLOW_CELL_IMG] = "./resources/images/pic/yellowCell.bmp";
+	src->board_images[GREEN_CELL_IMG] = "./resources/images/pic/greenCell.bmp";
 }
 
 void initSaves(GuiManager *src)
 {
 	//init all save paths
-	src->saved_games[FILE_SLOT_1] = "./GUI/saved_games/file_0.xml";
-	src->saved_games[FILE_SLOT_2] = "./GUI/saved_games/file_1.xml";
-	src->saved_games[FILE_SLOT_3] = "./GUI/saved_games/file_2.xml";
-	src->saved_games[FILE_SLOT_4] = "./GUI/saved_games/file_3.xml";
-	src->saved_games[FILE_SLOT_5] = "./GUI/saved_games/file_4.xml";
+	src->saved_games[FILE_SLOT_1] = "./resources/saved_games/file_0.xml";
+	src->saved_games[FILE_SLOT_2] = "./resources/saved_games/file_1.xml";
+	src->saved_games[FILE_SLOT_3] = "./resources/saved_games/file_2.xml";
+	src->saved_games[FILE_SLOT_4] = "./resources/saved_games/file_3.xml";
+	src->saved_games[FILE_SLOT_5] = "./resources/saved_games/file_4.xml";
 }
 
 void ManagerDestroy(GuiManager *src)

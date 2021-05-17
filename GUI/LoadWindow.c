@@ -82,19 +82,19 @@ bool loadButtonInit(LoadWin *win, int num_of_saved_games)
 
 	//buttons create
 	win->buttonList[SLOT1_BUTTON] = Create_Button(&slot1, win->rendererLoad,
-												  "./images/pic/GameSlot1Final.bmp", "./images/pic/GameSlot1.bmp", false, false, false);
+												  "./resources/images/pic/GameSlot1Final.bmp", "./resources/images/pic/GameSlot1.bmp", false, false, false);
 	win->buttonList[SLOT2_BUTTON] = Create_Button(&slot2, win->rendererLoad,
-												  "./images/pic/GameSlot2Final.bmp", "./images/pic/GameSlot2.bmp", false, false, false);
+												  "./resources/images/pic/GameSlot2Final.bmp", "./resources/images/pic/GameSlot2.bmp", false, false, false);
 	win->buttonList[SLOT3_BUTTON] = Create_Button(&slot3, win->rendererLoad,
-												  "./images/pic/GameSlot3Final.bmp", "./images/pic/GameSlot3.bmp", false, false, false);
+												  "./resources/images/pic/GameSlot3Final.bmp", "./resources/images/pic/GameSlot3.bmp", false, false, false);
 	win->buttonList[SLOT4_BUTTON] = Create_Button(&slot4, win->rendererLoad,
-												  "./images/pic/GameSlot4Final.bmp", "./images/pic/GameSlot4.bmp", false, false, false);
+												  "./resources/images/pic/GameSlot4Final.bmp", "./resources/images/pic/GameSlot4.bmp", false, false, false);
 	win->buttonList[SLOT5_BUTTON] = Create_Button(&slot5, win->rendererLoad,
-												  "./images/pic/GameSlot5Final.bmp", "./images/pic/GameSlot5.bmp", false, false, false);
+												  "./resources/images/pic/GameSlot5Final.bmp", "./resources/images/pic/GameSlot5.bmp", false, false, false);
 	win->buttonList[LOAD_BACK_BUTTON] = Create_Button(&backR, win->rendererLoad,
-													  "./images/pic/Back.bmp", "./images/pic/Back.bmp", true, true, false);
+													  "./resources/images/pic/Back.bmp", "./resources/images/pic/Back.bmp", true, true, false);
 	win->buttonList[LOAD_LOAD_BUTTON] = Create_Button(&loadR, win->rendererLoad,
-													  "./images/pic/LoadGameFinal.bmp", "./images/pic/LoadGame.bmp", false, true, false);
+													  "./resources/images/pic/LoadGameFinal.bmp", "./resources/images/pic/LoadGame.bmp", false, true, false);
 	for (int i = 0; i < num_of_saved_games; i++)
 	{
 		win->buttonList[i]->isEnabled = false;
@@ -116,7 +116,7 @@ void LoadWindowDraw(LoadWin *src)
 	assert(src != NULL);
 
 	//drawing background
-	SDL_Surface* surface = SDL_LoadBMP("./images/pic/mainbg.bmp");
+	SDL_Surface* surface = SDL_LoadBMP("./resources/images/pic/mainbg.bmp");
 	if(surface==NULL){
 		failMessage("Couldn't Load surface!\n");
 	}
@@ -150,29 +150,29 @@ LOAD_EVENT LoadWindowHandleEvent(LoadWin *src, SDL_Event *event)
 		{ //checks which button was clicked
 		case SLOT1_BUTTON:
 			activateAfterClick(src, lOAD_EVENT_SLOT1);
-			playSound("sound/click2.wav",SDL_MIX_MAXVOLUME);
+			playSound("./resources/sound/click2.wav",SDL_MIX_MAXVOLUME);
 			return lOAD_EVENT_NONE;
 		case SLOT2_BUTTON:
 			activateAfterClick(src, lOAD_EVENT_SLOT2);
-			playSound("sound/click2.wav",SDL_MIX_MAXVOLUME);
+			playSound("./resources/sound/click2.wav",SDL_MIX_MAXVOLUME);
 			return lOAD_EVENT_NONE;
 		case SLOT3_BUTTON:
 			activateAfterClick(src, lOAD_EVENT_SLOT3);
-			playSound("sound/click2.wav",SDL_MIX_MAXVOLUME);
+			playSound("./resources/sound/click2.wav",SDL_MIX_MAXVOLUME);
 			return lOAD_EVENT_NONE;
 		case SLOT4_BUTTON:
 			activateAfterClick(src, lOAD_EVENT_SLOT4);
-			playSound("sound/click2.wav",SDL_MIX_MAXVOLUME);
+			playSound("./resources/sound/click2.wav",SDL_MIX_MAXVOLUME);
 			return lOAD_EVENT_NONE;
 		case SLOT5_BUTTON:
 			activateAfterClick(src, lOAD_EVENT_SLOT5);
-			playSound("sound/click2.wav",SDL_MIX_MAXVOLUME);
+			playSound("./resources/sound/click2.wav",SDL_MIX_MAXVOLUME);
 			return lOAD_EVENT_NONE;
 		case LOAD_BACK_BUTTON:
-			playSound("sound/click2.wav",SDL_MIX_MAXVOLUME);
+			playSound("./resources/sound/click2.wav",SDL_MIX_MAXVOLUME);
 			return lOAD_EVENT_BACK;
 		case LOAD_LOAD_BUTTON:
-			playSound("sound/click2.wav",SDL_MIX_MAXVOLUME);
+			playSound("./resources/sound/click2.wav",SDL_MIX_MAXVOLUME);
 			return lOAD_EVENT_lOAD;
 		}
 		break;

@@ -74,22 +74,22 @@ Button **CreateSetPanelButtons(SDL_Renderer *renderer)
 
 	//buttons create
 	buttonList[0] = Create_Button(&restartR, renderer,
-								  "./images/pic/restart.bmp", "./images/pic/restart.bmp", true, true,
+								  "./resources/images/pic/restart.bmp", "./resources/images/pic/restart.bmp", true, true,
 								  false);
 	buttonList[1] = Create_Button(&saveR, renderer,
-								  "./images/pic/saveGame.bmp", "./images/pic/saveGame.bmp", true,
+								  "./resources/images/pic/saveGame.bmp", "./resources/images/pic/saveGame.bmp", true,
 								  true, false);
 	buttonList[2] = Create_Button(&loadR, renderer,
-								  "./images/pic/LoadGameFinal.bmp", "./images/pic/LoadGameFinal.bmp",
+								  "./resources/images/pic/LoadGameFinal.bmp", "./resources/images/pic/LoadGameFinal.bmp",
 								  true, true, false);
 	buttonList[3] = Create_Button(&undoR, renderer,
-								  "./images/pic/UndoFinal.bmp", "./images/pic/undo.bmp", false,
+								  "./resources/images/pic/UndoFinal.bmp", "./resources/images/pic/undo.bmp", false,
 								  true, false);
 	buttonList[4] = Create_Button(&mainMenuR, renderer,
-								  "./images/pic/mainMenu.bmp", "./images/pic/mainMenu.bmp", true,
+								  "./resources/images/pic/mainMenu.bmp", "./resources/images/pic/mainMenu.bmp", true,
 								  true, false);
 	buttonList[5] = Create_Button(&exitR, renderer,
-								  "./images/pic/QuitGameFinal.bmp", "./images/pic/QuitGameFinal.bmp", true,
+								  "./resources/images/pic/QuitGameFinal.bmp", "./resources/images/pic/QuitGameFinal.bmp", true,
 								  true, false);
 
 	for (int i = 0; i < NUM_OF_SET_PANEL_BUTTONS; ++i)

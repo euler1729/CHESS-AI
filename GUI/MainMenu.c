@@ -39,12 +39,12 @@ MainWin* CreateMainWindow()
 	SDL_Rect exitR = { .x = MAIN_X, .y = MAIN_Y+MAIN_H*2+MAIN_OFFSET*2, .h = MAIN_H, .w = MAIN_W };
 	//create buttons
 	res->buttonList[MAIN_START_BUTTON]=Create_Button(&startR, res->mainRenderer,
-			"./images/pic/newGameFinal.bmp","./images/pic/newGameFinal.bmp", true,true,false);
+			"./resources/images/pic/newGameFinal.bmp","./resources/images/pic/newGameFinal.bmp", true,true,false);
     // printf("error\n");
 	res->buttonList[MAIN_LOAD_BUTTON]=Create_Button(&loadR, res->mainRenderer,
-			"./images/pic/LoadGameFinal.bmp", "./images/pic/LoadGameFinal.bmp", true,true,false);
+			"./resources/images/pic/LoadGameFinal.bmp", "./resources/images/pic/LoadGameFinal.bmp", true,true,false);
 	res->buttonList[MAIN_QUIT_BUTTON]=Create_Button(&exitR, res->mainRenderer,
-			"./images/pic/QuitGameFinal.bmp", "./images/pic/QuitGameFinal.bmp", true,true,false);
+			"./resources/images/pic/QuitGameFinal.bmp", "./resources/images/pic/QuitGameFinal.bmp", true,true,false);
 	for(int i=0;i<NUM_OF_MAIN_BUTTONS;i++){
 		if(res->buttonList[i]==NULL){
 			failMessage("Couldn't create button!");
@@ -59,7 +59,7 @@ void DrawMainWindow(MainWin* src)
 	assert(src!=NULL);
     //drawing background
 
-	SDL_Surface* mainMenuSurface = SDL_LoadBMP("./images/pic/mainbg.bmp");
+	SDL_Surface* mainMenuSurface = SDL_LoadBMP("./resources/images/pic/mainbg.bmp");
 	SDL_Texture* bgTexture = SDL_CreateTextureFromSurface(src->mainRenderer, mainMenuSurface);
 	SDL_FreeSurface(mainMenuSurface);
 	SDL_RenderCopy(src->mainRenderer, bgTexture, NULL, NULL);
@@ -85,16 +85,16 @@ MAIN_EVENT HandleMainWindowEvent(MainWin* src, SDL_Event* event)
             {
                 case MAIN_START_BUTTON:
 				{
-					playSound("sound/click2.wav",SDL_MIX_MAXVOLUME);
+					playSound("./resources/sound/click2.wav",SDL_MIX_MAXVOLUME);
 					return MAIN_START;
 				}
                     
                 case MAIN_LOAD_BUTTON:{
-					playSound("sound/click2.wav",SDL_MIX_MAXVOLUME);
+					playSound("./resources/sound/click2.wav",SDL_MIX_MAXVOLUME);
 					return MAIN_LOAD;
 				}
                 case MAIN_QUIT_BUTTON:{
-					playSound("sound/click2.wav",SDL_MIX_MAXVOLUME);
+					playSound("./resources/sound/click2.wav",SDL_MIX_MAXVOLUME);
 					return MAIN_EXIT;
 				}
                     

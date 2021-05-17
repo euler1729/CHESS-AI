@@ -5,7 +5,7 @@
 #include <math.h>
 #include <time.h>
 #include <assert.h>
-#include "../ConsoleMode.h"
+#include "../ENGINE/ConsoleMode.h"
 #include "Button.h"
 #include "Panel.h"
 #include <SDL2/SDL_mixer.h>
