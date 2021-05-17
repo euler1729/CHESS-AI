@@ -56,4 +56,4 @@ Sound.o: GUI/Sound.c
 	$(CC) $(COMP_FLAG) $(SDL_COMP_FLAG) -c GUI/$*.c
 
 clean:
-	rm -f $(OBJS) $(EXEC)
+	rm -f $(OBJS)
