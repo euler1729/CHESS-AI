@@ -2,5 +2,6 @@
 **/*.exe
 **/*.docx
 **/*.png
+**/CHESSAI
 **/OBJS
 **/*.xml

@@ -68,7 +68,7 @@ GameWindow *GameWindowdowCreate(CH_Game *game, const char **board_images)
 		return NULL;
 	}
 	//creates board surface
-	SDL_Surface *boardSurface = SDL_LoadBMP("././resources/images/Boards/600x600/brown.bmp");
+	SDL_Surface *boardSurface = SDL_LoadBMP("././resources/images/Boards/brown.bmp");
 	if (boardSurface == NULL)
 	{
 		failMessage("Couldn't create game window(Surface)!");
@@ -156,7 +156,7 @@ int boardUpdate(Panel *panel, CH_Game *game, const char **board_images)
 
 	const char *img = NULL;
 	SDL_Texture *cellTexture = NULL;
-	SDL_Surface *boardSurface = SDL_LoadBMP("./resources/images/Boards/600x600/brown.bmp");
+	SDL_Surface *boardSurface = SDL_LoadBMP("./resources/images/Boards/brown.bmp");
 
 	if (boardSurface == NULL)
 	{
