@@ -9,8 +9,10 @@
 // Buttons defining
 #define MAIN_START_BUTTON 0
 #define MAIN_LOAD_BUTTON 1
-#define MAIN_QUIT_BUTTON 2
-#define NUM_OF_MAIN_BUTTONS 3
+#define MAIN_INTRO_BUTTON 2
+#define MAIN_QUIT_BUTTON 3
+
+#define NUM_OF_MAIN_BUTTONS 4
 
 //WINDOW SIZES
 #define MAIN_WINDOW_H 600
@@ -22,11 +24,11 @@
 #define MAIN_B 100
 
 //BUTTON DIMENSION
-#define MAIN_X 75
+#define MAIN_X 325
 #define MAIN_Y 25
 #define MAIN_H 100
 #define MAIN_W 250
-#define MAIN_OFFSET 25
+#define MAIN_OFFSET 20
 
 //FLAGS
 #define ERROR_FLAG_MAIN -1
@@ -35,11 +37,12 @@
 
 //represents all possible main events
 typedef enum{
-    MAIN_EXIT,
-    MAIN_START,
     MAIN_INVALID_ARGUMENT,
+    MAIN_START,
+    MAIN_LOAD,
+    MAIN_INTRO_WINDOW,
     MAIN_NONE,
-    MAIN_LOAD
+    MAIN_EXIT
 }MAIN_EVENT;
 
 //represents main window

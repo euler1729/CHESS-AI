@@ -23,6 +23,7 @@ GuiManager *ManagerCreate()
 	res->settingsWin = NULL;
 	res->loadWin = NULL;
 	res->GameWindow = NULL;
+	res->introWin = NULL;
 	res->activeWin = MAIN_WINDOW;
 	res->prevWin = MAIN_WINDOW;
 	res->game = gameCreate(HISTORY_SIZE, DEFAULT_DIFFICULTY, DEFAULT_COLOR, DEFAULT_MODE); //create game
@@ -93,6 +94,8 @@ void ManagerDestroy(GuiManager *src)
 	src->mainWin = NULL;
 	if (src->game != NULL)
 		gameDestroy(src->game);
+	if(src->introWin != NULL)
+		IntroWindowDestroy(src->introWin);
 	free(src);
 }
 
@@ -106,15 +109,21 @@ void ManagerDraw(GuiManager *src)
 		GameWindowdowDraw(src->GameWindow);
 	else if (src->activeWin == SETTINGS_WINDOW)
 		SettingsWindowDraw(src->settingsWin);
-	else
+	else if (src->activeWin == INTRO_WINDOW)
+		IntroWindowDraw(src->introWin);
+	else if(src->activeWin == LOAD_WINDOW)
 		LoadWindowDraw(src->loadWin);
+	else{
+		printf("error in ManagerDraw\n");
+	}
 }
+
 
 MANAGER_EVENT handleManagerDueToMainEvent(GuiManager *src, MAIN_EVENT event)
 {
 	assert(src != NULL);
 	if (event == MAIN_START)
-	{ //if the user clicked on start
+	{ //if clicked on start
 		MainWindowHide(src->mainWin);
 		if (src->settingsWin != NULL)
 			SettingsWindowDestroy(src->settingsWin);
@@ -128,11 +137,12 @@ MANAGER_EVENT handleManagerDueToMainEvent(GuiManager *src, MAIN_EVENT event)
 		SettingsWindowShow(src->settingsWin);
 	}
 	if (event == MAIN_LOAD)
-	{ //if the user clicked on load
+	{ //if clicked on load
 		MainWindowHide(src->mainWin);
 		src->prevWin = MAIN_WINDOW;
-		if (src->loadWin != NULL)
+		if (src->loadWin != NULL){
 			LoadWindowDestroy(src->loadWin);
+		}
 		src->loadWin = LoadWindowCreate(num_of_saved_files(src)); //go to load window
 		if (src->loadWin == NULL)
 		{
@@ -142,19 +152,52 @@ MANAGER_EVENT handleManagerDueToMainEvent(GuiManager *src, MAIN_EVENT event)
 		src->activeWin = LOAD_WINDOW; //set active window to load window
 		LoadWindowShow(src->loadWin);
 	}
+	if(event == MAIN_INTRO_WINDOW)
+	{
+		MainWindowHide(src->mainWin);
+		src->prevWin = MAIN_WINDOW;
+
+		if(src->introWin==NULL){
+			src->introWin = IntroWindowCreate();
+		}
+		
+		if(src->introWin==NULL){
+			failMessage("Couldn't Create intro window in GUIMANAGER!\n");
+			return MANAGER_QUIT;
+		}
+		src->activeWin = INTRO_WINDOW;
+		IntroWindowShow(src->introWin);
+	}
 	if (event == MAIN_EXIT)
-	{ //quit game if the user clicked on exit
+	{ //quit game if clicked on exit
 		return MANAGER_QUIT;
 	}
 	return MANAGER_NONE;
 }
+MANAGER_EVENT HandleEventDueToIntroWindow(GuiManager* src, INTRO_EVENT event)
+{
+	assert(src!=NULL);
+	if(event == INTRO_BUTTON_BACK)
+	{
+		IntroWindowHide(src->introWin);
+		MainWindowShow(src->mainWin);
+		src->activeWin = MAIN_WINDOW;
+		src->prevWin = INTRO_WINDOW;
+		return MANAGER_NONE;
+	}
+	if(event == INTRO_WINDOW_EVENT_QUIT){
+		return MANAGER_QUIT;
+	}
+	return MANAGER_NONE;
+}
+
 
 MANAGER_EVENT handleManagerDueToLoadEvent(GuiManager *src, LOAD_EVENT event)
 {
 	assert(src != NULL);
 	int correct;
 	if (event == lOAD_EVENT_BACK)
-	{ //if the user clicked on back
+	{ //if clicked on back
 		LoadWindowHide(src->loadWin);
 		if (src->prevWin == MAIN_WINDOW)
 		{
@@ -176,7 +219,7 @@ MANAGER_EVENT handleManagerDueToLoadEvent(GuiManager *src, LOAD_EVENT event)
 	{ // load button was clicked
 		return loadEvent(src);
 	}
-	if (event == LOAD_EVENT_QUIT) //if the user clicked on quit
+	if (event == LOAD_EVENT_QUIT) //if clicked on quit
 		return MANAGER_QUIT;
 	return MANAGER_NONE;
 }
@@ -247,16 +290,17 @@ MANAGER_EVENT loadEvent(GuiManager *src)
 MANAGER_EVENT handleManagerDueToGameEvent(GuiManager *src, GAME_EVENT event)
 {
 	if (event == GAME_EVENT_NONE || src == NULL){
+		ManagerDraw(src);
 		return MANAGER_NONE;
 	}
 		
-	if (event == GAME_EVENT_QUIT) //the user clicked on quit
+	if (event == GAME_EVENT_QUIT) //clicked on quit
 		return MANAGER_QUIT;
-	if (event == GAME_EVENT_RESTART) //the user clicked on quit
+	if (event == GAME_EVENT_RESTART) //clicked on quit
 		return gameRestart(src);
 	if ((event == GAME_EVENT_MAIN_MENU) || (event == GAME_EVENT_SAVE_MAIN_MENU))
 	{
-		if (event == GAME_EVENT_SAVE_MAIN_MENU) //if the user wanted to save before going to main menu
+		if (event == GAME_EVENT_SAVE_MAIN_MENU) //if wanted to save before going to main menu
 			saveGameGui(src);					//save game
 		GameWindowdowHide(src->GameWindow);
 		src->prevWin = MAIN_WINDOW;
@@ -311,8 +355,11 @@ MANAGER_EVENT handleManagerDueToGameEvent(GuiManager *src, GAME_EVENT event)
 			return MANAGER_QUIT;
 		return MANAGER_NONE;
 	}
-	if (event == GAME_EVENT_UNDO)
+	if (event == GAME_EVENT_UNDO){
 		undoGameGui(src); //undo move
+		undoGameGui(src);
+	}
+
 	return MANAGER_NONE;
 }
 
@@ -324,33 +371,38 @@ MANAGER_EVENT handleManagerDueToSetEvent(GuiManager *src, SETTINGS_EVENT event)
 		return MANAGER_NONE;
 	}
 	if (event == SETTINGS_EVENT_BACK)
-	{							//the user clicked on back
+	{							//clicked on back
 		drawSetPrevScreen(src); //go to back settings sub screen
 		return MANAGER_NONE;
 	}
 	else if (event == SETTINGS_EVENT_NEXT)
-	{							//the user clicked on next
+	{							//clicked on next
 		drawSetNextScreen(src); //go to next settings sub screen
 		return MANAGER_NONE;
 	}
 	else if (event == SETTINGS_EVENT_START)
-	{ //the user clicked on start
+	{
+		//clicked on start
 		SettingsWindowHide(src->settingsWin);
-		if (src->GameWindow != NULL)
+		if (src->GameWindow != NULL){
 			GameWindowdowDestroy(src->GameWindow);
-		src->GameWindow = GameWindowdowCreate(src->game, src->board_images); //go to game window
-		if (src->GameWindow == NULL)
-		{
+		}
+		//go to game window
+		src->GameWindow = GameWindowdowCreate(src->game, src->board_images);
+		if (src->GameWindow == NULL){
 			failMessage("Couldn't create game window!");
 			return MANAGER_QUIT;
 		}
 		GameWindowdowShow(src->GameWindow);
+		
 		src->activeWin = GAME_WINDOW;
-		if (!PCMove(src->GameWindow, src->board_images)) // computer makes move if needed
+		ManagerDraw(src);
+		// computer makes move if needed
+		if (!PCMove(src->GameWindow, src->board_images)) 
 			return MANAGER_QUIT;
 	}
 	else if (event == SETTINGS_EVENT_QUIT)
-	{ //the user clicked on quit
+	{ //clicked on quit
 		return MANAGER_QUIT;
 	}
 	return MANAGER_NONE;
@@ -395,7 +447,7 @@ MANAGER_EVENT ManagerHandleEvent(GuiManager *src, SDL_Event *event)
 		return MANAGER_NONE;
 	}
 	if (src->activeWin == MAIN_WINDOW)
-	{																	   //active window is main window
+	{														   //active window is main window
 		MAIN_EVENT mainEvent = HandleMainWindowEvent(src->mainWin, event); //handle the event
 		return handleManagerDueToMainEvent(src, mainEvent);				   //handle the windows due to the event of main window
 	}
@@ -409,10 +461,14 @@ MANAGER_EVENT ManagerHandleEvent(GuiManager *src, SDL_Event *event)
 		SETTINGS_EVENT setEvent = SettingsWindowHandleEvent(src->settingsWin, event, src->game); //handle the event
 		return handleManagerDueToSetEvent(src, setEvent);										 //handle the windows due to the event of settings window
 	}
+	else if(src->activeWin == INTRO_WINDOW)
+	{	
+		INTRO_EVENT introEvent = IntroWindowHandleEvent(src->introWin, event);
+		return HandleEventDueToIntroWindow(src, introEvent);
+	}
 	else
 	{																								//active window is game window
 		GAME_EVENT gameEvent = GameWindowdowHandleEvent(src->GameWindow, event, src->board_images); //handle the event
-		ManagerDraw(src);
 		return handleManagerDueToGameEvent(src, gameEvent); //handle the windows due to the event of game window
 	}
 	return MANAGER_NONE;

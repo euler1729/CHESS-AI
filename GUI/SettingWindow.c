@@ -28,7 +28,7 @@ SettingsWin* SettingsWindowCreate()
     bool check = false;
 
     win = (SettingsWin*) calloc(sizeof(SettingsWin), sizeof(char));
-    if(win ==NULL){
+    if(win==NULL){
         failMessage("Couldn't create setting window!");
         return NULL;
     }

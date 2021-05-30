@@ -1,7 +1,7 @@
 CC = gcc
 
 OBJS =  Main.o ConsoleMode.o Search.o XMLREADWRITE.o XMLGameParser.o XMLSettingsParser.o ChessGame.o  ArrayList.o \
-GuiMode.o GUIManager.o MainMenu.o LoadWindow.o SettingWindow.o Panel.o Cell.o Button.o GameWindow.o Sound.o  
+GuiMode.o GUIManager.o MainMenu.o LoadWindow.o SettingWindow.o Panel.o Cell.o Button.o GameWindow.o Sound.o  Introduction.o
 
 EXEC = CHESSAI
 COMP_FLAG = -std=c99 -Wall -Wextra -Werror -pedantic-errors
@@ -51,6 +51,8 @@ Panel.o: Panel.c Cell.h
 Cell.o: Cell.c Button.h ENGINE/ConsoleMode.h
 	$(CC) $(COMP_FLAG) $(SDL_COMP_FLAG) -c GUI/$*.c
 Button.o: GUI/Button.c
+	$(CC) $(COMP_FLAG) $(SDL_COMP_FLAG) -c GUI/$*.c
+Introduction.o: Introduction.c Button.h
 	$(CC) $(COMP_FLAG) $(SDL_COMP_FLAG) -c GUI/$*.c
 Sound.o: GUI/Sound.c
 	$(CC) $(COMP_FLAG) $(SDL_COMP_FLAG) -c GUI/$*.c

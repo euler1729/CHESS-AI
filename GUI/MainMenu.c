@@ -36,15 +36,14 @@ MainWin* CreateMainWindow()
 	//create rectangles of buttons
 	SDL_Rect startR = { .x = MAIN_X, .y = MAIN_Y, .h = MAIN_H, .w = MAIN_W };
 	SDL_Rect loadR = { .x = MAIN_X, .y = MAIN_Y+MAIN_H+MAIN_OFFSET, .h = MAIN_H, .w = MAIN_W };
-	SDL_Rect exitR = { .x = MAIN_X, .y = MAIN_Y+MAIN_H*2+MAIN_OFFSET*2, .h = MAIN_H, .w = MAIN_W };
+	SDL_Rect introR = {.x = MAIN_X, .y = MAIN_Y+MAIN_H*2+MAIN_OFFSET*2, .h = MAIN_H, .w= MAIN_W};
+	SDL_Rect exitR = { .x = MAIN_X, .y = MAIN_Y+MAIN_H*3+MAIN_OFFSET*3, .h = MAIN_H, .w = MAIN_W };
+	
 	//create buttons
-	res->buttonList[MAIN_START_BUTTON]=Create_Button(&startR, res->mainRenderer,
-			"./resources/images/pic/newGameFinal.bmp","./resources/images/pic/newGameFinal.bmp", true,true,false);
-    // printf("error\n");
-	res->buttonList[MAIN_LOAD_BUTTON]=Create_Button(&loadR, res->mainRenderer,
-			"./resources/images/pic/LoadGameFinal.bmp", "./resources/images/pic/LoadGameFinal.bmp", true,true,false);
-	res->buttonList[MAIN_QUIT_BUTTON]=Create_Button(&exitR, res->mainRenderer,
-			"./resources/images/pic/QuitGameFinal.bmp", "./resources/images/pic/QuitGameFinal.bmp", true,true,false);
+	res->buttonList[MAIN_START_BUTTON]=Create_Button(&startR, res->mainRenderer,"./resources/images/pic/newGameFinal.bmp","./resources/images/pic/newGameFinal.bmp", true,true,false);
+	res->buttonList[MAIN_LOAD_BUTTON]=Create_Button(&loadR, res->mainRenderer,"./resources/images/pic/LoadGameFinal.bmp", "./resources/images/pic/LoadGameFinal.bmp", true,true,false);
+	res->buttonList[MAIN_INTRO_BUTTON] = Create_Button(&introR, res->mainRenderer,"./resources/images/pic/Back.bmp", "./resources/images/pic/Back.bmp",true, true, false );
+	res->buttonList[MAIN_QUIT_BUTTON]=Create_Button(&exitR, res->mainRenderer,"./resources/images/pic/QuitGameFinal.bmp", "./resources/images/pic/QuitGameFinal.bmp", true,true,false);
 	for(int i=0;i<NUM_OF_MAIN_BUTTONS;i++){
 		if(res->buttonList[i]==NULL){
 			failMessage("Couldn't create button!");
@@ -93,6 +92,10 @@ MAIN_EVENT HandleMainWindowEvent(MainWin* src, SDL_Event* event)
 					playSound("./resources/sound/click2.wav",SDL_MIX_MAXVOLUME);
 					return MAIN_LOAD;
 				}
+				case MAIN_INTRO_BUTTON:{
+					playSound("./resources/sound/click2.wav",SDL_MIX_MAXVOLUME);
+					return MAIN_INTRO_WINDOW;
+				}
                 case MAIN_QUIT_BUTTON:{
 					playSound("./resources/sound/click2.wav",SDL_MIX_MAXVOLUME);
 					return MAIN_EXIT;
@@ -123,9 +126,9 @@ int isClickedOnMain(int x, int y,MainWin* src)
 	for(int i=0;i<src->buttonCounter;i++)
     {  //getting location
 		start_x = src->buttonList[i]->location->x;
-		end_x = src->buttonList[i]->location->x + src->buttonList[i]->location->w;
+		end_x = start_x + src->buttonList[i]->location->w;
 		start_y = src->buttonList[i]->location->y;
-		end_y = src->buttonList[i]->location->y + src->buttonList[i]->location->h;
+		end_y = start_y + src->buttonList[i]->location->h;
 		shown = src->buttonList[i]->toShow;
         //checking click
 		if(inRange(x,start_x,end_x) && inRange(y,start_y,end_y) && shown){
