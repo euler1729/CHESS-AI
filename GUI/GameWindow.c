@@ -336,6 +336,7 @@ GAME_EVENT buttonUp(GameWindow *src, SDL_Event *event, int res, const char **boa
 		if (!correct){
 			return GAME_EVENT_QUIT;
 		}
+		
 		return GAME_EVENT_NONE;
 	}
 	if (inRange(res, 0, ((GRID * GRID) - 1)) && (event->button.button == SDL_BUTTON_LEFT))
@@ -524,22 +525,22 @@ int PCMove(GameWindow *src, const char **board_images)
 	if (src->game->mode == 1 && src->game->currentPlayer == playerPC(src->game))
 	{													  //pc move
 		move = miniMax(src->game, src->game->difficulty); //get the move
-		if (!move)
-		{ //checks allocation
+		if (!move){ //checks allocation
 			failMessage("Couldn't allocate memory!");
 			return 0;
 		}
-		for (int i = 0; i < CELL_SIZE * CELL_SIZE; i++)
+		for (int i = 0; i < CELL_SIZE * CELL_SIZE; i++){
 			move[i]++;
-		if (setMove(src->game, move) != 0)
-		{ //makes the move
+		}
+		if (setMove(src->game, move) != 0){ //makes the move
 			failMessage("Couldn't allocate memory!");
 			return 0;
 		}
 		free(move);
 		correct = boardUpdate(src->boardPanel, src->game, board_images); //update the board according to the computer's move
-		if (!correct)
+		if (!correct){
 			return 0;
+		}
 		undoUpdate(src->settingPanel, src->game); //updates undo button
 		src->save_the_game = false;
 		src->check_printed = false; //updates flag fields
@@ -660,6 +661,8 @@ int Moving(GameWindow *src, int cell_src, int res, const char **board_images)
 			else if (result == RESTART_BUTTONID)
 				return RESTART; //restart
 		}
+		GameWindowdowDraw(src);
+		playSound("./resources/sound/simple_move.wav",SDL_MIX_MAXVOLUME);
 		if (!PCMove(src, board_images))
 			return QUIT; //quit
 	}

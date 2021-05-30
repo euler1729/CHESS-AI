@@ -2,16 +2,16 @@
 <game>
 	<current_turn>1</current_turn>
 	<game_mode>1</game_mode>
-	<diffifcult>4</difficulty>
+	<diffifcult>5</difficulty>
 	<user_color>1</user_color>
 	<board>
-		<row_8>RNBQKBNR</row_8>
-		<row_7>_PPPPPPP</row_7>
-		<row_6>________</row_6>
-		<row_5>P_______</row_5>
-		<row_4>__p_____</row_4>
-		<row_3>________</row_3>
-		<row_2>pp_ppppp</row_2>
-		<row_1>rnbqkbnr</row_1>
+		<row_8>R_BK__NR</row_8>
+		<row_7>___N__q_</row_7>
+		<row_6>__P____P</row_6>
+		<row_5>_P_P___p</row_5>
+		<row_4>P__p_k__</row_4>
+		<row_3>__B__r__</row_3>
+		<row_2>ppp_npp_</row_2>
+		<row_1>r_b_Q___</row_1>
 	</board>
 </game>

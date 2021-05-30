@@ -37,7 +37,7 @@ int startGuiMode()
             playMusic("./resources/sound/mainWindowMusic.wav",SDL_MIX_MAXVOLUME/2);
         }
         else{
-            playMusic("./resources/sound/mainWindowMusic.wav",SDL_MIX_MAXVOLUME/80);
+            playMusic("./resources/sound/mainWindowMusic.wav",SDL_MIX_MAXVOLUME/100);
         }
 
         while (SDL_PollEvent(&event))
