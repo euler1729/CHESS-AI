@@ -14,7 +14,7 @@ The game can be played in both Console mode and GUI mode.The whole game is writt
 - Now available on LINUX based OS such as Ubuntu, POP OS etc.
 ## Requirements
   * ```Linux```:
-  * 
+  
         - Libraries for Debian Based Distributoins: ```build-essential``` ```libsdl2-dev```
 
         - ```make```
