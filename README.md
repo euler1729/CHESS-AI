@@ -1,7 +1,7 @@
 # QUEEN'S GAMBIT
 
 **This is an AI based Chess Game.**
--   Preview (#)
+-   Preview - [CHESS-AI (Coming Soon)](#)
 The whole game is written in C. The game can be played in both Console mode and GUI mode. To add AI Negamax algorithm has been used which is the simplest version of Minimax algorithm.
 # FEATURES
 - HUMAN vs HUMAN (Two player mode)
