@@ -15,9 +15,9 @@ The game can be played in both Console mode and GUI mode.The whole game is writt
 ## Requirements
   * ```Linux:```
   
-        * Libraries for Debian Based Distributoins: ```build-essential``` ```libsdl2-dev```
+        *```Libraries for Debian Based Distributoins:``` ```build-essential``` ```libsdl2-dev```
 
-        * ```make```
+        *```make```
         * ```Git```
 ## Clone the Repository
 ```
