@@ -34,7 +34,7 @@ git clone https://github.com/Eulers2020/CHESS-AI.git
   
   
 # Future Plan
-- Improving searching algorithm
+- Improve searching algorithm
 - Multiplayer mode
 # Resources
 The following resources helped me to build the game in the long run of the project. I learned many things from those resources.
