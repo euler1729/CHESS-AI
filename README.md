@@ -1,6 +1,7 @@
 # QUEEN'S GAMBIT
 
 **This is an AI based Chess Game.**
+
 The game can be played in both Console mode and GUI mode.The whole game is written in C. SDL libraries have been used to build the game.
 
 
@@ -14,10 +15,10 @@ The game can be played in both Console mode and GUI mode.The whole game is writt
 - Now available on LINUX based OS such as Ubuntu, POP OS etc.
 ## Requirements
   * ```Linux:```
-  
-        *Libraries for Debian Based Distributoins: ```build-essential``` ```libsdl2-dev```
-        *make
-        *Git
+  - Libraries for Debian Based Distributoins : ```build-essential``` ```libsdl2-dev```
+  - make
+  - Git
+
 ## Clone the Repository
 ```
 git clone https://github.com/Eulers2020/CHESS-AI.git
