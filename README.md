@@ -15,10 +15,9 @@ The game can be played in both Console mode and GUI mode.The whole game is writt
 ## Requirements
   * ```Linux:```
   
-        *```Libraries for Debian Based Distributoins:``` ```build-essential``` ```libsdl2-dev```
-
-        *```make```
-        * ```Git```
+        *Libraries for Debian Based Distributoins: ```build-essential``` ```libsdl2-dev```
+        *make
+        *Git
 ## Clone the Repository
 ```
 git clone https://github.com/Eulers2020/CHESS-AI.git
@@ -28,9 +27,9 @@ git clone https://github.com/Eulers2020/CHESS-AI.git
  Go to the the CHESS-AI directory run the following command:
   - make
   - make clean
-  * ```To play in GUI Mode: ./CHESSAI -g
-  * ```To play in Console Mode: ./CHESSAI -c or anything else instead of c
-  * ```To quit in console mode, just write quit and enter.```
+  * To play in GUI Mode: ./CHESSAI -g
+  * To play in Console Mode: ./CHESSAI -c or anything else instead of c
+  * To quit in console mode, just write quit and enter.
   
   
 ## Future Plan
