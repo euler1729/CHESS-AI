@@ -13,12 +13,12 @@ The game can be played in both Console mode and GUI mode.The whole game is writt
 # Available for OS
 - Now available on LINUX based OS such as Ubuntu, POP OS etc.
 ## Requirements
-  * ```Linux```:
+  * ```Linux:```
   
-        - Libraries for Debian Based Distributoins: ```build-essential``` ```libsdl2-dev```
+        * Libraries for Debian Based Distributoins: ```build-essential``` ```libsdl2-dev```
 
-        - ```make```
-        - ```Git```
+        * ```make```
+        * ```Git```
 ## Clone the Repository
 ```
 git clone https://github.com/Eulers2020/CHESS-AI.git
