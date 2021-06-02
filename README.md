@@ -1,8 +1,8 @@
 # QUEEN'S GAMBIT
 
 **This is an AI based Chess Game.**
-The whole game is written in C. The game can be played in both Console mode and GUI mode. To add AI Negamax algorithm has been used which is the simplest version of Minimax algorithm. In that game, 4 difficulty levels has been added in One Player Mode.
-
+-   Preview (#)
+The whole game is written in C. The game can be played in both Console mode and GUI mode. To add AI Negamax algorithm has been used which is the simplest version of Minimax algorithm.
 # FEATURES
 - HUMAN vs HUMAN (Two player mode)
 - HUMAN vs Computer (One player mode)
