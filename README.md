@@ -11,7 +11,7 @@ The game can be played in both Console mode and GUI mode.The whole game is writt
 - Game can be saved anytime and can be continued at convenient time
 - Four Difficulty Levels
 
-# Available for OS
+# Availability
 - Now available on LINUX based OS such as Ubuntu, POP OS etc.
 # Requirements
   ## LINUX:
