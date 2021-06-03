@@ -10,7 +10,7 @@ Intro_Window* IntroWindowCreate()
         return NULL;
     }
     //Creating INtrodectory window
-    win->windowIntro = SDL_CreateWindow("Introuction", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, INTRO_WINDOW_WIDTH, INTRO_WINDOW_HEIGHT, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE | SDL_WINDOW_SHOWN);
+    win->windowIntro = SDL_CreateWindow("INSTRUCTION", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, INTRO_WINDOW_WIDTH, INTRO_WINDOW_HEIGHT, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE | SDL_WINDOW_SHOWN);
     if(win->windowIntro == NULL){
         failMessage("Couldn't create Intoductory window!");
         IntroWindowDestroy(win);
@@ -66,7 +66,7 @@ void IntroWindowDraw(Intro_Window* src)
 {
     assert(src!=NULL);
     //Drawing Background
-    SDL_Surface* surface = SDL_LoadBMP("./resources/images/pic/mainbg.bmp");
+    SDL_Surface* surface = SDL_LoadBMP("./resources/images/pic/instructins.bmp");
     if(!surface){
         failMessage("Couldn't Load Surface on IntroWindow!\n");
     }

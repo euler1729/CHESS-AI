@@ -36,7 +36,7 @@ LoadWin *LoadWindowCreate(int num_of_saved_games)
 		return NULL;
 	}
 	//Creating an application window with the following settings
-	win->windowLoad = SDL_CreateWindow("Load Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, LOAD_WINDOW_W, LOAD_WINDOW_H, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE | SDL_WINDOW_SHOWN);
+	win->windowLoad = SDL_CreateWindow("LOAD MENU", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, LOAD_WINDOW_W, LOAD_WINDOW_H, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE | SDL_WINDOW_SHOWN);
 	if (!win->windowLoad)
 	{
 		failMessage("Couldn't create load window!");

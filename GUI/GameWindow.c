@@ -53,7 +53,7 @@ GameWindow *GameWindowdowCreate(CH_Game *game, const char **board_images)
 		return NULL;
 	}
 	//Creating an application window with the following settings:
-	win->window = SDL_CreateWindow("Game Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HIGHT, SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+	win->window = SDL_CreateWindow("QUEEN'S GAMBIT - GAME WINDOW", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HIGHT, SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
 	if (win->window == NULL)
 	{
 		failMessage("Couldn't create game window!");

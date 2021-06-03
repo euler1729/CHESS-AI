@@ -33,7 +33,7 @@ SettingsWin* SettingsWindowCreate()
         return NULL;
     }
     // Creating application window
-    win->window = SDL_CreateWindow("Game Setting",SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,SET_WINDOW_W, SET_WINDOW_H, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+    win->window = SDL_CreateWindow("GAME SETTINGS",SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,SET_WINDOW_W, SET_WINDOW_H, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
     if(win->window==NULL){
         failMessage("Couldn't create setting window!");
         SettingsWindowDestroy(win);

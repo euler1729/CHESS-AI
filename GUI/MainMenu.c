@@ -42,7 +42,7 @@ MainWin* CreateMainWindow()
 	//create buttons
 	res->buttonList[MAIN_START_BUTTON]=Create_Button(&startR, res->mainRenderer,"./resources/images/pic/newGameFinal.bmp","./resources/images/pic/newGameFinal.bmp", true,true,false);
 	res->buttonList[MAIN_LOAD_BUTTON]=Create_Button(&loadR, res->mainRenderer,"./resources/images/pic/LoadGameFinal.bmp", "./resources/images/pic/LoadGameFinal.bmp", true,true,false);
-	res->buttonList[MAIN_INTRO_BUTTON] = Create_Button(&introR, res->mainRenderer,"./resources/images/pic/Back.bmp", "./resources/images/pic/Back.bmp",true, true, false );
+	res->buttonList[MAIN_INTRO_BUTTON] = Create_Button(&introR, res->mainRenderer,"./resources/images/pic/instructions.bmp", "./resources/images/pic/instructions.bmp",true, true, false );
 	res->buttonList[MAIN_QUIT_BUTTON]=Create_Button(&exitR, res->mainRenderer,"./resources/images/pic/QuitGameFinal.bmp", "./resources/images/pic/QuitGameFinal.bmp", true,true,false);
 	for(int i=0;i<NUM_OF_MAIN_BUTTONS;i++){
 		if(res->buttonList[i]==NULL){
