@@ -12,7 +12,7 @@ The game can be played in both Console mode and GUI mode.The whole game is writt
 - Four Difficulty Levels
 
 # Availability
-- Now available on LINUX based OS such as Ubuntu, POP OS etc.
+- Now available on *LINUX* and *Debian* based OS such as *Ubuntu*, *POP OS* etc.
 # Requirements
   ## LINUX:
   - Libraries for Debian Based Distributoins : ```build-essential``` ```libsdl2-dev```
@@ -35,7 +35,8 @@ git clone https://github.com/Eulers2020/CHESS-AI.git
   
 # Future Plan
 - Improve searching algorithm
-- Multiplayer mode
+- Adding Multiplayer mode
+- 
 # Resources
 The following resources helped me to build the game in the long run of the project. I learned many things from those resources.
 -   [ChessProgrammingWiki](https://www.chessprogramming.org/Main_Page)
