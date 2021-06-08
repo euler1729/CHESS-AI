@@ -24,6 +24,7 @@ void lineToInfo(CH_Game *game, char *line)
 
     int row = 0;
     char *ch = NULL;
+    
     if (strstr(line, "game_mode"))
     { //if the line represent the game mode
         if (strstr(line, "2"))
@@ -44,11 +45,7 @@ void lineToInfo(CH_Game *game, char *line)
     }
     if (strstr(line, "difficulty"))
     { //if the line represents user color
-        if (strstr(line, "1"))
-        {
-            game->difficulty = 1;
-        }
-        else if (strstr(line, "2"))
+        if (strstr(line, "2"))
         {
             game->difficulty = 2;
         }
@@ -56,9 +53,13 @@ void lineToInfo(CH_Game *game, char *line)
         {
             game->difficulty = 3;
         }
-        else
+        else if (strstr(line, "4"))
         {
             game->difficulty = 4;
+        }
+        else
+        {
+            game->difficulty = 5;
         }
     }
     if (strstr(line, "user_color"))
@@ -72,6 +73,14 @@ void lineToInfo(CH_Game *game, char *line)
             game->user_color = 1;
         }
     }
+    
+    if( strstr(line,"move_count")){
+        char *p = strstr(line, "move_count");
+        p += 11;
+        int moveCount = atoi(p);
+        game->mv_cnt = moveCount;
+    }
+
     if (strstr(line, "row"))
     { //if the line represents row
         ch = strstr(line, "_");
@@ -155,6 +164,10 @@ XML_MESSAGE gameToFile(CH_Game *src, FILE *xml)
         fprintf(xml, "\t<diffifcult>%d</difficulty>\n", src->difficulty);
         fprintf(xml, "\t<user_color>%d</user_color>\n", src->user_color);
     }
+
+    fprintf(xml,"\t<move_count>%d</move_count>\n",src->mv_cnt);
+
+
     fprintf(xml, "\t<board>\n");
     for (int i = GRID; i > 0; --i)
     {

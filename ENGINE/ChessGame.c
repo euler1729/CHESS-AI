@@ -20,6 +20,7 @@ CH_Game* gameCreate(int historySize, int diff, int color, int mode)
     new->user_color = color;
     new->difficulty = diff;
     new->currentPlayer = CH_PLAYER_1;
+    new->mv_cnt = 0;
     return new;
 }
 
@@ -107,6 +108,7 @@ void copyParameters(CH_Game* src, CH_Game* gamecopy)
 
     gamecopy->currentPlayer = getCurrentPlayer(src);
     gamecopy->mode = src->mode;
+    gamecopy->mv_cnt = src->mv_cnt;
     gamecopy->black_king[0] = src->black_king[0];
     gamecopy->black_king[1] = src->black_king[1];
     gamecopy->white_king[0] = src->white_king[0];

@@ -84,7 +84,7 @@ enum{
 //default arguments
 #define DEFAULT_MODE 1
 #define DEFAULT_COLOR 1
-#define DEFAULT_DIFFICULTY 2
+#define DEFAULT_DIFFICULTY 3
 #define TWO_PLAYER_MODE 2
 
 //represent moves to col ans row
@@ -109,6 +109,7 @@ typedef struct ch_game{
     int difficulty;
     int user_color;// 1 for white and 0 for black
     int piece_promotion[4];
+    int mv_cnt;
 }CH_Game;
 
 //for error detection in game function

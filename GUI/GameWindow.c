@@ -375,7 +375,7 @@ void Drag(GameWindow *src)
 		delta_y = src->target_y - src->moving_cell->location->y;
 		distance = dist(delta_x, delta_y); // computing distane using MACRO
 		if (distance > DRAG_TIME)
-		{ //updates the diatance every 5
+		{ //updates the distance every 5
 			src->moving_cell->location->x = src->target_x;
 			src->moving_cell->location->y = src->target_y;
 		}
@@ -453,7 +453,7 @@ int buttonDown(GameWindow *src, SDL_Event *event, int res, const char **board_im
 		check = getMovesGui(src, row + 1, col + 1, board_images); // get moves
 		if (!check)
 		{ // if an error occurred
-			failMessage("Couldn't allocate memory!");
+			failMessage("Couldn't allocate memory gamewindow line 456!");
 			return QUIT;
 		}
 	}
@@ -526,14 +526,14 @@ int PCMove(GameWindow *src, const char **board_images)
 	{													  //pc move
 		move = miniMax(src->game, src->game->difficulty); //get the move
 		if (!move){ //checks allocation
-			failMessage("Couldn't allocate memory!");
+			failMessage("Couldn't allocate memory gamewindow line 529!");
 			return 0;
 		}
 		for (int i = 0; i < CELL_SIZE * CELL_SIZE; i++){
 			move[i]++;
 		}
 		if (setMove(src->game, move) != 0){ //makes the move
-			failMessage("Couldn't allocate memory!");
+			failMessage("Couldn't allocate memory gamewindow line 536!");
 			return 0;
 		}
 		free(move);
@@ -622,14 +622,14 @@ int Moving(GameWindow *src, int cell_src, int res, const char **board_images)
 	elem *element = transfer(src->game, move);
 	if (element == NULL)
 	{
-		failMessage("Couldn't allocate memory!");
+		failMessage("Couldn't allocate memory gamewindow line 625!");
 		return QUIT; //quit
 	}
 	result = isValidMove(src->game, element); //checks if the move is valid
 	free(element);
 	if (result == ALLOCATION_ERROR)
 	{
-		failMessage("Couldn't allocate memory!");
+		failMessage("Couldn't allocate memory gamewindow line 632!");
 		return QUIT; //quit
 	}
 	else if (result == 1)
@@ -637,7 +637,7 @@ int Moving(GameWindow *src, int cell_src, int res, const char **board_images)
 		result = setMove(src->game, move); //do the move!
 		if (result != 0)
 		{
-			failMessage("Couldn't allocate memory!");
+			failMessage("Couldn't allocate memory game window line 640!");
 			return QUIT; //quit
 		}
 		src->check_printed = false;

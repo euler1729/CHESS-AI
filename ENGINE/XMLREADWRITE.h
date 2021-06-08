@@ -5,6 +5,7 @@
 #include "XMLSettingsParser.h"
 #include "XMLGameParser.h"
 #include <unistd.h>
+#include <string.h>
 
 typedef enum xml_messages
 {

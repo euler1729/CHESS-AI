@@ -22,19 +22,63 @@ int* miniMax(CH_Game* currentGame, unsigned int maxDepth)
         return NULL;
     }
 
-    miniMaxRec(node, 0, maxDepth,getCurrentPlayer(copy)==playerPC(copy) , INT_MIN, INT_MAX);
+    currentGame->mv_cnt += 1;
 
-    if(node->best_move[0]==ALLOC_ERROR_FLAG)
+    if(currentGame->difficulty >3 && currentGame->mv_cnt<3)
     {
-        gameDestroy(copy);
-        nodeDestroy(node);
-        free(move);
-        return NULL;
+        if(getCurrentPlayer(currentGame) =='F')
+        {
+            if(currentGame->mv_cnt==1){
+                
+                move[START_ROW_PLACE] = 1;
+                move[START_COL_PLACE] = 4;
+                move[DESTINATION_ROW_PLACE] = 3;
+                move[DESTINATION_COL_PLACE] =4;
+                // return move;
+            }
+            else{
+                move[START_ROW_PLACE] = 1;
+                move[START_COL_PLACE] = 3;
+                move[DESTINATION_ROW_PLACE] = 3;
+                move[DESTINATION_COL_PLACE] =3;
+                // return move;
+            }
+        }
+        else{
+            if(currentGame->mv_cnt==1)
+            {
+                move[START_ROW_PLACE] = 6;
+                move[START_COL_PLACE] = 4;
+                move[DESTINATION_ROW_PLACE] = 4;
+                move[DESTINATION_COL_PLACE] =4;
+                // return move;
+            }
+
+            else{
+                move[START_ROW_PLACE] = 6;
+                move[START_COL_PLACE] = 3;
+                move[DESTINATION_ROW_PLACE] = 4;
+                move[DESTINATION_COL_PLACE] =3;
+                // return move;
+            }
+        }
+        
     }
-    for(int i=0; i<CELL_SIZE*CELL_SIZE; ++i)
-    {
-        move[i] = node->best_move[i];
+    else{
+        miniMaxRec(node, 0, maxDepth,getCurrentPlayer(copy)==playerPC(copy) , INT_MIN, INT_MAX);
+        if(node->best_move[0]==ALLOC_ERROR_FLAG)
+        {
+            gameDestroy(copy);
+            nodeDestroy(node);
+            free(move);
+            return NULL;
+        }
+        for(int i=0; i<CELL_SIZE*CELL_SIZE; ++i)
+        {
+            move[i] = node->best_move[i];
+        }
     }
+
     gameDestroy(copy);
     nodeDestroy(node);
     return move;

@@ -294,24 +294,29 @@ MANAGER_EVENT handleManagerDueToGameEvent(GuiManager *src, GAME_EVENT event)
 		return MANAGER_NONE;
 	}
 		
-	if (event == GAME_EVENT_QUIT) //clicked on quit
+	if (event == GAME_EVENT_QUIT){//clicked on quit
 		return MANAGER_QUIT;
-	if (event == GAME_EVENT_RESTART) //clicked on quit
+	}	
+	if (event == GAME_EVENT_RESTART){ //clicked on quit
 		return gameRestart(src);
+	}	
 	if ((event == GAME_EVENT_MAIN_MENU) || (event == GAME_EVENT_SAVE_MAIN_MENU))
 	{
 		if (event == GAME_EVENT_SAVE_MAIN_MENU) //if wanted to save before going to main menu
-			saveGameGui(src);					//save game
+		{
+			saveGameGui(src);//save game
+		}	
 		GameWindowdowHide(src->GameWindow);
 		src->prevWin = MAIN_WINDOW;
 		MainWindowShow(src->mainWin); //show main window
 		src->activeWin = MAIN_WINDOW;
 		CH_Game *new_game = gameCreate(HISTORY_SIZE, DEFAULT_DIFFICULTY, DEFAULT_COLOR, DEFAULT_MODE); //create new game
-		if (new_game == NULL)
-		{
-			failMessage("Couldn't allocate memory!");
+
+		if (new_game == NULL){
+			failMessage("Couldn't allocate memory in guimanager line 312!");
 			return MANAGER_QUIT;
 		}
+
 		gameAssign(new_game, src->game); // copies game params
 		gameDestroy(new_game);
 		ArrayListClear(src->game->undo_hist); // clears history
@@ -326,7 +331,7 @@ MANAGER_EVENT handleManagerDueToGameEvent(GuiManager *src, GAME_EVENT event)
 			src->loadWin = LoadWindowCreate(num_of_saved_files(src)); //create load window
 			if (src->loadWin == NULL)
 			{
-				failMessage("Couldn't allocate memory!");
+				failMessage("Couldn't allocate memory gui manager line 329!");
 				return MANAGER_QUIT;
 			}
 		}
@@ -358,6 +363,7 @@ MANAGER_EVENT handleManagerDueToGameEvent(GuiManager *src, GAME_EVENT event)
 	if (event == GAME_EVENT_UNDO){
 		undoGameGui(src); //undo move
 		undoGameGui(src);
+		src->game->mv_cnt -= 1;
 	}
 
 	return MANAGER_NONE;
@@ -502,7 +508,7 @@ MANAGER_EVENT gameRestart(GuiManager *src)
 	CH_Game *copy = gameCreate(HISTORY_SIZE, src->game->difficulty, src->game->user_color, src->game->mode);
 	if (copy == NULL)
 	{ //allocation error
-		failMessage("Couldn't allocate memory!");
+		failMessage("Couldn't allocate memory guimanager line 505!");
 		return MANAGER_QUIT;
 	}
 	gameAssign(copy, src->game); // assigns the new game
