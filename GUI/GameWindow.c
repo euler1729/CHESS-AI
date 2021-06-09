@@ -294,41 +294,47 @@ GAME_EVENT buttonUp(GameWindow *src, SDL_Event *event, int res, const char **boa
 	int correct;
 	int cell_src;
 
-	if (res == EXIT_GAME_BUTTON) //click on exit
-	{
-		playSound("./resources/sound/click.wav",SDL_MIX_MAXVOLUME);
-		SDL_Delay(400);
-		return exitMessage(src, true);
-	}	
-	if (res == MAIN_MENU_GAME_BUTTON) //click on main menu
-	{
-		playSound("./resources/sound/click.wav",SDL_MIX_MAXVOLUME);
-		SDL_Delay(500);
-		return exitMessage(src, false);
-	}	
 	if (res == RESTART_GAME_BUTTON) //click on restart
 	{
 		playSound("./resources/sound/click.wav",SDL_MIX_MAXVOLUME);
 		SDL_Delay(200);
 		return GAME_EVENT_RESTART;
-	}	
+	}
+
+	if (res == SAVE_GAME_BUTTON) //click on save
+	{
+		playSound("./resources/sound/click.wav",SDL_MIX_MAXVOLUME);
+		SDL_Delay(200);
+		return GAME_EVENT_SAVE;
+	}
+		
 	if (res == LOAD_GAME_BUTTON) //click on load
 	{
 		playSound("./resources/sound/click.wav",SDL_MIX_MAXVOLUME);
 		SDL_Delay(200);
 		return GAME_EVENT_LOAD;
 	}	
-	if (res == SAVE_GAME_BUTTON) //click on save
-	{
-		playSound("./resources/sound/click.wav",SDL_MIX_MAXVOLUME);
-		SDL_Delay(200);
-		return GAME_EVENT_SAVE;
-	}	
+	
+		
 	if (res == UNDO_GAME_BUTTON) //click on undo
 	{
 		playSound("./resources/sound/click.wav",SDL_MIX_MAXVOLUME);
 		SDL_Delay(200);
 		return GAME_EVENT_UNDO;
+	}
+
+	if (res == MAIN_MENU_GAME_BUTTON) //click on main menu
+	{
+		playSound("./resources/sound/click.wav",SDL_MIX_MAXVOLUME);
+		SDL_Delay(500);
+		return exitMessage(src, false);
+	}
+	
+	if (res == EXIT_GAME_BUTTON) //click on exit
+	{
+		playSound("./resources/sound/click.wav",SDL_MIX_MAXVOLUME);
+		SDL_Delay(400);
+		return exitMessage(src, true);
 	}	
 	if (inRange(res, 0, ((GRID * GRID) - 1)) && (event->button.button == SDL_BUTTON_RIGHT))
 	{ //right click
