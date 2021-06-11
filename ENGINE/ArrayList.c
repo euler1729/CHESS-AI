@@ -1,5 +1,56 @@
 #include "ArrayList.h"
 
+
+
+SPArrayList *ArrayListCreate(int maxSize)
+{
+    //checks array size validity
+    if (maxSize <= 0)
+    {
+        return NULL;
+    }
+
+    //allocate memory for array(uses for move list)
+    SPArrayList *arr = (SPArrayList *)malloc(sizeof(SPArrayList));
+    if (!arr)
+    { //check validity of allocation
+        free(arr);
+        return NULL;
+    }
+
+    //allocate memory for array(uses for history)
+    elem **element = (elem **)malloc(maxSize * (sizeof(elem *)));
+    if (!element)
+    { //check validity
+        free(arr);
+        return NULL;
+    }
+
+    for (int i = 0; i < maxSize; ++i)
+    {
+        element[i] = (elem *)malloc(sizeof(elem));
+        if (!element[i])
+        {
+            for (int j = 0; j < i; ++j)
+            {
+                free(element[j]);
+            }
+            free(element);
+            free(arr);
+            return NULL;
+        }
+    }
+    arr->maxSize = maxSize;
+    arr->elements = element;
+    arr->actualSize = 0;
+
+    return arr;
+}
+
+
+
+
+
 void copyParams(SPArrayList *src, SPArrayList *arr)
 {
     // copies elements - each element represents one move
@@ -48,50 +99,6 @@ int ArrayListMaxCapacity(SPArrayList *src)
     return src->maxSize;
 }
 
-SPArrayList *ArrayListCreate(int maxSize)
-{
-    //checks array size validity
-    if (maxSize <= 0)
-    {
-        return NULL;
-    }
-
-    //allocate memory for array(uses for move list)
-    SPArrayList *arr = (SPArrayList *)malloc(sizeof(SPArrayList));
-    if (!arr)
-    { //check validity of allocation
-        free(arr);
-        return NULL;
-    }
-
-    //allocate memory for array(uses for history)
-    elem **element = (elem **)malloc(maxSize * (sizeof(elem *)));
-    if (!element)
-    { //check validity
-        free(arr);
-        return NULL;
-    }
-
-    for (int i = 0; i < maxSize; ++i)
-    {
-        element[i] = (elem *)malloc(sizeof(elem));
-        if (!element[i])
-        {
-            for (int j = 0; j < i; ++j)
-            {
-                free(element[j]);
-            }
-            free(element);
-            free(arr);
-            return NULL;
-        }
-    }
-    arr->maxSize = maxSize;
-    arr->elements = element;
-    arr->actualSize = 0;
-
-    return arr;
-}
 
 SPArrayList *ArrayListCopy(SPArrayList *src)
 {

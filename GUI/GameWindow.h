@@ -8,7 +8,6 @@
 #include "../ENGINE/ConsoleMode.h"
 #include "Button.h"
 #include "Panel.h"
-#include <SDL2/SDL_mixer.h>
 #include "Sound.h"
 
 //Represernts all events in game window

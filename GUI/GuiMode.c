@@ -42,11 +42,12 @@ int startGuiMode()
 
         while (SDL_PollEvent(&event))
         {
-            if (currentState(manager)){
+            
+            if (ManagerHandleEvent(manager, &event) == MANAGER_QUIT){
                 quit = 1;
                 break;
             }
-            if (ManagerHandleEvent(manager, &event) == MANAGER_QUIT){
+            if (currentState(manager)){
                 quit = 1;
                 break;
             }

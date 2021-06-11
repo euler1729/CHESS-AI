@@ -5,8 +5,8 @@
 #include "GUIManager.h"
 #include "Sound.h"
 
-extern int startGuiMode();
-extern int currentState( GuiManager* manager);
+extern int startGuiMode(); //Starts the GUI MODE
+extern int currentState( GuiManager* manager); // retruns the current state of the game, is there any check, or is there any winner or a normal state
 
 
 #endif

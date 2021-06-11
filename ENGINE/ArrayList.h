@@ -40,6 +40,15 @@ typedef enum ARRAY_LIST_MESSAGE_t
     SP_ARRAY_LIST_EMPTY
 } ARRAY_LIST_MESSAGE;
 
+
+/**
+ * Creates an empty array list with the specified maxSize
+ * @param maxSize 
+ * @return
+ */
+extern SPArrayList *ArrayListCreate(int maxSize);
+
+
 /**
  * Copies params from src to arr ArrayList
  * @param src - the array list that should be copied
@@ -89,12 +98,6 @@ extern int ArrayListSize(SPArrayList *src);
  */
 extern int ArrayListMaxCapacity(SPArrayList *src);
 
-/**
- * Creates an empty array list with the specified maxSize
- * @param maxSize 
- * @return
- */
-extern SPArrayList *ArrayListCreate(int maxSize);
 
 /**
  *	Creates an exact copy of the src array list. Elements in the new copy will

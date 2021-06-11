@@ -574,7 +574,7 @@ int statusMessage(GameWindow *src)
 		if (!(src->check_printed))
 		{							   //check wasnt printed this round
 			src->check_printed = true; // check is printed
-			SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION,"Game Status", "There is a CHECK!", NULL);
+			SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION,"Game Status", "There is a CHECK!", src->window);
 		}
 		return CHECK_FLAG;
 	}
