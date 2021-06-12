@@ -531,6 +531,7 @@ int PCMove(GameWindow *src, const char **board_images)
 	if (src->game->mode == 1 && src->game->currentPlayer == playerPC(src->game))
 	{													  //pc move
 		move = miniMax(src->game, src->game->difficulty); //get the move
+		printf("%d%d->%d%d\n",move[0]+1,move[1]+1,move[2]+1,move[3]+1);
 		if (!move){ //checks allocation
 			failMessage("Couldn't allocate memory gamewindow line 529!");
 			return 0;
@@ -539,7 +540,8 @@ int PCMove(GameWindow *src, const char **board_images)
 			move[i]++;
 		}
 		if (setMove(src->game, move) != 0){ //makes the move
-			failMessage("Couldn't allocate memory gamewindow line 536!");
+			// printf("%d%d->%d%d\n",move[0],move[1],move[2],move[3]);
+			failMessage("Couldn't allocate memory gamewindow line 543!");
 			return 0;
 		}
 		free(move);

@@ -4,15 +4,15 @@
 	<game_mode>1</game_mode>
 	<diffifcult>4</difficulty>
 	<user_color>1</user_color>
-	<move_count>3</move_count>
+	<move_count>15</move_count>
 	<board>
-		<row_8>RNBQKBNR</row_8>
-		<row_7>PPP__PPP</row_7>
-		<row_6>________</row_6>
-		<row_5>____P___</row_5>
-		<row_4>p__P____</row_4>
-		<row_3>r_n_____</row_3>
-		<row_2>_ppppppp</row_2>
-		<row_1>__bqkbnr</row_1>
+		<row_8>R_B_KBNR</row_8>
+		<row_7>_____PPP</row_7>
+		<row_6>__P__N__</row_6>
+		<row_5>P_______</row_5>
+		<row_4>_pp__b_p</row_4>
+		<row_3>r____n__</row_3>
+		<row_2>__k_p_p_</row_2>
+		<row_1>_____b_r</row_1>
 	</board>
 </game>

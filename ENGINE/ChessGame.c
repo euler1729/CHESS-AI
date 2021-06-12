@@ -171,27 +171,32 @@ int setMove(CH_Game* src, int* move)
     elem* element;
     int res = 0;
     if( (!src) || (!move) ){
+        printf("error: chessgame.c-line174\n");
         return 1;
     }
     for(int i=0; i<CELL_SIZE*CELL_SIZE; ++i)
     {
         if(move[i]<1 || move[i]>GRID)
         {
+            printf("error: chessgame.c-line181\n");
             return 1;
         }
     }
     element = transfer(src, move);
     if(element==NULL){
+        printf("error: chessgame.c-line187\n");
         return ALLOCATION_ERROR;
     }
     res = isValidMove(src,element);
     if(res==ALLOCATION_ERROR)
     {
+        printf("error: chessgame.c-line193\n");
         free(element);
         return ALLOCATION_ERROR;
     }
     if(res != 1)
     {
+        printf("error: chessgame.c-line199\n");
         free(element);
         return res;
     }
@@ -291,7 +296,7 @@ int isValidMove(CH_Game* src, elem* element)
         return ILLEGAL_MOVE;
     }
     gameDestroy(copy);
-    return 1;    
+    return 1;
 }
 bool playerFig(CH_Game* src, int row, int col)
 {
