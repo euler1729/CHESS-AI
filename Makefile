@@ -3,7 +3,7 @@ CC = gcc
 OBJS =  Main.o ConsoleMode.o Search.o XMLREADWRITE.o XMLGameParser.o XMLSettingsParser.o ChessGame.o  ArrayList.o \
 GuiMode.o GUIManager.o MainMenu.o LoadWindow.o SettingWindow.o Panel.o Cell.o Button.o GameWindow.o Sound.o  Introduction.o
 
-EXEC = CHESSAI
+EXEC = QueensGambit
 COMP_FLAG = -std=c99 -Wall -Wextra -Werror -pedantic-errors
 
 SDL_COMP_FLAG = -I/usr/local/lib/sdl_2.0.5/include/SDL2 -D_REENTRANT
@@ -13,7 +13,7 @@ SDL_LIB = -L/usr/local/lib/sdl_2.0.5/lib -Wl,-rpath,/usr/local/lib/sdl_2.0.5/lib
 VPATH = GUI ENGINE
 
 all: $(OBJS)
-	$(CC) $(OBJS) $(SDL_LIB) -o CHESSAI
+	$(CC) $(OBJS) $(SDL_LIB) -o QueensGambit
 $(EXEC): $(OBJS)
 	$(CC) $(OBJS) $(SDL_LIB) -o $@
 
