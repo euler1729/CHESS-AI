@@ -27,8 +27,8 @@ git clone https://github.com/Eulers2020/CHESS-AI.git
  Go to the the CHESS-AI directory run the following command:
   - make
   - make clean(to clean object files)
-  * To play in GUI Mode: ./CHESSAI -g
-  * To play in Console Mode: ./CHESSAI -c or anything else instead of c
+  * To play in GUI Mode: ./QueensGambit -g
+  * To play in Console Mode: ./QueensGambit -c or anything else instead of c
   * To quit in console mode, just write quit and enter.
   
   
