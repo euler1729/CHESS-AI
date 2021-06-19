@@ -2,7 +2,7 @@
 
 Cell *CreateCell(SDL_Rect *location, SDL_Renderer *renderer, const char *cell_image)
 {
-    assert((renderer != NULL) && (location != NULL));
+    ASSERT((renderer != NULL) && (location != NULL));
     Cell *cell = (Cell *)malloc(sizeof(Cell));
     if (!cell)
     {
@@ -48,7 +48,7 @@ void DestroyCell(Cell *cell)
 }
 bool textureUpdate(Cell *cell, const char *cell_image)
 {
-    assert(cell != NULL);
+    ASSERT(cell != NULL);
 
     if (cell_image != NULL)
     {

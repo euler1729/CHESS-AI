@@ -1,4 +1,3 @@
-#pragma once
 #ifndef ARRAYLIST_H_
 #define ARRAYLIST_H_
 
@@ -7,8 +6,12 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <assert.h>
+#include "../ASSERT.h"
 
 #define CELL_SIZE 2 //specify the number of coordinates that represent a cell
+
+
+
 
 // To save Move history
 typedef struct elem_t

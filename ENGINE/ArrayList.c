@@ -257,12 +257,6 @@ elem* ArrayListGetAt(SPArrayList* src, int index){
         return NULL;
     }
 
-
-	// if (index<0 || index>src->actualSize-1 || (!src)) //checks validity of the input
-	// {
-    //     printf("error\n");
-    //     return NULL;
-    // }	
 	else
 	{
         return src->elements[index];

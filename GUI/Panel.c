@@ -41,8 +41,8 @@ Panel *CreatePanel(SDL_Renderer *renderer, SDL_Surface *image, SDL_Rect *locatio
 			return NULL;
 		}
 	}
-	else//Creating button for Board 
-	{ 
+	else //Creating button for Board
+	{
 		panel->cellCounter = GRID * GRID;
 		panel->cellList = CreateGamePanelCells(panel->renderer);
 		if (panel->cellList == NULL)

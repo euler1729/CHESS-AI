@@ -6,9 +6,7 @@ CH_Game* gameCreate(int historySize, int diff, int color, int mode)
         return NULL;
     }
     CH_Game *new = (CH_Game*)malloc(sizeof(CH_Game));
-    if(!new){
-        return NULL;
-    }
+    ASSERT(new!=NULL);
     new->undo_hist = ArrayListCreate(historySize);
     if(!(new->undo_hist)){
         free(new);
@@ -26,7 +24,7 @@ CH_Game* gameCreate(int historySize, int diff, int color, int mode)
 
 void argInitialize(CH_Game* game)
 {
-    assert(game != NULL);
+    ASSERT(game != NULL);
     game->white[PAWN_INDEX] = game->black[PAWN_INDEX] = PAWN_NUM;
     game->white[KNIGHT_INDEX] = game->white[BISHOP_INDEX] = game->white[ROOK_INDEX] = B_R_Kn_NUM;
     game->black[KNIGHT_INDEX] = game->black[BISHOP_INDEX] = game->black[ROOK_INDEX] = B_R_Kn_NUM;
@@ -41,7 +39,7 @@ void argInitialize(CH_Game* game)
 }
 void boardInitialize(CH_Game* game)
 {
-    assert(game!=NULL);
+    ASSERT(game!=NULL);
     for(int i=1; i<GRID-1; ++i)
     {
         for(int j=0; j<GRID; ++j)
@@ -94,8 +92,8 @@ CH_Game* gameCopy(CH_Game* src)
 }
 void copyParameters(CH_Game* src, CH_Game* gamecopy)
 {
-    assert(src!=NULL);
-    assert(gamecopy != NULL);
+    ASSERT(src!=NULL);
+    ASSERT(gamecopy != NULL);
     for(int i=0; i<GRID; ++i){
         for(int j=0; j<GRID; ++j){
             (gamecopy->gameBoard)[i][j] = (src->gameBoard)[i][j];
@@ -207,8 +205,8 @@ int setMove(CH_Game* src, int* move)
 }
 elem* transfer(CH_Game* src, int* move)
 {
-    assert(move!=NULL);
-    assert(src!=NULL);
+    ASSERT(move!=NULL);
+    ASSERT(src!=NULL);
     elem* element;
     element = (elem*)malloc(2*sizeof(elem));
     if(!element){
@@ -255,8 +253,8 @@ CH_STATUS intToStatus(int n)
 }
 int isValidMove(CH_Game* src, elem* element)
 {
-    assert(element!=NULL);
-    assert(src!=NULL);
+    ASSERT(element!=NULL);
+    ASSERT(src!=NULL);
     int row=0, col=0;
     if(element->fig ==CH_EMPTY_ENTRY)
     {
@@ -300,7 +298,7 @@ int isValidMove(CH_Game* src, elem* element)
 }
 bool playerFig(CH_Game* src, int row, int col)
 {
-    assert(src!=NULL);
+    ASSERT(src!=NULL);
     if(src->gameBoard[row][col]==CH_EMPTY_ENTRY){
         return false;
     }
@@ -318,8 +316,8 @@ bool playerFig(CH_Game* src, int row, int col)
 }
 bool figureMove(CH_Game* src, elem* element)
 {
-    assert(src!=NULL);
-    assert(element!=NULL);
+    ASSERT(src!=NULL);
+    ASSERT(element!=NULL);
 
     switch(element->fig)
     {
@@ -346,8 +344,8 @@ bool figureMove(CH_Game* src, elem* element)
 }
 bool pawnMove(CH_Game* src, elem* element)
 {
-    assert(element!=NULL);
-    assert(src!=NULL);
+    ASSERT(element!=NULL);
+    ASSERT(src!=NULL);
     bool check = false;
     if(element->player ==CH_PLAYER_1)
     {
@@ -397,7 +395,7 @@ bool pawnMove(CH_Game* src, elem* element)
 }
 bool isOppPiece(CH_Game* src, int row, int col)
 {
-    assert(src!= NULL);
+    ASSERT(src!= NULL);
     char piece = src->gameBoard[row][col];
     if(getCurrentPlayer(src) == CH_PLAYER_2)
     {
@@ -410,12 +408,12 @@ bool isOppPiece(CH_Game* src, int row, int col)
 }
 bool bishopMove(elem* element)
 {
-    assert(element!=NULL);
+    ASSERT(element!=NULL);
     return isDiagonal(element);
 }
 bool isDiagonal(elem* element)
 {
-    assert(element!=NULL);
+    ASSERT(element!=NULL);
     int col, row;
     if( (element->destinationCol-element->startCol)==0 && (element->destinationRow-element->startRow)==0)
     {
@@ -430,7 +428,7 @@ bool isDiagonal(elem* element)
 
 bool rookMove(elem* element)
 {
-    assert(element!=NULL);
+    ASSERT(element!=NULL);
     if( (element->destinationCol-element->startCol)==0 && (element->destinationRow-element->startRow)==0)
     {
         return false;
@@ -440,7 +438,7 @@ bool rookMove(elem* element)
 
 bool knightMove(elem* element)
 {
-    assert(element!=NULL);
+    ASSERT(element!=NULL);
     if( (abs(element->destinationCol-element->startCol)==2) && (abs(element->destinationRow-element->startRow)==1)  )
     {
         return true;
@@ -453,12 +451,12 @@ bool knightMove(elem* element)
 }
 bool queenMove(elem* element)
 {
-    assert(element!=NULL);
+    ASSERT(element!=NULL);
     return (rookMove(element) || bishopMove(element));
 }
 bool kingMove(elem* element)
 {
-    assert(element != NULL);
+    ASSERT(element != NULL);
     if(abs(element->destinationCol-element->startCol)==0 && abs(element->destinationRow-element->startRow)==0)
     {
         return false;
@@ -472,8 +470,8 @@ bool kingMove(elem* element)
 
 bool noOverlap( CH_Game* src, elem* element)
 {
-    assert(src!=NULL);
-    assert(element!=NULL);
+    ASSERT(src!=NULL);
+    ASSERT(element!=NULL);
 
     switch(element->fig)
     {
@@ -499,8 +497,8 @@ bool noOverlap( CH_Game* src, elem* element)
 }
 bool pawnOverlap(CH_Game* src, elem* element)
 {
-    assert(src!=NULL);
-    assert(element!=NULL);
+    ASSERT(src!=NULL);
+    ASSERT(element!=NULL);
     int check_row = 0;
 
     if(abs(element->destinationRow-element->startRow)==1)
@@ -538,7 +536,7 @@ bool pawnOverlap(CH_Game* src, elem* element)
 }
 bool isCellEmpty(CH_Game* src, int row, int col)
 {
-    assert(src!=NULL);
+    ASSERT(src!=NULL);
     if(col<0 || col>(GRID-1) || row<0 || row>(GRID-1))
     {
         return false;
@@ -547,8 +545,8 @@ bool isCellEmpty(CH_Game* src, int row, int col)
 }
 bool bishopOverlap(CH_Game* src, elem* element)
 {
-    assert(src != NULL);
-    assert(element != NULL);
+    ASSERT(src != NULL);
+    ASSERT(element != NULL);
     int row_check = 0;
     int col_check = 0;
     if(element->destinationRow > element->startRow)
@@ -619,8 +617,8 @@ bool bishopOverlap(CH_Game* src, elem* element)
 }
 bool rookOverlap(CH_Game* src, elem* element)
 {
-    assert(src!=NULL);
-    assert(element!=NULL);
+    ASSERT(src!=NULL);
+    ASSERT(element!=NULL);
     int row_check = 0, col_check = 0;
     if(element->destinationRow == element->startRow)
     {
@@ -687,8 +685,8 @@ bool rookOverlap(CH_Game* src, elem* element)
 }
 bool queenOverlap(CH_Game* src, elem* element)
 {
-    assert(element != NULL);
-	assert(src != NULL);
+    ASSERT(element != NULL);
+	ASSERT(src != NULL);
     if(isDiagonal(element))
     {
         return bishopOverlap(src, element);
@@ -699,13 +697,13 @@ bool queenOverlap(CH_Game* src, elem* element)
 }
 bool kingOrKnightOverlap(CH_Game* src, elem* element)
 {
-    assert(src!= NULL);
-    assert(element!=NULL);
+    ASSERT(src!= NULL);
+    ASSERT(element!=NULL);
     return (isCellEmpty(src, element->destinationRow, element->destinationCol) || isOppPiece(src, element->destinationRow, element->destinationCol));
 }
 void doMove(CH_Game* src, elem* element)
 {
-    assert(src!=NULL);
+    ASSERT(src!=NULL);
     // int i = 3;
     element->prevFig = src->gameBoard[element->destinationRow][element->destinationCol];//save in the history list the captured piece
     if(element->player == CH_PLAYER_1 && element->fig == PAWN_W && element->destinationRow == 7){
@@ -783,7 +781,7 @@ void doMove(CH_Game* src, elem* element)
 }
 void piecesUpdate(CH_Game* src, char figure, bool add, char player)
 {
-    assert(src!=NULL);
+    ASSERT(src!=NULL);
     int index = -1;
     switch(figure)
     {
@@ -852,7 +850,7 @@ char playerPC(CH_Game* src)
 
 void kingUpdate(CH_Game* src, char fig, int row, int col )
 {
-    assert(src!=NULL);
+    ASSERT(src!=NULL);
     if(fig == KING_W)
     {
         src->white_king[0] = row;
@@ -866,7 +864,7 @@ void kingUpdate(CH_Game* src, char fig, int row, int col )
 }
 void switchPlayer(CH_Game* src)
 {
-    assert(src!=NULL);
+    ASSERT(src!=NULL);
     if((getCurrentPlayer(src))==CH_PLAYER_1)
     {
         src->currentPlayer = CH_PLAYER_2;
@@ -878,7 +876,7 @@ void switchPlayer(CH_Game* src)
 
 bool pieceUnderAttack(CH_Game* src, int row, int col)
 {
-    assert(src!=NULL);
+    ASSERT(src!=NULL);
     elem* element = NULL;
     int move[4] = {0};
     int pos[2] = {0};//represents the kings position of current player
@@ -941,7 +939,7 @@ CH_STATUS updateStatus(CH_Game* src)
 }
 bool isTie(CH_Game *src)
 {
-	assert(src != NULL);
+	ASSERT(src != NULL);
 	return noPossibleMoves(src); // true if no moves
 }
 bool isCheck(CH_Game* src)
@@ -986,7 +984,7 @@ bool isCheckMate(CH_Game* src)
 }
 bool noPossibleMoves(CH_Game* src)
 {
-    assert(src!=NULL);
+    ASSERT(src!=NULL);
     int **arr = NULL;
     int num_of_moves = 0;
     for(int i=0; i<GRID; ++i)
@@ -1014,7 +1012,7 @@ bool noPossibleMoves(CH_Game* src)
 }
 int **possibleMoves(CH_Game *src, int row, int col)
 {
-	assert(src != NULL);
+	ASSERT(src != NULL);
 	switch (src->gameBoard[row][col])
 	{ 
         //Checks if the move given doesn't overlap other pieces
@@ -1100,8 +1098,8 @@ int **arrayInit(int size)
 }
 bool addToMoveArray(CH_Game* src, int row, int col, int i, int j, int **arr, int index)
 {
-    assert(src!=NULL);
-    assert(arr!=NULL);
+    ASSERT(src!=NULL);
+    ASSERT(arr!=NULL);
     elem* element = NULL;
     int res, move[CELL_SIZE*CELL_SIZE] = {0};
     if (row < 0 || row > (GRID - 1) || col < 0 || col > (GRID - 1) || i < 0 || i > (GRID - 1) || j < 0 || j > (GRID - 1) || (row == i && col == j))
@@ -1410,14 +1408,9 @@ int numOfMoves(char ch)
 
 bool gameAssign(CH_Game *src, CH_Game *gamecopy)
 {
-	if (!src){
-        return false;
-    }
-		
-	if (!gamecopy)
-	{
-		return false;
-	}
+
+    ASSERT(src!=NULL);
+	ASSERT(gamecopy!=NULL);
 
 	copyParams(src->undo_hist, gamecopy->undo_hist); //copies undo hist params
 	copyParameters(src, gamecopy);					 //copies params from src to gamecopy
@@ -1454,7 +1447,7 @@ CH_GAME_MESSAGE undoPrevMove(CH_Game *src)
 }
 char checkWinner(CH_Game *src)
 {
-	assert(src != NULL);
+	ASSERT(src != NULL);
     
 	if (src->game_status == CHECKMATE)
 	{											  
@@ -1496,9 +1489,9 @@ int comp(const void *arg1, const void *arg2)
 }
 CH_GAME_MESSAGE getMovesBonus(CH_Game *src, int row, int col, char **board, bool gui)
 {
-	assert(src != NULL);
+	ASSERT(src != NULL);
 	if (gui){
-        assert(board != NULL);
+        ASSERT(board != NULL);
     }
 		
 	char fig;

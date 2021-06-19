@@ -36,7 +36,13 @@
         "guimode.h": "c",
         "sound.h": "c",
         "sdl.h": "c",
-        "guimanager.h": "c"
+        "guimanager.h": "c",
+        "search.h": "c",
+        "stdlib.h": "c",
+        "introduction.h": "c",
+        "gamewindow.h": "c",
+        "mainmenu.h": "c",
+        "panel.h": "c"
     },
     "terminal.integrated.shell.windows": "cmd.exe"
 }

@@ -3,7 +3,8 @@
 int startGuiMode()
 {
     //Initialize SDL_videos and Audio_system
-    if (SDL_Init(SDL_INIT_VIDEO) | SDL_Init(SDL_INIT_AUDIO)){
+    if (SDL_Init(SDL_INIT_VIDEO) | SDL_Init(SDL_INIT_AUDIO))
+    {
         printf("ERROR: Unable to initialize GUI: %s\n", SDL_GetError());
         return 1;
     }
@@ -14,7 +15,8 @@ int startGuiMode()
     //Initializing sound
     initAudio();
 
-    if (manager == NULL){
+    if (manager == NULL)
+    {
         SDL_Quit();
         return 0;
     }
@@ -23,31 +25,35 @@ int startGuiMode()
     int quit = 0;
 
     ManagerDraw(manager);
-    playMusic("./resources/sound/mainWindowMusic.wav", SDL_MIX_MAXVOLUME);
-
+    playMusic("./resources/sound/keys-of-moon-white-petals.wav", SDL_MIX_MAXVOLUME);
 
     while (!quit)
     {
         // if there's a Quit request
-        if (currentState(manager)){
+        if (currentState(manager))
+        {
             quit = 1;
             break;
         }
-        if(manager->activeWin != GAME_WINDOW){
-            playMusic("./resources/sound/mainWindowMusic.wav",SDL_MIX_MAXVOLUME/2);
+        if (manager->activeWin != GAME_WINDOW)
+        {
+            playMusic("./resources/sound/keys-of-moon-white-petals.wav", SDL_MIX_MAXVOLUME / 2);
         }
-        else{
-            playMusic("./resources/sound/mainWindowMusic.wav",SDL_MIX_MAXVOLUME/100);
+        else
+        {
+            playMusic("./resources/sound/keys-of-moon-white-petals.wav", SDL_MIX_MAXVOLUME / 100);
         }
 
         while (SDL_PollEvent(&event))
         {
-            
-            if (ManagerHandleEvent(manager, &event) == MANAGER_QUIT){
+
+            if (ManagerHandleEvent(manager, &event) == MANAGER_QUIT)
+            {
                 quit = 1;
                 break;
             }
-            if (currentState(manager)){
+            if (currentState(manager))
+            {
                 quit = 1;
                 break;
             }
@@ -67,11 +73,14 @@ int currentState(GuiManager *manager)
     if (manager->game->game_status != REGULAR)
     {
         int stat = statusMessage(manager->GameWindow);
-        if (stat == -1 || stat == 2){
+        if (stat == -1 || stat == 2)
+        {
             return 1;
         }
-        else if (stat == 1){
-            if (gameRestart(manager) == MANAGER_QUIT){
+        else if (stat == 1)
+        {
+            if (gameRestart(manager) == MANAGER_QUIT)
+            {
                 return 1;
             }
         }

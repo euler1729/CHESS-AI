@@ -2,7 +2,7 @@
 
 void initButtons(Button **buttonsList, int size)
 {
-    assert(buttonsList != NULL);
+    ASSERT(buttonsList != NULL);
     //initialize all buttons to not clicked
     for (int i = 0; i < size; i++)
     {
@@ -12,8 +12,8 @@ void initButtons(Button **buttonsList, int size)
 
 Button *Create_Button(SDL_Rect *location, SDL_Renderer *buttonRenderer, const char *enable_image, const char *disable_image, bool isEnabled, bool toShow, bool isClicked)
 {
-    assert(buttonRenderer != NULL);
-    assert(location != NULL);
+    ASSERT(buttonRenderer != NULL);
+    ASSERT(location != NULL);
     if (enable_image == NULL || disable_image == NULL)
     {
         failMessage("error in image! ");
@@ -94,7 +94,7 @@ Button *Create_Button(SDL_Rect *location, SDL_Renderer *buttonRenderer, const ch
 
 void failMessage(char *str)
 {
-    assert(str != NULL);
+    ASSERT(str != NULL);
     SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "ERROR:", str, NULL);
 }
 SDL_Rect *copyLocation(SDL_Rect *src)

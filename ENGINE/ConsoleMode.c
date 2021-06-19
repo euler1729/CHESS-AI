@@ -19,7 +19,7 @@ void startGame()
 
 void settingState(CH_Game* game)
 {
-    assert(game!=NULL);
+    ASSERT(game!=NULL);
     SetCommand command;
 
     printf("Specify the game Setting or type 'start' to begin with default Setting:\n ");
@@ -74,7 +74,7 @@ SetCommand getNewSetCommand()
 }
 void gameMode(CH_Game* game, int arg)
 {
-    assert(game!=NULL);
+    ASSERT(game!=NULL);
 
     if(arg == DEFAULT_MODE){
         game->mode = arg;
@@ -90,7 +90,7 @@ void gameMode(CH_Game* game, int arg)
 }
 void gameDifficulty(CH_Game* game, int arg)
 {
-    assert(game!=NULL);
+    ASSERT(game!=NULL);
     if(game->mode == TWO_PLAYER_MODE){// in human vs human there is no difficulty level
         printf("ERRPR: invalid command\n");
     }
@@ -108,7 +108,7 @@ void gameDifficulty(CH_Game* game, int arg)
 }
 void gameColor(CH_Game* game, int arg)
 {
-    assert(game!=NULL);
+    ASSERT(game!=NULL);
 
     if(game->mode == TWO_PLAYER_MODE){
         printf("In HUMAN vs HUMAN mode, setting up color is unneccessary.\n");
@@ -119,8 +119,8 @@ void gameColor(CH_Game* game, int arg)
 }
 void gameLoad(CH_Game* game, char* path)
 {
-    assert(game != NULL);
-    assert(path!=NULL);
+    ASSERT(game != NULL);
+    ASSERT(path!=NULL);
 
     CH_Game* loadGame;
     FILE* fxml = fopen(path, "r");
@@ -145,14 +145,14 @@ void gameLoad(CH_Game* game, char* path)
 }
 void gameDefault(CH_Game* game)
 {
-    assert(game!=NULL);
+    ASSERT(game!=NULL);
     game->mode = DEFAULT_MODE;
     game->difficulty = DEFAULT_DIFFICULTY;
     game->user_color = DEFAULT_COLOR;
 }
 void gamePrintSetting(CH_Game* game)
 {
-    assert(game!=NULL);
+    ASSERT(game!=NULL);
     if(game->mode != DEFAULT_MODE){//default is AI mode whose numerical value is 1
         printf("SETTINGS:\n");
         printf("GAME_MODE: 2\n");
@@ -171,7 +171,7 @@ void gamePrintSetting(CH_Game* game)
 }
 void gameQuit(CH_Game* game, bool check)
 {
-    assert(game!=NULL);
+    ASSERT(game!=NULL);
     gameDestroy(game);
     if(check){
         printf("Exiting....\n");
@@ -180,7 +180,7 @@ void gameQuit(CH_Game* game, bool check)
 }
 void twoPlayerMode(CH_Game* game)
 {
-    assert(game!=NULL);
+    ASSERT(game!=NULL);
     bool check = true;
     GameCommand command;
     
@@ -231,7 +231,7 @@ char *color(char ch){
 }
 bool gameState(CH_Game* game, GameCommand command)
 {
-    assert(game!=NULL);
+    ASSERT(game!=NULL);
     int move[CELL_SIZE*CELL_SIZE];
     for(int i=0; i<CELL_SIZE*CELL_SIZE; ++i){
         move[i] = command.move[i];
@@ -259,8 +259,8 @@ bool gameState(CH_Game* game, GameCommand command)
 
 bool gameMove(CH_Game* game, int* move)
 {
-    assert(game!= NULL);
-    assert(move!=NULL);
+    ASSERT(game!= NULL);
+    ASSERT(move!=NULL);
     int result = setMove(game,move);
     if(result == ALLOCATION_ERROR){
         failGame(game, true);
@@ -283,8 +283,8 @@ bool gameMove(CH_Game* game, int* move)
 
 bool gameGetMoves(CH_Game* game, int* move)
 {
-    assert(game!=NULL);
-    assert(move!=NULL);
+    ASSERT(game!=NULL);
+    ASSERT(move!=NULL);
     if(game->mode == TWO_PLAYER_MODE ||(game->difficulty > DEFAULT_DIFFICULTY)){
         printf("ERROR: invalid command\n");
         return false;
@@ -296,8 +296,8 @@ bool gameGetMoves(CH_Game* game, int* move)
     return true;
 }
 bool gameSave(CH_Game* game, char* path){
-    assert(game!=NULL);
-    assert(path!=NULL);
+    ASSERT(game!=NULL);
+    ASSERT(path!=NULL);
     XML_MESSAGE message;
     FILE* fxml = fopen(path, "w");
     if(fxml==NULL){
@@ -323,14 +323,14 @@ bool gameSave(CH_Game* game, char* path){
 }
 
 void gameReset(CH_Game* game){
-	assert(game!=NULL);
+	ASSERT(game!=NULL);
 	gameDestroy(game);
 	printf("Restarting...\n");
 	startGame(); //start new game
 }
 bool gameUndoMove(CH_Game* game)
 {
-    assert(game!= NULL);
+    ASSERT(game!= NULL);
 
     CH_GAME_MESSAGE status;
     elem* element;
@@ -352,7 +352,7 @@ bool gameUndoMove(CH_Game* game)
 }
 void statusCheck(CH_Game* game)
 {
-    assert(game!=NULL);
+    ASSERT(game!=NULL);
     if(checkWinner(game)!='\0')
     {
         if(game->game_status ==CHECKMATE)
@@ -372,7 +372,7 @@ void statusCheck(CH_Game* game)
 }
 void onePlayerMode(CH_Game* game)
 {
-    assert(game!=NULL);
+    ASSERT(game!=NULL);
     bool check = true;
     bool to_print = (game->user_color==1);
     GameCommand command;
@@ -417,7 +417,7 @@ void onePlayerMode(CH_Game* game)
 }
 void computerMove(CH_Game* game)
 {
-    assert(game!=NULL);
+    ASSERT(game!=NULL);
 
     int res;
     int* move = (int*) malloc(CELL_SIZE*CELL_SIZE*sizeof(int));

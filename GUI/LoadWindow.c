@@ -2,7 +2,7 @@
 
 int isClickedOnLoad(int x, int y, LoadWin *src)
 {
-	assert(src != NULL);
+	ASSERT(src != NULL);
 	int start_x = LOAD_ARGS_INIT;
 	int end_x = LOAD_ARGS_INIT;
 	int start_y = LOAD_ARGS_INIT;
@@ -113,15 +113,17 @@ bool loadButtonInit(LoadWin *win, int num_of_saved_games)
 }
 void LoadWindowDraw(LoadWin *src)
 {
-	assert(src != NULL);
+	ASSERT(src != NULL);
 
 	//drawing background
-	SDL_Surface* surface = SDL_LoadBMP("./resources/images/pic/mainbg.bmp");
-	if(surface==NULL){
+	SDL_Surface *surface = SDL_LoadBMP("./resources/images/pic/mainbg.bmp");
+	if (surface == NULL)
+	{
 		failMessage("Couldn't Load surface!\n");
 	}
-	SDL_Texture* bgTexture = SDL_CreateTextureFromSurface(src->rendererLoad, surface);
-	if(bgTexture==NULL){
+	SDL_Texture *bgTexture = SDL_CreateTextureFromSurface(src->rendererLoad, surface);
+	if (bgTexture == NULL)
+	{
 		failMessage("Couldn't Load texture!\n");
 	}
 	SDL_FreeSurface(surface);
@@ -150,29 +152,29 @@ LOAD_EVENT LoadWindowHandleEvent(LoadWin *src, SDL_Event *event)
 		{ //checks which button was clicked
 		case SLOT1_BUTTON:
 			activateAfterClick(src, lOAD_EVENT_SLOT1);
-			playSound("./resources/sound/click2.wav",SDL_MIX_MAXVOLUME);
+			playSound("./resources/sound/click2.wav", SDL_MIX_MAXVOLUME);
 			return lOAD_EVENT_NONE;
 		case SLOT2_BUTTON:
 			activateAfterClick(src, lOAD_EVENT_SLOT2);
-			playSound("./resources/sound/click2.wav",SDL_MIX_MAXVOLUME);
+			playSound("./resources/sound/click2.wav", SDL_MIX_MAXVOLUME);
 			return lOAD_EVENT_NONE;
 		case SLOT3_BUTTON:
 			activateAfterClick(src, lOAD_EVENT_SLOT3);
-			playSound("./resources/sound/click2.wav",SDL_MIX_MAXVOLUME);
+			playSound("./resources/sound/click2.wav", SDL_MIX_MAXVOLUME);
 			return lOAD_EVENT_NONE;
 		case SLOT4_BUTTON:
 			activateAfterClick(src, lOAD_EVENT_SLOT4);
-			playSound("./resources/sound/click2.wav",SDL_MIX_MAXVOLUME);
+			playSound("./resources/sound/click2.wav", SDL_MIX_MAXVOLUME);
 			return lOAD_EVENT_NONE;
 		case SLOT5_BUTTON:
 			activateAfterClick(src, lOAD_EVENT_SLOT5);
-			playSound("./resources/sound/click2.wav",SDL_MIX_MAXVOLUME);
+			playSound("./resources/sound/click2.wav", SDL_MIX_MAXVOLUME);
 			return lOAD_EVENT_NONE;
 		case LOAD_BACK_BUTTON:
-			playSound("./resources/sound/click2.wav",SDL_MIX_MAXVOLUME);
+			playSound("./resources/sound/click2.wav", SDL_MIX_MAXVOLUME);
 			return lOAD_EVENT_BACK;
 		case LOAD_LOAD_BUTTON:
-			playSound("./resources/sound/click2.wav",SDL_MIX_MAXVOLUME);
+			playSound("./resources/sound/click2.wav", SDL_MIX_MAXVOLUME);
 			return lOAD_EVENT_lOAD;
 		}
 		break;
@@ -221,12 +223,12 @@ void activateAfterClick(LoadWin *src, int event)
 
 void LoadWindowHide(LoadWin *src)
 {
-	assert(src != NULL);
+	ASSERT(src != NULL);
 	SDL_HideWindow(src->windowLoad);
 }
 void LoadWindowShow(LoadWin *src)
 {
-	assert(src != NULL);
+	ASSERT(src != NULL);
 	SDL_ShowWindow(src->windowLoad);
 }
 

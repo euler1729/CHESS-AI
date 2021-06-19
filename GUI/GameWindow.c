@@ -3,7 +3,7 @@
 
 int isClickedOnGame(int x, int y, GameWindow *src)
 {
-	assert(src != NULL);
+	ASSERT(src != NULL);
 	int start_x = GAME_ARGS_INIT;
 	int end_x = GAME_ARGS_INIT;
 	int start_y = GAME_ARGS_INIT;
@@ -44,7 +44,7 @@ int pixelToIndex(int x, int y)
 
 GameWindow *GameWindowdowCreate(CH_Game *game, const char **board_images)
 {
-	assert(game != NULL);
+	ASSERT(game != NULL);
 
 	GameWindow *win = (GameWindow *)calloc(sizeof(GameWindow), sizeof(char));
 	if (win == NULL)
@@ -141,7 +141,7 @@ void GameWindowdowDestroy(GameWindow *src)
 }
 void initDragArgs(GameWindow *src)
 {
-	assert(src != NULL);	 //assertion
+	ASSERT(src != NULL);	 //ASSERTion
 	src->moving_cell = NULL; // initialize args
 	src->to_drag = false;
 	src->target_x = GAME_ARGS_INIT;
@@ -151,8 +151,8 @@ void initDragArgs(GameWindow *src)
 }
 int boardUpdate(Panel *panel, CH_Game *game, const char **board_images)
 {
-	assert(panel != NULL);
-	assert(game != NULL);
+	ASSERT(panel != NULL);
+	ASSERT(game != NULL);
 
 	const char *img = NULL;
 	SDL_Texture *cellTexture = NULL;
@@ -163,13 +163,7 @@ int boardUpdate(Panel *panel, CH_Game *game, const char **board_images)
 		failMessage("Couldn't create game window!(boardUpdate)");
 		return 0;
 	}
-	//Creating texture for enabling button
-	SDL_Texture *panelTexture = SDL_CreateTextureFromSurface(panel->renderer, boardSurface);
-	if (panelTexture == NULL)
-	{
-		failMessage("Couldn't create game window!(boardUpdate)");
-		return 0;
-	}
+
 	SDL_FreeSurface(boardSurface);
 	for (int i = 0; i < GRID * GRID; ++i)
 	{
@@ -202,7 +196,7 @@ int boardUpdate(Panel *panel, CH_Game *game, const char **board_images)
 
 const char *cellToImage(char ch, const char **board_images)
 {
-	assert(board_images != NULL);
+	ASSERT(board_images != NULL);
 	switch (ch)
 	{			 //switch according to the char that represents the cell
 	case PAWN_W: // return the path to the specific image
@@ -290,7 +284,7 @@ GAME_EVENT GameWindowdowHandleEvent(GameWindow *src, SDL_Event *event, const cha
 }
 GAME_EVENT buttonUp(GameWindow *src, SDL_Event *event, int res, const char **board_images)
 {
-	assert(src != NULL);
+	ASSERT(src != NULL);
 	int correct;
 	int cell_src;
 
@@ -398,7 +392,7 @@ void Drag(GameWindow *src)
 
 GAME_EVENT exitMessage(GameWindow *src, bool flag)
 {
-	assert(src != NULL);
+	ASSERT(src != NULL);
 	if (src->save_the_game)
 	{					  //the game is up to date
 		if (flag == true) // flag represents where to go: main menu / quit game
@@ -449,7 +443,7 @@ GAME_EVENT exitMessage(GameWindow *src, bool flag)
 }
 int buttonDown(GameWindow *src, SDL_Event *event, int res, const char **board_images)
 {
-	assert(src != NULL);
+	ASSERT(src != NULL);
 	int row, col;
 	bool check;
 	row = (res / GRID); // row of event
@@ -558,8 +552,8 @@ int PCMove(GameWindow *src, const char **board_images)
 
 void undoUpdate(Panel *panel, CH_Game *game)
 {
-	assert(panel != NULL); // assertions
-	assert(game != NULL);
+	ASSERT(panel != NULL); // ASSERTions
+	ASSERT(game != NULL);
 	if (game->undo_hist->actualSize < HISTORY_MIN_LIMIT || game->mode == TWO_PLAYER_MODE) // turn undo to be disable
 		panel->buttonList[UNDO_GAME_BUTTON - (GRID * GRID)]->isEnabled = false;
 	else // turn undo to be enable
@@ -569,7 +563,7 @@ void undoUpdate(Panel *panel, CH_Game *game)
 
 int statusMessage(GameWindow *src)
 {
-	assert(src != NULL);
+	ASSERT(src != NULL);
 	char *string;
 	if (src->game->game_status == CHECK)
 	{ // if there is a check
@@ -618,7 +612,7 @@ int statusMessage(GameWindow *src)
 }
 int Moving(GameWindow *src, int cell_src, int res, const char **board_images)
 {
-	assert(src != NULL);												 //assertion
+	ASSERT(src != NULL);												 //ASSERTion
 	int move[CELL_SIZE * CELL_SIZE], result, mouse_x, mouse_y, cell_trg; //initializes params
 	bool check1, check2;
 	SDL_GetMouseState(&mouse_x, &mouse_y);	   //get mouse position

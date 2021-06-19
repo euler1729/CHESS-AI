@@ -2,8 +2,21 @@
 
 int* miniMax(CH_Game* currentGame, unsigned int maxDepth)
 {
-    assert(currentGame!=NULL);
-    
+    ASSERT(currentGame!=NULL);
+
+    int* move = (int*)malloc(CELL_SIZE*CELL_SIZE*sizeof(int));
+    ASSERT(move!=NULL);
+
+    currentGame->mv_cnt +=1;
+    if(currentGame->difficulty >3 && currentGame->mv_cnt<2 && getCurrentPlayer(currentGame) =='F')
+    {          
+        move[START_ROW_PLACE] = 1;
+        move[START_COL_PLACE] = 3;
+        move[DESTINATION_ROW_PLACE] = 3;
+        move[DESTINATION_COL_PLACE] =3;
+        return move;
+    }
+
     CH_Game* copy = gameCopy(currentGame);
     if(!copy){
         return NULL;
@@ -15,68 +28,22 @@ int* miniMax(CH_Game* currentGame, unsigned int maxDepth)
         return NULL;
     }
 
-    int* move = (int*)malloc(CELL_SIZE*CELL_SIZE*sizeof(int));
+    
     if(!move){
         gameDestroy(copy);
         nodeDestroy(node);
         return NULL;
     }
-
-    currentGame->mv_cnt += 1;
-
-    if(currentGame->difficulty >3 && currentGame->mv_cnt<3)
+    miniMaxRec(node, 0, maxDepth,getCurrentPlayer(copy)==playerPC(copy) , INT_MIN, INT_MAX);
+    if(node->best_move[0]==ALLOC_ERROR_FLAG){
+        gameDestroy(copy);
+        nodeDestroy(node);
+        free(move);
+        return NULL;
+     }
+    for(int i=0; i<CELL_SIZE*CELL_SIZE; ++i)
     {
-        if(getCurrentPlayer(currentGame) =='F')
-        {
-            if(currentGame->mv_cnt==1){
-                
-                move[START_ROW_PLACE] = 1;
-                move[START_COL_PLACE] = 4;
-                move[DESTINATION_ROW_PLACE] = 3;
-                move[DESTINATION_COL_PLACE] =4;
-                // return move;
-            }
-            else{
-                move[START_ROW_PLACE] = 1;
-                move[START_COL_PLACE] = 3;
-                move[DESTINATION_ROW_PLACE] = 3;
-                move[DESTINATION_COL_PLACE] =3;
-                // return move;
-            }
-        }
-        else{
-            if(currentGame->mv_cnt==1)
-            {
-                move[START_ROW_PLACE] = 6;
-                move[START_COL_PLACE] = 4;
-                move[DESTINATION_ROW_PLACE] = 4;
-                move[DESTINATION_COL_PLACE] =4;
-                // return move;
-            }
-
-            else{
-                move[START_ROW_PLACE] = 6;
-                move[START_COL_PLACE] = 3;
-                move[DESTINATION_ROW_PLACE] = 4;
-                move[DESTINATION_COL_PLACE] =3;
-                // return move;
-            }
-        }
-        
-    }
-    else{
-        miniMaxRec(node, 0, maxDepth,getCurrentPlayer(copy)==playerPC(copy) , INT_MIN, INT_MAX);
-        if(node->best_move[0]==ALLOC_ERROR_FLAG)
-        {
-            gameDestroy(copy);
-            nodeDestroy(node);
-            free(move);
-            return NULL;
-        }
-        for(int i=0; i<CELL_SIZE*CELL_SIZE; ++i)
-        {
-            move[i] = node->best_move[i];
-        }
+         move[i] = node->best_move[i];
     }
 
     gameDestroy(copy);
@@ -87,7 +54,7 @@ int* miniMax(CH_Game* currentGame, unsigned int maxDepth)
 
 int miniMaxRec(Node* src, int level, int maxDepth, bool maximize, int alpha, int beta)
 {
-    assert(src!=NULL);
+    ASSERT(src!=NULL);
     int val=0;
     int move[CELL_SIZE*CELL_SIZE] = {0};
     int size = 0;
@@ -174,7 +141,7 @@ int miniMaxRec(Node* src, int level, int maxDepth, bool maximize, int alpha, int
 }
 int callerWin(CH_Game* src)
 {
-    assert(src!=NULL);
+    ASSERT(src!=NULL);
     if(checkWinner(src) == playerPC(src))
     {
         return INT_MAX;
@@ -187,7 +154,7 @@ int callerWin(CH_Game* src)
 }
 int scoreFunction(CH_Game* src)
 {
-    assert(src!=NULL);
+    ASSERT(src!=NULL);
     int vec[NUM_OF_PIECES] = VEC;
     int value = callerWin(src);
     if(value!=0)

@@ -101,7 +101,7 @@ void ManagerDestroy(GuiManager *src)
 
 void ManagerDraw(GuiManager *src)
 {
-	assert(src != NULL);
+	ASSERT(src != NULL);
 	//draws according to the active window
 	if (src->activeWin == MAIN_WINDOW)
 		DrawMainWindow(src->mainWin);
@@ -121,7 +121,7 @@ void ManagerDraw(GuiManager *src)
 
 MANAGER_EVENT handleManagerDueToMainEvent(GuiManager *src, MAIN_EVENT event)
 {
-	assert(src != NULL);
+	ASSERT(src != NULL);
 	if (event == MAIN_START)
 	{ //if clicked on start
 		MainWindowHide(src->mainWin);
@@ -176,7 +176,7 @@ MANAGER_EVENT handleManagerDueToMainEvent(GuiManager *src, MAIN_EVENT event)
 }
 MANAGER_EVENT HandleEventDueToIntroWindow(GuiManager* src, INTRO_EVENT event)
 {
-	assert(src!=NULL);
+	ASSERT(src!=NULL);
 	if(event == INTRO_BUTTON_BACK)
 	{
 		IntroWindowHide(src->introWin);
@@ -194,7 +194,7 @@ MANAGER_EVENT HandleEventDueToIntroWindow(GuiManager* src, INTRO_EVENT event)
 
 MANAGER_EVENT handleManagerDueToLoadEvent(GuiManager *src, LOAD_EVENT event)
 {
-	assert(src != NULL);
+	ASSERT(src != NULL);
 	int correct;
 	if (event == lOAD_EVENT_BACK)
 	{ //if clicked on back
@@ -226,7 +226,7 @@ MANAGER_EVENT handleManagerDueToLoadEvent(GuiManager *src, LOAD_EVENT event)
 
 MANAGER_EVENT loadEvent(GuiManager *src)
 {
-	assert(src != NULL);
+	ASSERT(src != NULL);
 	int correct = 0;
 	for (int i = SLOT_BUTTONS_START_INDEX; i < src->loadWin->buttonCounter; i++)
 	{
@@ -371,7 +371,7 @@ MANAGER_EVENT handleManagerDueToGameEvent(GuiManager *src, GAME_EVENT event)
 
 MANAGER_EVENT handleManagerDueToSetEvent(GuiManager *src, SETTINGS_EVENT event)
 {
-	assert(src != NULL);
+	ASSERT(src != NULL);
 	if (event == SETTINGS_EVENT_NONE)
 	{ //no event
 		return MANAGER_NONE;
@@ -416,7 +416,7 @@ MANAGER_EVENT handleManagerDueToSetEvent(GuiManager *src, SETTINGS_EVENT event)
 
 void drawSetNextScreen(GuiManager *src)
 {
-	assert(src != NULL);
+	ASSERT(src != NULL);
 	if (src->settingsWin->curr_screen == GameModeScreen)
 	{												  //if the user's curr screen is game mode
 		SettingsChangeToDifficulty(src->settingsWin); //go to difficulty screen
@@ -431,7 +431,7 @@ void drawSetNextScreen(GuiManager *src)
 
 void drawSetPrevScreen(GuiManager *src)
 {
-	assert(src != NULL);
+	ASSERT(src != NULL);
 	if (src->settingsWin->curr_screen == ColorScreen)			//if user's curr screen is color screen
 		SettingsChangeToDifficulty(src->settingsWin);			//go to difficulty screen
 	else if (src->settingsWin->curr_screen == DifficultyScreen) //if user's curr screen is difficulty screen
@@ -447,7 +447,7 @@ void drawSetPrevScreen(GuiManager *src)
 
 MANAGER_EVENT ManagerHandleEvent(GuiManager *src, SDL_Event *event)
 {
-	assert(src != NULL);
+	ASSERT(src != NULL);
 	if (event == NULL)
 	{
 		return MANAGER_NONE;
@@ -506,22 +506,22 @@ void saveUpdate(GuiManager *src)
 MANAGER_EVENT gameRestart(GuiManager *src)
 {
 	CH_Game *copy = gameCreate(HISTORY_SIZE, src->game->difficulty, src->game->user_color, src->game->mode);
-	if (copy == NULL)
-	{ //allocation error
-		failMessage("Couldn't allocate memory guimanager line 505!");
-		return MANAGER_QUIT;
-	}
+	ASSERT(copy!=NULL);
 	gameAssign(copy, src->game); // assigns the new game
 	gameDestroy(copy);
-	ArrayListClear(src->game->undo_hist);												  // clears history
+	ArrayListClear(src->game->undo_hist);// clears history
+
 	int correct = boardUpdate(src->GameWindow->boardPanel, src->game, src->board_images); //updates board
-	if (!correct)
+	if (!correct){
 		return MANAGER_QUIT;
+	}
+		
 	undoUpdate(src->GameWindow->settingPanel, src->game); // updates undo button
 	src->GameWindow->save_the_game = true;				  // is up do date
 	src->GameWindow->check_printed = false;				  // check was not printed yet
-	if (!PCMove(src->GameWindow, src->board_images))	  // computer move if needed
+	if (!PCMove(src->GameWindow, src->board_images)){	  // computer move if needed
 		return MANAGER_QUIT;
+	}	
 	return MANAGER_NONE;
 }
 
@@ -553,7 +553,7 @@ XML_MESSAGE saveGameGui(GuiManager *src)
 
 void undoGameGui(GuiManager *src)
 {
-	assert(src != NULL);
+	ASSERT(src != NULL);
 	gameUndoMove(src->game);												//undo the move
 	boardUpdate(src->GameWindow->boardPanel, src->game, src->board_images); //update the board
 	undoUpdate(src->GameWindow->settingPanel, src->game);

@@ -2,7 +2,7 @@
 
 char *boardRowToLine(CH_Game *src, int row)
 {
-    assert(src != NULL);
+    ASSERT(src != NULL);
     char *line = (char *)malloc(sizeof(char) * (GRID + 1));
     if (!line)
     {
@@ -19,8 +19,8 @@ char *boardRowToLine(CH_Game *src, int row)
 
 void lineToInfo(CH_Game *game, char *line)
 {
-    assert(game != NULL);
-    assert(line != NULL);
+    ASSERT(game != NULL);
+    ASSERT(line != NULL);
 
     int row = 0;
     char *ch = NULL;
@@ -97,7 +97,7 @@ void lineToInfo(CH_Game *game, char *line)
 
 CH_Game *fileToGame(FILE *f)
 {
-    assert(f != NULL);
+    ASSERT(f != NULL);
     char line[SP_MAX_LINE_LENGTH];
     CH_Game *game = gameCreate(HISTORY_SIZE, DEFAULT_DIFFICULTY, DEFAULT_COLOR, DEFAULT_MODE);
     char fig, player;
@@ -143,7 +143,7 @@ CH_Game *fileToGame(FILE *f)
 
 XML_MESSAGE gameToFile(CH_Game *src, FILE *xml)
 {
-    assert(xml != NULL);
+    ASSERT(xml != NULL);
     if (src == NULL)
     {
         return XML_FAILED;
