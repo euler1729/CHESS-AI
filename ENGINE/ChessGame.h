@@ -12,7 +12,7 @@
 
 #define NUM_OF_PIECES 6
 #define GRID 8
-#define HISTORY_SIZE 10
+#define HISTORY_SIZE 6
 
 enum {EMPTY, wP, wN, wB, wR, wQ, wK, bP, bN, bB, bR, bQ, bK};
 #define PAWN_W 'p'
