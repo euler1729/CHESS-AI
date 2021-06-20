@@ -1,7 +1,7 @@
 # QUEEN'S GAMBIT
 ![Project Image](resources/images/pic/logo.png)
 
-**This is an AI based Chess Game.**
+**QUEEN'S GAMBIT is an AI based Chess Game.**
 
 The game can be played in both Console mode and GUI mode.The whole game is written in C. SDL2 libraries have been used to build the game.
 
