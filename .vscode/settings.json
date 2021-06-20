@@ -42,7 +42,8 @@
         "introduction.h": "c",
         "gamewindow.h": "c",
         "mainmenu.h": "c",
-        "panel.h": "c"
+        "panel.h": "c",
+        "assert.h": "c"
     },
     "terminal.integrated.shell.windows": "cmd.exe"
 }

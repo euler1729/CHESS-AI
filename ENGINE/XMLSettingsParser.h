@@ -6,7 +6,6 @@
 #include <stdbool.h>
 #include <string.h>
 #include <ctype.h>
-#include <assert.h>
 
 #define SP_MAX_LINE_LENGTH 1024
 #define PATH_COMMAND_FLAG 2

@@ -1,4 +1,5 @@
 # QUEEN'S GAMBIT
+![Project Image](resources/images/pic/logo.png)
 
 **This is an AI based Chess Game.**
 

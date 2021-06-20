@@ -3,11 +3,10 @@
 
 #include <stdio.h>
 #include <stdbool.h>
-// #include <assert.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_video.h>
 #include <stdlib.h>
-#include "../ASSERT.h"
+#include "../ENGINE/ASSERT.h"
 
 
 #define inRange(a, min, max) ((a >= min) && (a <= max))

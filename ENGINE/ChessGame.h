@@ -6,8 +6,6 @@
 #include <stdbool.h>
 #include <string.h>
 #include <ctype.h>
-#include <assert.h>
-
 #include "ArrayList.h"
 
 #define NUM_OF_PIECES 6

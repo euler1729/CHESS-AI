@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <math.h>
 #include <time.h>
-#include <assert.h>
 #include "../ENGINE/ConsoleMode.h"
 #include "Button.h"
 #include "Panel.h"

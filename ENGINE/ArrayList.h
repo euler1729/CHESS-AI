@@ -5,8 +5,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include <assert.h>
-#include "../ASSERT.h"
+#include "ASSERT.h"
 
 #define CELL_SIZE 2 //specify the number of coordinates that represent a cell
 
