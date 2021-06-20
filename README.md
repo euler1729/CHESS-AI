@@ -3,7 +3,13 @@
 
 **This is an AI based Chess Game.**
 
-The game can be played in both Console mode and GUI mode.The whole game is written in C. SDL libraries have been used to build the game.
+The game can be played in both Console mode and GUI mode.The whole game is written in C. SDL2 libraries have been used to build the game.
+
+**The main objectives of the game:**
+1. To improve skill in playing chess
+2. For enjoyment
+3. To learn about Artificial Intelligence
+4. To improve programming and problem solving skill in C
 
 
 # FEATURES
@@ -13,7 +19,7 @@ The game can be played in both Console mode and GUI mode.The whole game is writt
 - Four Difficulty Levels
 
 # Availability
-- Now available on *LINUX* and *Debian* based OS such as *Ubuntu*, *POP OS* etc.
+- Now available on **LINUX** based Operating Systems such as **Ubuntu**, **POP OS** etc.
 # Requirements
   ## LINUX:
   - Libraries for Debian Based Distributoins : ```build-essential``` ```libsdl2-dev```
