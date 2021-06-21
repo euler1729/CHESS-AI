@@ -1,6 +1,7 @@
 #ifndef INTRODUCTION_H_
 #define INTRODUCTION_H_
 
+#include <SDL2/SDL_image.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <string.h>

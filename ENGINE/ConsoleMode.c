@@ -331,9 +331,8 @@ void gameReset(CH_Game* game){
 bool gameUndoMove(CH_Game* game)
 {
     ASSERT(game!= NULL);
-
     CH_GAME_MESSAGE status;
-    elem* element;
+    
     if(game->mode==TWO_PLAYER_MODE){
         printf("Undo Feature is not available in 2 players mode.\n");
         return false;
@@ -342,12 +341,13 @@ bool gameUndoMove(CH_Game* game)
         printf("Empty history, move cannot be undone.\n");
         return false;
     }
-    element = ArrayListGetLast(game->undo_hist);
+    // elem* element;
+    // element = ArrayListGetLast(game->undo_hist);
     status = undoPrevMove(game);
     if(status != CH_SUCCESS){
         return false;
     }
-    printf("Undo move for player %s: <%c%d> -> <%c%d>\n",color(game->currentPlayer),element->destinationCol+ASCII_OFFSET+1,element->destinationRow+1,element->startCol+ASCII_OFFSET+1,element->startRow+1);
+    // printf("Undo move for player %s: <%c%d> -> <%c%d>\n",color(game->currentPlayer),element->destinationCol+ASCII_OFFSET+1,element->destinationRow+1,element->startCol+ASCII_OFFSET+1,element->startRow+1);
     return true;
 }
 void statusCheck(CH_Game* game)

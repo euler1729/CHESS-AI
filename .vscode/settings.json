@@ -43,7 +43,8 @@
         "gamewindow.h": "c",
         "mainmenu.h": "c",
         "panel.h": "c",
-        "assert.h": "c"
+        "assert.h": "c",
+        "stdbool.h": "c"
     },
     "terminal.integrated.shell.windows": "cmd.exe"
 }

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <game>
-	<current_turn>0</current_turn>
+	<current_turn>1</current_turn>
 	<game_mode>1</game_mode>
 	<diffifcult>5</difficulty>
 	<user_color>1</user_color>
-	<move_count>10</move_count>
+	<move_count>11</move_count>
 	<board>
 		<row_8>________</row_8>
 		<row_7>________</row_7>
@@ -13,6 +13,6 @@
 		<row_4>________</row_4>
 		<row_3>_____k__</row_3>
 		<row_2>P_____R_</row_2>
-		<row_1>_K______</row_1>
+		<row_1>K_______</row_1>
 	</board>
 </game>

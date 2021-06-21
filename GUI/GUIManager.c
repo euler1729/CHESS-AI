@@ -2,44 +2,39 @@
 
 GuiManager *ManagerCreate()
 {
-	GuiManager *res = (GuiManager *)malloc(sizeof(GuiManager));
-	if (res == NULL)
+	GuiManager *mangr = (GuiManager *)malloc(sizeof(GuiManager));
+	if (mangr == NULL)
 	{
 		failMessage("Couldn't create gui manager window!");
 		return NULL;
 	}
 
-	res->mainWin = CreateMainWindow(); //creates main window
+	mangr->mainWin = CreateMainWindow(); //creates main window
 	// printf("error\n");
-	if (res->mainWin == NULL)
-	{
-		failMessage("Couldn't create gui manager window!");
-		free(res);
-		return NULL;
-	}
+	ASSERT(mangr->mainWin!=NULL);
 
 	//initializes gui manager's parameters
-	res->game = NULL;
-	res->settingsWin = NULL;
-	res->loadWin = NULL;
-	res->GameWindow = NULL;
-	res->introWin = NULL;
-	res->activeWin = MAIN_WINDOW;
-	res->prevWin = MAIN_WINDOW;
-	res->game = gameCreate(HISTORY_SIZE, DEFAULT_DIFFICULTY, DEFAULT_COLOR, DEFAULT_MODE); //create game
-	if (res->game == NULL)
-	{
-		failMessage("Couldn't create gui manager window!");
-		ManagerDestroy(res);
-		return NULL;
+	mangr->game = NULL;
+	mangr->settingsWin = NULL;
+	mangr->loadWin = NULL;
+	mangr->GameWindow = NULL;
+	mangr->introWin = NULL;
+	mangr->activeWin = MAIN_WINDOW;
+	mangr->prevWin = MAIN_WINDOW;
+	// mangr->whiteTime = 0;
+	// mangr->blackTime = 0;
+	mangr->game = gameCreate(HISTORY_SIZE, DEFAULT_DIFFICULTY, DEFAULT_COLOR, DEFAULT_MODE); //create game
+	ASSERT(mangr!=NULL);
+	for (int i = 0; i < MAX_OF_SAVED_FILES; i++){ //initializes the arrays
+		mangr->saved_games[i] = "";
 	}
-	for (int i = 0; i < MAX_OF_SAVED_FILES; i++) //initializes the arrays
-		res->saved_games[i] = "";
-	for (int i = 0; i < NUM_OF_IMAGES; i++)
-		res->board_images[i] = "";
-	updateImages(res);
-	initSaves(res); //xml files
-	return res;
+	for (int i = 0; i < NUM_OF_IMAGES; i++){
+		mangr->board_images[i] = "";
+	}
+		
+	updateImages(mangr);
+	initSaves(mangr); //xml files
+	return mangr;
 }
 
 void updateImages(GuiManager *src)

@@ -291,21 +291,21 @@ GAME_EVENT buttonUp(GameWindow *src, SDL_Event *event, int res, const char **boa
 	if (res == RESTART_GAME_BUTTON) //click on restart
 	{
 		playSound("./resources/sound/click.wav",SDL_MIX_MAXVOLUME);
-		SDL_Delay(200);
+		SDL_Delay(100);
 		return GAME_EVENT_RESTART;
 	}
 
 	if (res == SAVE_GAME_BUTTON) //click on save
 	{
 		playSound("./resources/sound/click.wav",SDL_MIX_MAXVOLUME);
-		SDL_Delay(200);
+		SDL_Delay(100);
 		return GAME_EVENT_SAVE;
 	}
 		
 	if (res == LOAD_GAME_BUTTON) //click on load
 	{
 		playSound("./resources/sound/click.wav",SDL_MIX_MAXVOLUME);
-		SDL_Delay(200);
+		SDL_Delay(100);
 		return GAME_EVENT_LOAD;
 	}	
 	
@@ -313,25 +313,26 @@ GAME_EVENT buttonUp(GameWindow *src, SDL_Event *event, int res, const char **boa
 	if (res == UNDO_GAME_BUTTON) //click on undo
 	{
 		playSound("./resources/sound/click.wav",SDL_MIX_MAXVOLUME);
-		SDL_Delay(200);
+		SDL_Delay(100);
 		return GAME_EVENT_UNDO;
 	}
 
 	if (res == MAIN_MENU_GAME_BUTTON) //click on main menu
 	{
 		playSound("./resources/sound/click.wav",SDL_MIX_MAXVOLUME);
-		SDL_Delay(500);
+		SDL_Delay(100);
 		return exitMessage(src, false);
 	}
 	
 	if (res == EXIT_GAME_BUTTON) //click on exit
 	{
 		playSound("./resources/sound/click.wav",SDL_MIX_MAXVOLUME);
-		SDL_Delay(400);
+		SDL_Delay(100);
 		return exitMessage(src, true);
-	}	
+	}
+	//right button of mouse click
 	if (inRange(res, 0, ((GRID * GRID) - 1)) && (event->button.button == SDL_BUTTON_RIGHT))
-	{ //right click
+	{ 
 		correct = boardUpdate(src->boardPanel, src->game, board_images);
 		if (!correct){
 			return GAME_EVENT_QUIT;
@@ -339,19 +340,21 @@ GAME_EVENT buttonUp(GameWindow *src, SDL_Event *event, int res, const char **boa
 		
 		return GAME_EVENT_NONE;
 	}
+	//left button of mouse click
 	if (inRange(res, 0, ((GRID * GRID) - 1)) && (event->button.button == SDL_BUTTON_LEFT))
-	{ //left click
+	{ 
 		cell_src = pixelToIndex(src->source_x + CELL_OFFSET + 1, src->source_y + CELL_OFFSET);
 		if (playerFig(src->game, cell_src / GRID, cell_src % GRID))
 		{
 			correct = Moving(src, cell_src, res, board_images); // make move
 			if (correct == QUIT){
+				playSound("./resources/sound/simple_move.wav",SDL_MIX_MAXVOLUME);
 				return GAME_EVENT_QUIT; // check if move succeeded
 			}
 			else if (correct == RESTART){
 				return GAME_EVENT_RESTART;
 			}
-			playSound("./resources/sound/simple_move.wav",SDL_MIX_MAXVOLUME);
+			
 			return GAME_EVENT_NONE;
 		}
 	}
@@ -525,7 +528,8 @@ int PCMove(GameWindow *src, const char **board_images)
 	if (src->game->mode == 1 && src->game->currentPlayer == playerPC(src->game))
 	{													  //pc move
 		move = miniMax(src->game, src->game->difficulty); //get the move
-		printf("%d%d->%d%d\n",move[0]+1,move[1]+1,move[2]+1,move[3]+1);
+		// printf("%d%d->%d%d\n",move[0]+1,move[1]+1,move[2]+1,move[3]+1);
+		
 		if (!move){ //checks allocation
 			failMessage("Couldn't allocate memory gamewindow line 529!");
 			return 0;
@@ -538,7 +542,9 @@ int PCMove(GameWindow *src, const char **board_images)
 			failMessage("Couldn't allocate memory gamewindow line 543!");
 			return 0;
 		}
+
 		free(move);
+
 		correct = boardUpdate(src->boardPanel, src->game, board_images); //update the board according to the computer's move
 		if (!correct){
 			return 0;
@@ -546,7 +552,11 @@ int PCMove(GameWindow *src, const char **board_images)
 		undoUpdate(src->settingPanel, src->game); //updates undo button
 		src->save_the_game = false;
 		src->check_printed = false; //updates flag fields
+		playSound("./resources/sound/simple_move.wav",SDL_MIX_MAXVOLUME);
+		src->game->mv_cnt +=1;
+		printf("pc move: %d\n", src->game->mv_cnt);
 	}
+
 	return 1;
 }
 
@@ -588,8 +598,9 @@ int statusMessage(GameWindow *src)
 		 {WHITE, WHITE, WHITE},
 		 /* [SDL_MESSAGEBOX_COLOR_BUTTON_SELECTED] */
 		 {WHITE, BLACK, WHITE}}};
+	//checkmate the winner is
 	if (src->game->game_status == CHECKMATE)
-	{ //checkmate the winner is
+	{ 
 		switchPlayer(src->game);
 		if (strcmp(color(src->game->currentPlayer), "white") == 0) //checks for winner
 			string = "WHITE player won!";
@@ -597,8 +608,9 @@ int statusMessage(GameWindow *src)
 			string = "BLACK player won!";
 		switchPlayer(src->game);
 	}
+	 //tie
 	else if (src->game->game_status == TIE)
-	{ //tie
+	{
 		string = "MATCH TIED!";
 	}
 	const SDL_MessageBoxData messageboxdata = {SDL_MESSAGEBOX_INFORMATION, NULL, "Game Status", string, SDL_arraysize(buttons), buttons, &colorScheme};
@@ -642,6 +654,10 @@ int Moving(GameWindow *src, int cell_src, int res, const char **board_images)
 			failMessage("Couldn't allocate memory game window line 640!");
 			return QUIT; //quit
 		}
+		
+		src->game->mv_cnt +=1;
+		printf("player %s count: %d\n",getCurrentPlayer(src->game)=='S'?"white":"black",src->game->mv_cnt);
+
 		src->check_printed = false;
 		src->save_the_game = false;					   //the saved game is not up to date
 		src->moving_cell->location->x = src->source_x; //drag and drop application
@@ -665,8 +681,10 @@ int Moving(GameWindow *src, int cell_src, int res, const char **board_images)
 		}
 		GameWindowdowDraw(src);
 		playSound("./resources/sound/simple_move.wav",SDL_MIX_MAXVOLUME);
-		if (!PCMove(src, board_images))
+		if (!PCMove(src, board_images)){
 			return QUIT; //quit
+		}
+			
 	}
 	else
 	{

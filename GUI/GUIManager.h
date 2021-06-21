@@ -41,15 +41,17 @@ typedef enum
 typedef struct
 {
 	GameWindow *GameWindow;	  //game window
-	MainWin *mainWin;	//main window
-	LoadWin *loadWin;	//load window
-	SettingsWin *settingsWin;  //settings window
-	Intro_Window* introWin;//Introductory Window
+	MainWin *mainWin;	      //main window
+	LoadWin *loadWin;	      //load window
+	SettingsWin *settingsWin; //settings window
+	Intro_Window* introWin;	  //Introductory Window
 	WINDOWS_LIST activeWin;	  //which window is active at the moment
 	WINDOWS_LIST prevWin;	  //previous window
 	CH_Game *game;			  //chess game
 	const char *board_images[NUM_OF_IMAGES];
 	const char *saved_games[MAX_OF_SAVED_FILES];
+	// int whiteTime;
+	// int blackTime;
 
 } GuiManager;
 

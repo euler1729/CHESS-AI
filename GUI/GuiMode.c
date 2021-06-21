@@ -3,7 +3,7 @@
 int startGuiMode()
 {
     //Initialize SDL_videos and Audio_system
-    if (SDL_Init(SDL_INIT_VIDEO) | SDL_Init(SDL_INIT_AUDIO))
+    if (SDL_Init(SDL_INIT_VIDEO) | SDL_Init(SDL_INIT_AUDIO) )
     {
         printf("ERROR: Unable to initialize GUI: %s\n", SDL_GetError());
         return 1;
@@ -30,37 +30,31 @@ int startGuiMode()
     while (!quit)
     {
         // if there's a Quit request
-        if (currentState(manager))
-        {
+        if (currentState(manager)){
             quit = 1;
             break;
         }
-        if (manager->activeWin != GAME_WINDOW)
-        {
-            playMusic("./resources/sound/keys-of-moon-white-petals.wav", SDL_MIX_MAXVOLUME / 2);
+        if (manager->activeWin != GAME_WINDOW){
+            playMusic("./resources/sound/keys-of-moon-white-petals.wav", SDL_MIX_MAXVOLUME / 50);
         }
-        else
-        {
+        else{
             playMusic("./resources/sound/keys-of-moon-white-petals.wav", SDL_MIX_MAXVOLUME / 100);
         }
 
-        while (SDL_PollEvent(&event))
-        {
+        while (SDL_PollEvent(&event)){
 
-            if (ManagerHandleEvent(manager, &event) == MANAGER_QUIT)
-            {
+            if (ManagerHandleEvent(manager, &event) == MANAGER_QUIT){
                 quit = 1;
                 break;
             }
-            if (currentState(manager))
-            {
+            if (currentState(manager)){
                 quit = 1;
                 break;
             }
             ManagerDraw(manager);
         }
     }
-    SDL_Delay(500);
+    SDL_Delay(300);
     endAudio();
     ManagerDestroy(manager);
     SDL_Quit();
@@ -69,7 +63,7 @@ int startGuiMode()
 
 int currentState(GuiManager *manager)
 {
-    assert(manager != NULL);
+    ASSERT(manager != NULL);
     if (manager->game->game_status != REGULAR)
     {
         int stat = statusMessage(manager->GameWindow);

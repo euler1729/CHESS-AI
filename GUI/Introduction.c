@@ -85,6 +85,7 @@ void IntroWindowDraw(Intro_Window *src)
     SDL_RenderCopy(src->RendererIntro, bgTexture, NULL, NULL);
     drawButton(src->introBackButton);
     SDL_RenderPresent(src->RendererIntro);
+    SDL_RenderClear(src->RendererIntro);
 }
 
 int isClickedOnBack(int x, int y, Intro_Window *src)

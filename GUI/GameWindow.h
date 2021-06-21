@@ -269,7 +269,7 @@ extern GAME_EVENT exitMessage(GameWindow *src, bool flag);
  */
 extern void undoUpdate(Panel *panel, CH_Game *game);
 /**
- * @brief makes comouter move
+ * @brief makes computer move
  * @param src
  * @param cell_src - the source cell of the event
  * @param win - the place of the event

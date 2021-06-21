@@ -934,6 +934,12 @@ CH_STATUS updateStatus(CH_Game* src)
         if(isTie(src)){
             return TIE;
         }
+        else if(src->mv_cnt>=100 && src->mode==DEFAULT_MODE){
+            return TIE;
+        }
+        else if(src->mv_cnt>=100 && src->mode == TWO_PLAYER_MODE){
+            return TIE;
+        }
     }
     return REGULAR;
 }

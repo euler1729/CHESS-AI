@@ -108,6 +108,7 @@ typedef struct ch_game{
     int user_color;// 1 for white and 0 for black
     int piece_promotion[4];
     int mv_cnt;
+    
 }CH_Game;
 
 //for error detection in game function
