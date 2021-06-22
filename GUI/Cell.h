@@ -13,6 +13,8 @@ typedef struct cell{
 } Cell;
 
 /**
+ * @brief creates cells of the game board
+ * 
  * @param location
  * @param renderer
  * @param cell_image
@@ -20,11 +22,18 @@ typedef struct cell{
  */
 extern Cell *CreateCell(SDL_Rect *location, SDL_Renderer *renderer, const char *cell_image);
 /**
- * @param cell
+ * @brief Destroys the Board cell
+ * 
  */
 extern void DestroyCell(Cell *cell);
+/**
+ * @brief Draws the board cell
+ * 
+ * @param cell 
+ */
 extern void DrawCell(Cell *cell);
 /**
+ * @brief Updated the cell textures of game board
  * @param cell
  * @param cell_image
  */

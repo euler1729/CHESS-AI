@@ -571,7 +571,7 @@ void undoUpdate(Panel *panel, CH_Game *game)
 {
 	ASSERT(panel != NULL); // ASSERTions
 	ASSERT(game != NULL);
-	if (game->undo_hist->actualSize < HISTORY_MIN_LIMIT || game->mode == TWO_PLAYER_MODE) // turn undo to be disable
+	if (game->undo_hist->actualSize < HISTORY_MIN_LIMIT || game->mode == TWO_PLAYER_MODE || game->difficulty>3) // turn undo to be disable
 		panel->buttonList[UNDO_GAME_BUTTON - (GRID * GRID)]->isEnabled = false;
 	else // turn undo to be enable
 		panel->buttonList[UNDO_GAME_BUTTON - (GRID * GRID)]->isEnabled = true;

@@ -337,6 +337,10 @@ bool gameUndoMove(CH_Game* game)
         printf("Undo Feature is not available in 2 players mode.\n");
         return false;
     }
+    if(game->difficulty>3){
+        printf("Undo unavailable for Moderate and Hard level.\n");
+        return false;
+    }
     if(game->undo_hist->actualSize<1){
         printf("Empty history, move cannot be undone.\n");
         return false;

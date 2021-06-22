@@ -356,10 +356,14 @@ MANAGER_EVENT handleManagerDueToGameEvent(GuiManager *src, GAME_EVENT event)
 			return MANAGER_QUIT;
 		return MANAGER_NONE;
 	}
-	if (event == GAME_EVENT_UNDO){
+	if (event == GAME_EVENT_UNDO && src->game->difficulty<4){
 		undoGameGui(src); //undo move
 		undoGameGui(src);
 		src->game->mv_cnt -= 1;
+	}
+	if(event==GAME_EVENT_UNDO && src->game->difficulty>3){
+		playSound("./resources/sound/wrong.wav",SDL_MIX_MAXVOLUME);
+		printf("Undo is unavailable for MODERATE and HARD level.\n");
 	}
 
 	return MANAGER_NONE;
