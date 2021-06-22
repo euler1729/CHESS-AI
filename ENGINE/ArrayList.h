@@ -7,9 +7,18 @@
 #include <stdbool.h>
 #include "ASSERT.h"
 
-#define CELL_SIZE 2 //specify the number of coordinates that represent a cell
 
+//Error flags
+typedef enum ARRAY_LIST_MESSAGE_t
+{
+    SP_ARRAY_LIST_SUCCESS,
+    SP_ARRAY_LIST_INVALID_ARGUMENT,
+    SP_ARRAY_LIST_FULL,
+    SP_ARRAY_LIST_EMPTY
+} ARRAY_LIST_MESSAGE;
 
+//specify the number of coordinates that represent a cell
+#define CELL_SIZE 2 
 
 
 // To save Move history
@@ -33,14 +42,6 @@ typedef struct sp_array_list_t
     int maxSize;
 } SPArrayList;
 
-//Uses for errors
-typedef enum ARRAY_LIST_MESSAGE_t
-{
-    SP_ARRAY_LIST_SUCCESS,
-    SP_ARRAY_LIST_INVALID_ARGUMENT,
-    SP_ARRAY_LIST_FULL,
-    SP_ARRAY_LIST_EMPTY
-} ARRAY_LIST_MESSAGE;
 
 
 /**

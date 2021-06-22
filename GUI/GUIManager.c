@@ -9,8 +9,8 @@ GuiManager *ManagerCreate()
 		return NULL;
 	}
 
-	mangr->mainWin = CreateMainWindow(); //creates main window
-	// printf("error\n");
+	//creates main window
+	mangr->mainWin = CreateMainWindow(); 
 	ASSERT(mangr->mainWin!=NULL);
 
 	//initializes gui manager's parameters
@@ -18,14 +18,14 @@ GuiManager *ManagerCreate()
 	mangr->settingsWin = NULL;
 	mangr->loadWin = NULL;
 	mangr->GameWindow = NULL;
-	mangr->introWin = NULL;
+	mangr->InstrWin = NULL;
 	mangr->activeWin = MAIN_WINDOW;
 	mangr->prevWin = MAIN_WINDOW;
-	// mangr->whiteTime = 0;
-	// mangr->blackTime = 0;
 	mangr->game = gameCreate(HISTORY_SIZE, DEFAULT_DIFFICULTY, DEFAULT_COLOR, DEFAULT_MODE); //create game
 	ASSERT(mangr!=NULL);
-	for (int i = 0; i < MAX_OF_SAVED_FILES; i++){ //initializes the arrays
+
+	//initializes the arrays
+	for (int i = 0; i < MAX_OF_SAVED_FILES; i++){ 
 		mangr->saved_games[i] = "";
 	}
 	for (int i = 0; i < NUM_OF_IMAGES; i++){
@@ -33,27 +33,28 @@ GuiManager *ManagerCreate()
 	}
 		
 	updateImages(mangr);
-	initSaves(mangr); //xml files
+	initSaves(mangr); //initialize xml file paths
 	return mangr;
 }
 
 void updateImages(GuiManager *src)
 {
 	//init all board images
+	//White Pieces
 	src->board_images[WHITE_PAWN_IMG] = "./resources/images/pic/WhiteP.bmp";
 	src->board_images[WHITE_BISHOP_IMG] = "./resources/images/pic/WhiteB.bmp";
 	src->board_images[WHITE_ROOK_IMG] = "./resources/images/pic/WhiteR.bmp";
 	src->board_images[WHITE_KNIGHT_IMG] = "./resources/images/pic/WhiteN.bmp";
 	src->board_images[WHITE_QUEEN_IMG] = "./resources/images/pic/WhiteQ.bmp";
 	src->board_images[WHITE_KING_IMG] = "./resources/images/pic/WhiteK.bmp";
-
+	//Black Pieces
 	src->board_images[BLACK_PAWN_IMG] = "./resources/images/pic/BlackP.bmp";
 	src->board_images[BLACK_BISHOP_IMG] = "./resources/images/pic/BlackB.bmp";
 	src->board_images[BLACK_ROOK_IMG] = "./resources/images/pic/BlackR.bmp";
 	src->board_images[BLACK_KNIGHT_IMG] = "./resources/images/pic/BlackN.bmp";
 	src->board_images[BLACK_QUEEN_IMG] = "./resources/images/pic/BlackQ.bmp";
 	src->board_images[BLACK_KING_IMG] = "./resources/images/pic/BlackK.bmp";
-
+	//Red-YELLOW-GREED cells
 	src->board_images[RED_CELL_IMG] = "./resources/images/pic/redCell.bmp";
 	src->board_images[YELLOW_CELL_IMG] = "./resources/images/pic/yellowCell.bmp";
 	src->board_images[GREEN_CELL_IMG] = "./resources/images/pic/greenCell.bmp";
@@ -89,8 +90,8 @@ void ManagerDestroy(GuiManager *src)
 	src->mainWin = NULL;
 	if (src->game != NULL)
 		gameDestroy(src->game);
-	if(src->introWin != NULL)
-		IntroWindowDestroy(src->introWin);
+	if(src->InstrWin != NULL)
+		InstrcWindowDestroy(src->InstrWin);
 	free(src);
 }
 
@@ -104,8 +105,8 @@ void ManagerDraw(GuiManager *src)
 		GameWindowdowDraw(src->GameWindow);
 	else if (src->activeWin == SETTINGS_WINDOW)
 		SettingsWindowDraw(src->settingsWin);
-	else if (src->activeWin == INTRO_WINDOW)
-		IntroWindowDraw(src->introWin);
+	else if (src->activeWin == INSTRC_WINDOW)
+		InstrcWindowDraw(src->InstrWin);
 	else if(src->activeWin == LOAD_WINDOW)
 		LoadWindowDraw(src->loadWin);
 	else{
@@ -147,21 +148,21 @@ MANAGER_EVENT handleManagerDueToMainEvent(GuiManager *src, MAIN_EVENT event)
 		src->activeWin = LOAD_WINDOW; //set active window to load window
 		LoadWindowShow(src->loadWin);
 	}
-	if(event == MAIN_INTRO_WINDOW)
+	if(event == MAIN_INSTRC_WINDOW)
 	{
 		MainWindowHide(src->mainWin);
 		src->prevWin = MAIN_WINDOW;
 
-		if(src->introWin==NULL){
-			src->introWin = IntroWindowCreate();
+		if(src->InstrWin==NULL){
+			src->InstrWin = InstrcWindowCreate();
 		}
 		
-		if(src->introWin==NULL){
+		if(src->InstrWin==NULL){
 			failMessage("Couldn't Create intro window in GUIMANAGER!\n");
 			return MANAGER_QUIT;
 		}
-		src->activeWin = INTRO_WINDOW;
-		IntroWindowShow(src->introWin);
+		src->activeWin = INSTRC_WINDOW;
+		InstrcWindowShow(src->InstrWin);
 	}
 	if (event == MAIN_EXIT)
 	{ //quit game if clicked on exit
@@ -169,18 +170,18 @@ MANAGER_EVENT handleManagerDueToMainEvent(GuiManager *src, MAIN_EVENT event)
 	}
 	return MANAGER_NONE;
 }
-MANAGER_EVENT HandleEventDueToIntroWindow(GuiManager* src, INTRO_EVENT event)
+MANAGER_EVENT HandleEventDueToInstrWindow(GuiManager* src, INSTRC_EVENT event)
 {
 	ASSERT(src!=NULL);
-	if(event == INTRO_BUTTON_BACK)
+	if(event == INSTRC_BUTTON_BACK)
 	{
-		IntroWindowHide(src->introWin);
+		InstrcWindowHide(src->InstrWin);
 		MainWindowShow(src->mainWin);
 		src->activeWin = MAIN_WINDOW;
-		src->prevWin = INTRO_WINDOW;
+		src->prevWin = INSTRC_WINDOW;
 		return MANAGER_NONE;
 	}
-	if(event == INTRO_WINDOW_EVENT_QUIT){
+	if(event == INSTRC_WINDOW_EVENT_QUIT){
 		return MANAGER_QUIT;
 	}
 	return MANAGER_NONE;
@@ -462,10 +463,10 @@ MANAGER_EVENT ManagerHandleEvent(GuiManager *src, SDL_Event *event)
 		SETTINGS_EVENT setEvent = SettingsWindowHandleEvent(src->settingsWin, event, src->game); //handle the event
 		return handleManagerDueToSetEvent(src, setEvent);										 //handle the windows due to the event of settings window
 	}
-	else if(src->activeWin == INTRO_WINDOW)
+	else if(src->activeWin == INSTRC_WINDOW)
 	{	
-		INTRO_EVENT introEvent = IntroWindowHandleEvent(src->introWin, event);
-		return HandleEventDueToIntroWindow(src, introEvent);
+		INSTRC_EVENT introEvent = InstrcWindowHandleEvent(src->InstrWin, event);
+		return HandleEventDueToInstrWindow(src, introEvent);
 	}
 	else
 	{																								//active window is game window
@@ -497,29 +498,6 @@ void saveUpdate(GuiManager *src)
 	for (int i = saved_counter; i > 0; i--)
 		rename(src->saved_games[i - 1], src->saved_games[i]);
 }
-
-MANAGER_EVENT gameRestart(GuiManager *src)
-{
-	CH_Game *copy = gameCreate(HISTORY_SIZE, src->game->difficulty, src->game->user_color, src->game->mode);
-	ASSERT(copy!=NULL);
-	gameAssign(copy, src->game); // assigns the new game
-	gameDestroy(copy);
-	ArrayListClear(src->game->undo_hist);// clears history
-
-	int correct = boardUpdate(src->GameWindow->boardPanel, src->game, src->board_images); //updates board
-	if (!correct){
-		return MANAGER_QUIT;
-	}
-		
-	undoUpdate(src->GameWindow->settingPanel, src->game); // updates undo button
-	src->GameWindow->save_the_game = true;				  // is up do date
-	src->GameWindow->check_printed = false;				  // check was not printed yet
-	if (!PCMove(src->GameWindow, src->board_images)){	  // computer move if needed
-		return MANAGER_QUIT;
-	}	
-	return MANAGER_NONE;
-}
-
 XML_MESSAGE saveGameGui(GuiManager *src)
 {
 	saveUpdate(src);
@@ -545,6 +523,30 @@ XML_MESSAGE saveGameGui(GuiManager *src)
 	}
 	return XML_SUCCESS;
 }
+
+
+MANAGER_EVENT gameRestart(GuiManager *src)
+{
+	CH_Game *copy = gameCreate(HISTORY_SIZE, src->game->difficulty, src->game->user_color, src->game->mode);
+	ASSERT(copy!=NULL);
+	gameAssign(copy, src->game); // assigns the new game
+	gameDestroy(copy);
+	ArrayListClear(src->game->undo_hist);// clears history
+
+	int correct = boardUpdate(src->GameWindow->boardPanel, src->game, src->board_images); //updates board
+	if (!correct){
+		return MANAGER_QUIT;
+	}
+		
+	undoUpdate(src->GameWindow->settingPanel, src->game); // updates undo button
+	src->GameWindow->save_the_game = true;				  // is up do date
+	src->GameWindow->check_printed = false;				  // check was not printed yet
+	if (!PCMove(src->GameWindow, src->board_images)){	  // computer move if needed
+		return MANAGER_QUIT;
+	}	
+	return MANAGER_NONE;
+}
+
 
 void undoGameGui(GuiManager *src)
 {

@@ -4,6 +4,7 @@
 int isClickedOnGame(int x, int y, GameWindow *src)
 {
 	ASSERT(src != NULL);
+
 	int start_x = GAME_ARGS_INIT;
 	int end_x = GAME_ARGS_INIT;
 	int start_y = GAME_ARGS_INIT;
@@ -12,12 +13,15 @@ int isClickedOnGame(int x, int y, GameWindow *src)
 	bool show = false;
 	cell = pixelToIndex(x, y);
 
-	if (inRange(x, BOARD_START_X, BOARD_END_X) && inRange(y, BOARD_START_Y, BOARD_END_Y)) //checks where there was a click on button
+	//checks where there was a click on button
+	if (inRange(x, BOARD_START_X, BOARD_END_X) && inRange(y, BOARD_START_Y, BOARD_END_Y)) 
 	{
 		return cell; //returns on whick button there was a click
 	}
+
+	//copies parameters needed
 	for (int i = 0; i < src->settingPanel->buttonCounter; i++)
-	{ //copies parameters needed
+	{
 
 		start_x = src->settingPanel->buttonList[i]->location->x;
 		end_x = src->settingPanel->buttonList[i]->location->x + src->settingPanel->buttonList[i]->location->w;
@@ -25,8 +29,7 @@ int isClickedOnGame(int x, int y, GameWindow *src)
 		end_y = src->settingPanel->buttonList[i]->location->y + src->settingPanel->buttonList[i]->location->h;
 		show = src->settingPanel->buttonList[i]->toShow;
 		//checks wheer there was a click on button
-		if (inRange(x, start_x, end_x) && inRange(y, start_y, end_y) && show)
-		{
+		if (inRange(x, start_x, end_x) && inRange(y, start_y, end_y) && show){
 			return i + (GRID * GRID); //returns on which button there was a click
 		}
 	}
@@ -47,30 +50,29 @@ GameWindow *GameWindowdowCreate(CH_Game *game, const char **board_images)
 	ASSERT(game != NULL);
 
 	GameWindow *win = (GameWindow *)calloc(sizeof(GameWindow), sizeof(char));
-	if (win == NULL)
-	{
+	if (win == NULL){
 		failMessage("Couldn't create game window!");
 		return NULL;
 	}
+
 	//Creating an application window with the following settings:
 	win->window = SDL_CreateWindow("QUEEN'S GAMBIT - GAME WINDOW", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HIGHT, SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
-	if (win->window == NULL)
-	{
+	if (win->window == NULL){
 		failMessage("Couldn't create game window!");
 		GameWindowdowDestroy(win);
 		return NULL;
 	}
+
 	win->renderer = SDL_CreateRenderer(win->window, -1, SDL_RENDERER_ACCELERATED);
-	if (win->renderer == NULL)
-	{
+	if (win->renderer == NULL){
 		failMessage("Couldn't create game window!");
 		GameWindowdowDestroy(win);
 		return NULL;
 	}
+
 	//creates board surface
 	SDL_Surface *boardSurface = SDL_LoadBMP("././resources/images/Boards/brown.bmp");
-	if (boardSurface == NULL)
-	{
+	if (boardSurface == NULL){
 		failMessage("Couldn't create game window(Surface)!");
 		GameWindowdowDestroy(win);
 		return NULL;
@@ -80,30 +82,31 @@ GameWindow *GameWindowdowCreate(CH_Game *game, const char **board_images)
 	win->boardPanel = CreatePanel(win->renderer, boardSurface, &boardLocation, false);
 
 	SDL_FreeSurface(boardSurface);
+
 	//creates settings surface
 	SDL_Surface *settingSurface = SDL_LoadBMP("./resources/images/pic/graySquare.bmp");
-	if (settingSurface == NULL)
-	{
+	if (settingSurface == NULL){
 		failMessage("Couldn't create game window(settingSurface)!");
 		GameWindowdowDestroy(win);
 		return NULL;
 	}
+
 	SDL_Rect settingLocation = {.x = SET_WINDOW_START_X, .y = SET_WINDOW_START_Y, .h = SET_HEIGHT, .w = SET_WIDTH};
 	win->settingPanel = CreatePanel(win->renderer, settingSurface, &settingLocation, true);
-	if (win->settingPanel == NULL || win->boardPanel == NULL)
-	{
+	
+	if (win->settingPanel == NULL || win->boardPanel == NULL){
 		failMessage("Couldn't create game window(settingSurface)!");
 		GameWindowdowDestroy(win);
 		return NULL;
 	}
+
 	SDL_FreeSurface(settingSurface);
 	win->game = game;
 	//initializing dragging
 	initDragArgs(win);
 
 	int correct = boardUpdate(win->boardPanel, win->game, board_images);
-	if (!correct)
-	{
+	if (!correct){
 		return NULL;
 	}
 	win->save_the_game = true;
@@ -113,27 +116,23 @@ GameWindow *GameWindowdowCreate(CH_Game *game, const char **board_images)
 
 void GameWindowdowDestroy(GameWindow *src)
 {
-	if (!src)
-	{ //if no need to destroy
+	if (!src){//if no need to destroy 
 		return;
-	} // destroy fields of struct
-	if (src->boardPanel != NULL)
-	{
+	} 
+	
+	if (src->boardPanel != NULL){// destroys fields of struct
 		DestroyPanel(src->boardPanel);
 	}
 	src->boardPanel = NULL;
-	if (src->settingPanel != NULL)
-	{
+	if (src->settingPanel != NULL){
 		DestroyPanel(src->settingPanel);
 	}
 	src->settingPanel = NULL;
-	if (src->renderer != NULL)
-	{
+	if (src->renderer != NULL){
 		SDL_DestroyRenderer(src->renderer);
 	}
 	src->renderer = NULL;
-	if (src->window != NULL)
-	{
+	if (src->window != NULL){
 		SDL_DestroyWindow(src->window);
 	}
 	src->window = NULL;
@@ -141,7 +140,8 @@ void GameWindowdowDestroy(GameWindow *src)
 }
 void initDragArgs(GameWindow *src)
 {
-	ASSERT(src != NULL);	 //ASSERTion
+	ASSERT(src != NULL);
+
 	src->moving_cell = NULL; // initialize args
 	src->to_drag = false;
 	src->target_x = GAME_ARGS_INIT;
@@ -158,8 +158,7 @@ int boardUpdate(Panel *panel, CH_Game *game, const char **board_images)
 	SDL_Texture *cellTexture = NULL;
 	SDL_Surface *boardSurface = SDL_LoadBMP("./resources/images/Boards/brown.bmp");
 
-	if (boardSurface == NULL)
-	{
+	if (boardSurface == NULL){
 		failMessage("Couldn't create game window!(boardUpdate)");
 		return 0;
 	}
@@ -197,88 +196,97 @@ int boardUpdate(Panel *panel, CH_Game *game, const char **board_images)
 const char *cellToImage(char ch, const char **board_images)
 {
 	ASSERT(board_images != NULL);
+
+	//switch according to the char that represents the cell
 	switch (ch)
-	{			 //switch according to the char that represents the cell
-	case PAWN_W: // return the path to the specific image
-		return board_images[WHITE_PAWN_IMG];
-	case BISHOP_W:
-		return board_images[WHITE_BISHOP_IMG];
-	case ROOK_W:
-		return board_images[WHITE_ROOK_IMG];
-	case KNIGHT_W:
-		return board_images[WHITE_KNIGHT_IMG];
-	case QUEEN_W:
-		return board_images[WHITE_QUEEN_IMG];
-	case KING_W:
-		return board_images[WHITE_KING_IMG];
-	case PAWN_B:
-		return board_images[BLACK_PAWN_IMG];
-	case BISHOP_B:
-		return board_images[BLACK_BISHOP_IMG];
-	case ROOK_B:
-		return board_images[BLACK_ROOK_IMG];
-	case KNIGHT_B:
-		return board_images[BLACK_KNIGHT_IMG];
-	case QUEEN_B:
-		return board_images[BLACK_QUEEN_IMG];
-	case KING_B:
-		return board_images[BLACK_KING_IMG];
-	case RED_CELL:
-		return board_images[RED_CELL_IMG];
-	case YELLOW_CELL:
-		return board_images[YELLOW_CELL_IMG];
-	case GREEN_CELL:
-		return board_images[GREEN_CELL_IMG];
-	default:
-		return NULL;
+	{
+	// return the path to the specific image			 
+		case PAWN_W: 
+			return board_images[WHITE_PAWN_IMG];
+		case BISHOP_W:
+			return board_images[WHITE_BISHOP_IMG];
+		case ROOK_W:
+			return board_images[WHITE_ROOK_IMG];
+		case KNIGHT_W:
+			return board_images[WHITE_KNIGHT_IMG];
+		case QUEEN_W:
+			return board_images[WHITE_QUEEN_IMG];
+		case KING_W:
+			return board_images[WHITE_KING_IMG];
+		case PAWN_B:
+			return board_images[BLACK_PAWN_IMG];
+		case BISHOP_B:
+			return board_images[BLACK_BISHOP_IMG];
+		case ROOK_B:
+			return board_images[BLACK_ROOK_IMG];
+		case KNIGHT_B:
+			return board_images[BLACK_KNIGHT_IMG];
+		case QUEEN_B:
+			return board_images[BLACK_QUEEN_IMG];
+		case KING_B:
+			return board_images[BLACK_KING_IMG];
+		case RED_CELL:
+			return board_images[RED_CELL_IMG];
+		case YELLOW_CELL:
+			return board_images[YELLOW_CELL_IMG];
+		case GREEN_CELL:
+			return board_images[GREEN_CELL_IMG];
+		default:
+			return NULL;
 	}
 }
 void GameWindowdowDraw(GameWindow *src)
 {
-	if (!src)
-	{
+	if (!src){
 		return;
 	}
+
 	SDL_SetRenderDrawColor(src->renderer, BOARD_R, BOARD_G, BOARD_B, 0);
 	SDL_RenderClear(src->renderer);
 	DrawPanel(src->settingPanel);
 	DrawPanel(src->boardPanel);
-	if (src->target_x != GAME_ARGS_INIT && src->to_drag)
-	{
+	if (src->target_x != GAME_ARGS_INIT && src->to_drag){
 		DrawCell(src->moving_cell);
 	}
 	SDL_RenderPresent(src->renderer);
 }
 GAME_EVENT GameWindowdowHandleEvent(GameWindow *src, SDL_Event *event, const char **board_images)
 {
-	if (event == NULL || src == NULL)
-	{
+	if (event == NULL || src == NULL){
 		return GAME_EVENT_INVALID_ARGUMENT;
 	}
+
 	GAME_EVENT eve;
 	int result;
 	int res = isClickedOnGame(event->button.x, event->button.y, src); //get event
 	switch (event->type)
 	{
-	case SDL_MOUSEBUTTONUP: //click on something (mouse up)
-		eve = buttonUp(src, event, res, board_images);
-		if (eve != NO_EVENT)
-			return eve;
-		break;
-	case SDL_WINDOWEVENT: //window close
-		if (event->window.event == SDL_WINDOWEVENT_CLOSE)
-			return GAME_EVENT_QUIT;
-		break;
-	case SDL_MOUSEBUTTONDOWN: // button down event
-		result = buttonDown(src, event, res, board_images);
-		if (result != NO_EVENT)
-			return GAME_EVENT_QUIT;
-		break;
-	case SDL_MOUSEMOTION: // motion event
-		Drag(src);
-		break;
-	default:
-		return GAME_EVENT_NONE;
+		case SDL_MOUSEBUTTONUP: //click on something (mouse up)
+		{	
+			eve = buttonUp(src, event, res, board_images);
+			if (eve != NO_EVENT)
+				return eve;
+			break;
+		}
+		case SDL_WINDOWEVENT: //window close
+		{	
+			if (event->window.event == SDL_WINDOWEVENT_CLOSE)
+				return GAME_EVENT_QUIT;
+			break;
+		}
+		case SDL_MOUSEBUTTONDOWN: // button down event
+		{	
+			result = buttonDown(src, event, res, board_images);
+			if (result != NO_EVENT)
+				return GAME_EVENT_QUIT;
+			break;
+		}
+		case SDL_MOUSEMOTION: // motion event
+		{	Drag(src);
+			break;
+		}
+		default:
+			return GAME_EVENT_NONE;
 	}
 	return GAME_EVENT_NONE;
 }
@@ -419,16 +427,16 @@ GAME_EVENT exitMessage(GameWindow *src, bool flag)
 			 /* [SDL_MESSAGEBOX_COLOR_BUTTON_BACKGROUND] */
 			 {WHITE, WHITE, WHITE},
 			 /* [SDL_MESSAGEBOX_COLOR_BUTTON_SELECTED] */
-			 {WHITE, BLACK, WHITE}}};
+			 {WHITE, BLACK, WHITE}}
+		};
+
 	const SDL_MessageBoxData messageboxdata = {SDL_MESSAGEBOX_INFORMATION, NULL, "Warning", "Do you want to save game before exiting ?", SDL_arraysize(buttons), buttons, &colorScheme};
 	int buttonid;
-	if (SDL_ShowMessageBox(&messageboxdata, &buttonid) < 0)
-	{
+	if (SDL_ShowMessageBox(&messageboxdata, &buttonid) < 0){
 		failMessage("Message box ERROR!");
 		return -1;
 	}
-	if (buttonid == YES_BUTTONID)
-	{ // user wants to save game
+	if (buttonid == YES_BUTTONID){ // user wants to save game
 		if (flag == true)
 			return GAME_EVENT_SAVE_EXIT;
 		else
@@ -481,11 +489,10 @@ bool getMovesGui(GameWindow *src, int row, int col, const char **board_images)
 		printf("ERROR: Couldn't allocate space\n");
 		return false;
 	}
-	for (int i = 0; i < GRID; i++)
-	{ //allocates board
+	for (int i = 0; i < GRID; i++){ //allocates board
+
 		board[i] = (char *)malloc(sizeof(char) * GRID);
-		if (board[i] == NULL)
-		{ //checks allocation
+		if (board[i] == NULL){ //checks allocation
 			for (int j = 0; j < i; j++)
 				free(board[j]);
 			free(board);
@@ -504,7 +511,7 @@ bool getMovesGui(GameWindow *src, int row, int col, const char **board_images)
 		for (int j = 0; j < GRID; j++)
 		{
 			char c = src->game->gameBoard[i][j];
-			if (board[i][j] != DEFAULT_CELL)			  //there is a move in get moves board
+			if (board[i][j] != DEFAULT_CELL)	//there is a move in get moves board
 				src->game->gameBoard[i][j] = board[i][j]; //update
 			board[i][j] = c;
 		}
@@ -586,8 +593,8 @@ int statusMessage(GameWindow *src)
 	}
 	const SDL_MessageBoxButtonData buttons[] = {{SDL_MESSAGEBOX_BUTTON_RETURNKEY_DEFAULT, RESTART_BUTTONID, "Restart"},
 												{SDL_MESSAGEBOX_BUTTON_ESCAPEKEY_DEFAULT, QUIT_BUTTONID, "Quit"}};
-	const SDL_MessageBoxColorScheme colorScheme = {
-		{/* .colors (.r, .g, .b) */
+	const SDL_MessageBoxColorScheme colorScheme = 
+	{{/* .colors (.r, .g, .b) */
 		 /* [SDL_MESSAGEBOX_COLOR_BACKGROUND] */
 		 {WHITE, WHITE, WHITE},
 		 /* [SDL_MESSAGEBOX_COLOR_TEXT] */
@@ -597,7 +604,8 @@ int statusMessage(GameWindow *src)
 		 /* [SDL_MESSAGEBOX_COLOR_BUTTON_BACKGROUND] */
 		 {WHITE, WHITE, WHITE},
 		 /* [SDL_MESSAGEBOX_COLOR_BUTTON_SELECTED] */
-		 {WHITE, BLACK, WHITE}}};
+		 {WHITE, BLACK, WHITE}
+	}};
 	//checkmate the winner is
 	if (src->game->game_status == CHECKMATE)
 	{ 
@@ -608,7 +616,7 @@ int statusMessage(GameWindow *src)
 			string = "BLACK player won!";
 		switchPlayer(src->game);
 	}
-	 //tie
+	//tie
 	else if (src->game->game_status == TIE)
 	{
 		string = "MATCH TIED!";
@@ -624,16 +632,19 @@ int statusMessage(GameWindow *src)
 }
 int Moving(GameWindow *src, int cell_src, int res, const char **board_images)
 {
-	ASSERT(src != NULL);												 //ASSERTion
-	int move[CELL_SIZE * CELL_SIZE], result, mouse_x, mouse_y, cell_trg; //initializes params
+	ASSERT(src != NULL);
+	//initializes params
+	int move[CELL_SIZE * CELL_SIZE], result, mouse_x, mouse_y, cell_trg;
+
 	bool check1, check2;
-	SDL_GetMouseState(&mouse_x, &mouse_y);	   //get mouse position
+	SDL_GetMouseState(&mouse_x, &mouse_y);//gets mouse position
 	cell_trg = pixelToIndex(mouse_x, mouse_y); // transfer pixels to cell on board
 	move[START_ROW_PLACE] = (cell_src / GRID) + 1;
 	move[START_COL_PLACE] = (cell_src % GRID) + 1;
 	move[DESTINATION_ROW_PLACE] = (cell_trg / GRID) + 1;
 	move[DESTINATION_COL_PLACE] = (cell_trg % GRID) + 1;
 	elem *element = transfer(src->game, move);
+
 	if (element == NULL)
 	{
 		failMessage("Couldn't allocate memory gamewindow line 625!");
@@ -646,8 +657,8 @@ int Moving(GameWindow *src, int cell_src, int res, const char **board_images)
 		failMessage("Couldn't allocate memory gamewindow line 632!");
 		return QUIT; //quit
 	}
-	else if (result == 1)
-	{									   //valid move
+	else if (result == 1)//valid move
+	{									   
 		result = setMove(src->game, move); //do the move!
 		if (result != 0)
 		{
@@ -672,8 +683,8 @@ int Moving(GameWindow *src, int cell_src, int res, const char **board_images)
 		undoUpdate(src->settingPanel, src->game);
 		initDragArgs(src);
 		if (src->game->game_status != REGULAR)
-		{ //check for change in status
-			result = statusMessage(src);
+		{ 
+			result = statusMessage(src);//checks for change in status
 			if (result == QUIT_BUTTONID || result == ERROR_FLAG)
 				return QUIT; //quit
 			else if (result == RESTART_BUTTONID)

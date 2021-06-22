@@ -8,6 +8,42 @@
 
 
 
+
+/**enums that represents all settings events possible **/
+
+//Represents all possible setting events
+typedef enum {
+	//general
+	SETTINGS_EVENT_BACK,
+	SETTINGS_EVENT_START,
+	SETTINGS_EVENT_NEXT,
+	//game mode
+	SETTINGS_EVENT_ONE_PLAYER,
+	SETTINGS_EVENT_TWO_PLAYER,
+	//difficulty
+	SETTINGS_EVENT_NOOB,
+	SETTINGS_EVENT_EASY,
+	SETTINGS_EVENT_MODERATE,
+	SETTINGS_EVENT_HARD,
+	//color
+	SETTINGS_EVENT_WHITE,
+	SETTINGS_EVENT_BLACK,
+	//errors
+	SETTINGS_EVENT_INVALID_ARGUMENT,
+	SETTINGS_EVENT_NONE,
+	SETTINGS_EVENT_QUIT
+} SETTINGS_EVENT;
+
+//retpresents the sub-setting windows 
+typedef enum{
+    //General
+    GameModeScreen,
+    DifficultyScreen,
+    ColorScreen
+}SUB_WINDOW;
+
+
+
 // BUTTONS DEFINING
 #define NOOB_BUTTON 0
 #define EASY_BUTTON 1
@@ -63,46 +99,14 @@
 
 //MASC
 #define SET_DRAG_INIT -1
-//enum that represents all settings events possible
-
-//Represents all possible setting events
-typedef enum {
-	//general
-	SETTINGS_EVENT_BACK,
-	SETTINGS_EVENT_START,
-	SETTINGS_EVENT_NEXT,
-	//game mode
-	SETTINGS_EVENT_ONE_PLAYER,
-	SETTINGS_EVENT_TWO_PLAYER,
-	//difficulty
-	SETTINGS_EVENT_NOOB,
-	SETTINGS_EVENT_EASY,
-	SETTINGS_EVENT_MODERATE,
-	SETTINGS_EVENT_HARD,
-	//color
-	SETTINGS_EVENT_WHITE,
-	SETTINGS_EVENT_BLACK,
-	//errors
-	SETTINGS_EVENT_INVALID_ARGUMENT,
-	SETTINGS_EVENT_NONE,
-	SETTINGS_EVENT_QUIT
-} SETTINGS_EVENT;
-
-//retpresents the sub-setting windows 
-typedef enum{
-    //General
-    GameModeScreen,
-    DifficultyScreen,
-    ColorScreen
-}SUB_WINDOW;
 
 
 // Represents Setting window
-typedef struct{
-    SDL_Window* window;//window name
+typedef struct setting_window{
+    SDL_Window* window;	   //window name
     SDL_Renderer* renderer;// window's renderer
-    Button** buttonList;//setting window button list
-    int buttonCounter;
+    Button** buttonList;   //setting window button list
+    int buttonCounter;     //Keeps the count of all buttons in the setting window
     SUB_WINDOW curr_screen;//current sub-window
 }SettingsWin;
 

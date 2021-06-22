@@ -29,11 +29,26 @@ typedef enum
 	GAME_EVENT_NONE
 } GAME_EVENT;
 
-#define borderX(a) ((abs(a - 800)) <= (abs(a - 200)) ? (770) : (230))
-#define borderY(a) ((abs(a - 600)) <= (a) ? (570) : (30))
-#define xValue(a, b, c) ((a - b) / c)
-#define yValue(a, b, c) ((a - 1 - b) / (c - 1))
-#define dist(a, b) (sqrt((a * a) + (b * b)))
+//IMAGES NUM INDEX DEFINING
+typedef enum
+{
+	WHITE_PAWN_IMG,
+	WHITE_BISHOP_IMG,
+	WHITE_ROOK_IMG,
+	WHITE_KNIGHT_IMG,
+	WHITE_QUEEN_IMG,
+	WHITE_KING_IMG,
+	BLACK_PAWN_IMG,
+	BLACK_BISHOP_IMG,
+	BLACK_ROOK_IMG,
+	BLACK_KNIGHT_IMG,
+	BLACK_QUEEN_IMG,
+	BLACK_KING_IMG,
+	RED_CELL_IMG,
+	YELLOW_CELL_IMG,
+	GREEN_CELL_IMG
+} PieceImagesId;
+
 
 // BUTTONS DEFINING
 #define RESTART_GAME_BUTTON 64
@@ -48,6 +63,7 @@ typedef enum
 #define BOARD_END_X 773
 #define BOARD_START_Y 27
 #define BOARD_END_Y 573
+
 //WINDOW SIZES DEFINING
 #define BOARD_PANEL_START_X 200
 #define BOARD_PANEL_START_Y 1
@@ -92,26 +108,6 @@ typedef enum
 #define NO_BUTTONID 2
 #define CANCEL_BUTTONID 3
 
-//IMAGES NUM INDEX DEFINING
-typedef enum
-{
-	WHITE_PAWN_IMG,
-	WHITE_BISHOP_IMG,
-	WHITE_ROOK_IMG,
-	WHITE_KNIGHT_IMG,
-	WHITE_QUEEN_IMG,
-	WHITE_KING_IMG,
-	BLACK_PAWN_IMG,
-	BLACK_BISHOP_IMG,
-	BLACK_ROOK_IMG,
-	BLACK_KNIGHT_IMG,
-	BLACK_QUEEN_IMG,
-	BLACK_KING_IMG,
-	RED_CELL_IMG,
-	YELLOW_CELL_IMG,
-	GREEN_CELL_IMG
-} PieceImagesId;
-
 //GET MOVES IMG CHARS
 #define DEFAULT_CELL '3'
 #define RED_CELL '1'
@@ -128,18 +124,26 @@ typedef enum
 //OTHERS
 #define HISTORY_MIN_LIMIT 2
 
+//Determines loaction of Pieces and cells
+#define borderX(a) ((abs(a - 800)) <= (abs(a - 200)) ? (770) : (230))
+#define borderY(a) ((abs(a - 600)) <= (a) ? (570) : (30))
+#define xValue(a, b, c) ((a - b) / c)
+#define yValue(a, b, c) ((a - 1 - b) / (c - 1))
+#define dist(a, b) (sqrt((a * a) + (b * b)))
+
+
 //Represents the game window
 typedef struct
 {
 	SDL_Window *window;
 	SDL_Renderer *renderer;
-	Panel *settingPanel; //
-	Panel *boardPanel;	 //
-	Cell *moving_cell;	 //cell that is moving
-	CH_Game *game;		 // whole board information stores
-	bool to_drag;		 //flag that represents whether to drag or not
+	Panel *settingPanel;
+	Panel *boardPanel;
+	Cell *moving_cell;//cell that is moving
+	CH_Game *game;	 // whole board information stores
+	bool to_drag;   //flag that represents whether to drag or not
 
-	//initial and target square
+	//initiales and target square
 	int source_x;
 	int source_y;
 	int target_x;

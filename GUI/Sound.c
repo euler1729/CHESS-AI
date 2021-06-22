@@ -4,6 +4,7 @@
 static PrivateAudioDevice *iDevice;
 static uint32_t iSoundCount;
 
+
 /**
  * @brief  Wrapper function for playMusic, playSound, playMusicFromMemory, playSoundFromMemory
  * 
@@ -35,6 +36,10 @@ static void addAudio(Audio *root, Audio *newAudio);
  * @param len  Length of sound to play
  */
 static inline void audioCallBack(void *userdata, uint8_t *stream, int len);
+
+
+
+
 
 void playSound(const char *file, int volume)
 {

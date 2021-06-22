@@ -6,6 +6,17 @@
 #include "Panel.h"
 #include "Sound.h"
 
+
+//represents all possible main events
+typedef enum{
+    MAIN_INVALID_ARGUMENT,
+    MAIN_START,
+    MAIN_LOAD,
+    MAIN_INSTRC_WINDOW,
+    MAIN_NONE,
+    MAIN_EXIT
+}MAIN_EVENT;
+
 // Buttons defining
 #define MAIN_START_BUTTON 0
 #define MAIN_LOAD_BUTTON 1
@@ -35,24 +46,16 @@
 #define MAIN_ARGS_INIT -1
 
 
-//represents all possible main events
-typedef enum{
-    MAIN_INVALID_ARGUMENT,
-    MAIN_START,
-    MAIN_LOAD,
-    MAIN_INTRO_WINDOW,
-    MAIN_NONE,
-    MAIN_EXIT
-}MAIN_EVENT;
 
 //represents main window
-typedef struct{
-    SDL_Window* mainWindow;//window name
-    SDL_Renderer* mainRenderer;//window's renderer
-    Button** buttonList; //main window buttons list
-    int buttonCounter;//number of buttons
-    // Panel* bgPanel;
+typedef struct main_window{
+    SDL_Window* mainWindow;     //window name
+    SDL_Renderer* mainRenderer; //window's renderer
+    Button** buttonList;        //main window buttons list
+    int buttonCounter;          //number of buttons
 }MainWin;
+
+
 /**
  * @brief Function that checks whether there was a click on a button in main screen
  * @param x - x coordinate of click

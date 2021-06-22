@@ -3,8 +3,7 @@
 int startGuiMode()
 {
     //Initialize SDL_videos and Audio_system
-    if (SDL_Init(SDL_INIT_VIDEO) | SDL_Init(SDL_INIT_AUDIO) )
-    {
+    if (SDL_Init (SDL_INIT_VIDEO | SDL_INIT_AUDIO| SDL_INIT_TIMER) ){
         printf("ERROR: Unable to initialize GUI: %s\n", SDL_GetError());
         return 1;
     }
@@ -35,7 +34,7 @@ int startGuiMode()
             break;
         }
         if (manager->activeWin != GAME_WINDOW){
-            playMusic("./resources/sound/keys-of-moon-white-petals.wav", SDL_MIX_MAXVOLUME / 50);
+            playMusic("./resources/sound/keys-of-moon-white-petals.wav", SDL_MIX_MAXVOLUME / 2);
         }
         else{
             playMusic("./resources/sound/keys-of-moon-white-petals.wav", SDL_MIX_MAXVOLUME / 100);

@@ -8,41 +8,9 @@
 #include <ctype.h>
 #include "ArrayList.h"
 
-#define NUM_OF_PIECES 6
-#define GRID 8
-#define HISTORY_SIZE 6
-
-enum {EMPTY, wP, wN, wB, wR, wQ, wK, bP, bN, bB, bR, bQ, bK};
-#define PAWN_W 'p'
-#define PAWN_B 'P'
-#define BISHOP_W 'b'
-#define BISHOP_B 'B'
-#define ROOK_W 'r'
-#define ROOK_B 'R'
-#define KNIGHT_W 'n'
-#define KNIGHT_B 'N'
-#define QUEEN_W 'q'
-#define QUEEN_B 'Q'
-#define KING_W 'k'
-#define KING_B 'K'
-
-#define CH_EMPTY_ENTRY '_'
-#define CH_PLAYER_1 'F' //(white player)
-#define CH_PLAYER_2 'S'//(Black player)
-#define CH_TIE 'T'
-
-//represent the number of maxPossible direction of moves of each piece
-#define KING_MOVES 8
-#define QUEEN_MOVES 27
-#define KNIGHT_MOVES 8
-#define ROOK_MOVES 14
-#define BISHOP_MOVES 13
-#define PAWN_MOVES 4
-
-// represent the number of each kind of piece
-#define PAWN_NUM 8
-#define B_R_Kn_NUM 2
-#define K_Q_NUM 1
+//***************************//////
+//Enumerators for Sequential values
+//***************************/////
 
 //error checking flag
 enum{
@@ -58,17 +26,13 @@ typedef enum CH_STATUS{
     TIE,
     REGULAR
 }CH_STATUS;
-
-
-
 //represent status
-enum{
+typedef enum status_t{
     CHECK_REP,
     CHECKMATE_REP,
     TIE_REP,
     REG_REP
-};
-
+}Statut_t;
 //Piece Index
 enum{
     PAWN_INDEX,
@@ -78,13 +42,6 @@ enum{
     QUEEN_INDEX,
     KING_INDEX
 };
-
-//default arguments
-#define DEFAULT_MODE 1
-#define DEFAULT_COLOR 1
-#define DEFAULT_DIFFICULTY 3
-#define TWO_PLAYER_MODE 2
-
 //represent moves to col ans row
 enum{
     START_ROW_PLACE,
@@ -92,13 +49,77 @@ enum{
     DESTINATION_ROW_PLACE,
     DESTINATION_COL_PLACE
 };
+//for error detection in game function
+typedef enum ch_game_message_t{
+    CH_INVALID_MOVE,
+    CH_INVALID_ARGUMENT,
+    CH_NO_HISTORY,
+    CH_SUCCESS
+}CH_GAME_MESSAGE;
+
+//Defines the numerical value of corresponding piece
+enum {EMPTY, wP, wN, wB, wR, wQ, wK, bP, bN, bB, bR, bQ, bK};
+
+
+
+
+//***************************//////
+//#define preprocessors foe constants
+//***************************/////
+#define NUM_OF_PIECES 6
+#define GRID 8
+#define HISTORY_SIZE 6 //maximum history of moves can be saved- for a single player it's HISTORY_SIZE/2
+
+/*Lowercase Letters for White pieces and Uppercase letters for Black pieces*/
+#define PAWN_W 'p'
+#define PAWN_B 'P'
+#define BISHOP_W 'b'
+#define BISHOP_B 'B'
+#define ROOK_W 'r'
+#define ROOK_B 'R'
+#define KNIGHT_W 'n'
+#define KNIGHT_B 'N'
+#define QUEEN_W 'q'
+#define QUEEN_B 'Q'
+#define KING_W 'k'
+#define KING_B 'K'
+
+#define CH_EMPTY_ENTRY '_'//represents there is no piece in the board
+#define CH_PLAYER_1 'F'   //(white player or First player)
+#define CH_PLAYER_2 'S'   //(Black player or Second player)
+#define CH_TIE 'T'        //constant to check the tie status of game
+
+//represent the number of maxPossible direction of moves of each piece
+#define KING_MOVES 8    //A king can move to 8 possible different cells maximum at a time 
+#define QUEEN_MOVES 27  //Queen can 27 cells
+#define KNIGHT_MOVES 8  //knight can 8 cells
+#define ROOK_MOVES 14   //Rook can 14
+#define BISHOP_MOVES 13 //bishop can 13
+#define PAWN_MOVES 4    //pawn can 4
+
+// represent the number of each kind of piece
+#define PAWN_NUM 8
+#define B_R_Kn_NUM 2
+#define K_Q_NUM 1
+
+
+//default arguments
+#define DEFAULT_MODE 1      //1 indicates the player vs computer move
+#define DEFAULT_COLOR 1     //indicates white
+#define DEFAULT_DIFFICULTY 3
+#define TWO_PLAYER_MODE 2   //indicated human vs human 
+
+
+//***************************//////
+//Structures
+//***************************/////
 
 //represent whole game data
 typedef struct ch_game{
     char gameBoard[GRID][GRID];
     CH_STATUS game_status;
-    int white[NUM_OF_PIECES];
-    int black[NUM_OF_PIECES];
+    int white[NUM_OF_PIECES]; //keeps the count of how many pieces the white player have of corresponting type
+    int black[NUM_OF_PIECES]; //keeps the count of how many pieces the black plauer have of corresponding type
     char currentPlayer;
     SPArrayList* undo_hist;
     int white_king[2];
@@ -111,13 +132,7 @@ typedef struct ch_game{
     
 }CH_Game;
 
-//for error detection in game function
-typedef enum ch_game_message_t{
-    CH_INVALID_MOVE,
-    CH_INVALID_ARGUMENT,
-    CH_NO_HISTORY,
-    CH_SUCCESS
-}CH_GAME_MESSAGE;
+
 /**
  * Creates a new game with a specified history size. The history size is a
  * parameter which specifies the number of previous moves to store. If the number

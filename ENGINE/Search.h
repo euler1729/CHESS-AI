@@ -18,12 +18,11 @@
 #define ALLOC_ERROR_VALUE 15000
 
 //represents the node int the MiniMax tree
-typedef struct{
+typedef struct node_t{
     int best_move[CELL_SIZE*CELL_SIZE];//the best col to choose for the current node according to minimax algo
-    char player;//the player
+    char player;//the current player
     CH_Game* game_copy; // copy the game with the moves represented by the node
 }Node;
-
 
 
 

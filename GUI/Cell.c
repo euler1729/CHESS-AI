@@ -3,9 +3,9 @@
 Cell *CreateCell(SDL_Rect *location, SDL_Renderer *renderer, const char *cell_image)
 {
     ASSERT((renderer != NULL) && (location != NULL));
+
     Cell *cell = (Cell *)malloc(sizeof(Cell));
-    if (!cell)
-    {
+    if (!cell){
         printf("Couldn't Create cell!\n");
         return NULL;
     }
@@ -15,31 +15,26 @@ Cell *CreateCell(SDL_Rect *location, SDL_Renderer *renderer, const char *cell_im
     cell->cellTexture = NULL;
     cell->renderer = renderer;
     cell->location = copyLocation(location);
-    if (cell->location == NULL)
-    {
+    if (cell->location == NULL){
         DestroyCell(cell);
         return NULL;
     }
     bool check = textureUpdate(cell, cell_image);
-    if (!check)
-    {
+    if (!check){
         return NULL;
     }
     return cell;
 }
 void DestroyCell(Cell *cell)
 {
-    if (cell == NULL)
-    {
+    if (cell == NULL){
         return;
     }
-    if (cell->location != NULL)
-    {
+    if (cell->location != NULL){
         free(cell->location);
     }
     cell->location = NULL;
-    if (cell->cellTexture != NULL)
-    {
+    if (cell->cellTexture != NULL){
         SDL_DestroyTexture(cell->cellTexture);
     }
     cell->cellTexture = NULL;
@@ -50,11 +45,9 @@ bool textureUpdate(Cell *cell, const char *cell_image)
 {
     ASSERT(cell != NULL);
 
-    if (cell_image != NULL)
-    {
+    if (cell_image != NULL){
         SDL_Surface *imageSurface = SDL_LoadBMP(cell_image);
-        if (imageSurface == NULL)
-        {
+        if (imageSurface == NULL){
             printf("ERROR: couldn't create surface!\n");
             return false;
         }
@@ -65,8 +58,7 @@ bool textureUpdate(Cell *cell, const char *cell_image)
 }
 void DrawCell(Cell *cell)
 {
-    if (cell == NULL)
-    {
+    if (cell == NULL){
         return;
     }
     //drawing cell

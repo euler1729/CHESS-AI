@@ -101,7 +101,7 @@ MAIN_EVENT HandleMainWindowEvent(MainWin *src, SDL_Event *event)
 			case MAIN_INTRO_BUTTON:
 			{
 				playSound("./resources/sound/click2.wav", SDL_MIX_MAXVOLUME);
-				return MAIN_INTRO_WINDOW;
+				return MAIN_INSTRC_WINDOW;
 			}
 			case MAIN_QUIT_BUTTON:
 			{

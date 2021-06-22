@@ -5,8 +5,7 @@
 #include "../ENGINE/ConsoleMode.h"
 
 //Represents Board Cell in the game
-typedef struct cell
-{
+typedef struct cell{
     SDL_Texture *cellTexture; //texture to be presented when the cell is enabled
     SDL_Renderer *renderer;   //renderer for cell
     SDL_Rect *location;       //rectangle to represent cell's location

@@ -7,7 +7,7 @@
 #include "GameWindow.h"
 #include "LoadWindow.h"
 #include "SettingWindow.h"
-#include "Introduction.h"
+#include "InstructionWin.h"
 #include "Sound.h"
 
 
@@ -27,7 +27,7 @@ typedef enum
 	GAME_WINDOW,
 	LOAD_WINDOW,
 	SETTINGS_WINDOW,
-	INTRO_WINDOW
+	INSTRC_WINDOW
 } WINDOWS_LIST;
 
 // represents events like quit window
@@ -44,14 +44,12 @@ typedef struct
 	MainWin *mainWin;	      //main window
 	LoadWin *loadWin;	      //load window
 	SettingsWin *settingsWin; //settings window
-	Intro_Window* introWin;	  //Introductory Window
+	InstrcWin* InstrWin;	  //Instruction Window
 	WINDOWS_LIST activeWin;	  //which window is active at the moment
 	WINDOWS_LIST prevWin;	  //previous window
 	CH_Game *game;			  //chess game
 	const char *board_images[NUM_OF_IMAGES];
 	const char *saved_games[MAX_OF_SAVED_FILES];
-	// int whiteTime;
-	// int blackTime;
 
 } GuiManager;
 
@@ -217,12 +215,12 @@ extern void undoGameGui(GuiManager *src);
  */
 extern MANAGER_EVENT gameRestart(GuiManager *src);
 /**
- * @brief 
+ * @brief Handles Eveent occurs in Instruction window
  * 
  * @param src 
  * @param event 
  * @return MANAGER_EVENT 
  */
-extern MANAGER_EVENT HandleEventDueToIntroWindow(GuiManager* src, INTRO_EVENT event);
+extern MANAGER_EVENT HandleEventDueToInstrWindow(GuiManager* src, INSTRC_EVENT event);
 
 #endif

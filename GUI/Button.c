@@ -4,8 +4,7 @@ void initButtons(Button **buttonsList, int size)
 {
     ASSERT(buttonsList != NULL);
     //initialize all buttons to not clicked
-    for (int i = 0; i < size; i++)
-    {
+    for (int i = 0; i < size; i++){
         buttonsList[i]->clicked = false;
     }
 }
@@ -14,56 +13,51 @@ Button *Create_Button(SDL_Rect *location, SDL_Renderer *buttonRenderer, const ch
 {
     ASSERT(buttonRenderer != NULL);
     ASSERT(location != NULL);
-    if (enable_image == NULL || disable_image == NULL)
-    {
+    if (enable_image == NULL || disable_image == NULL){
         failMessage("error in image! ");
         return NULL;
     }
+
     Button *button = (Button *)malloc(sizeof(Button));
-    if (!button)
-    {
+    if (!button){
         failMessage("Couldn't Create a Button!\n");
         return NULL;
     }
-    // printf("error\n");
+
     button->isEnabled = isEnabled;
     button->clicked = isClicked;
     button->toShow = toShow;
     button->buttonRenderer = buttonRenderer;
     button->location = NULL;
     button->location = copyLocation(location);
-    if (button->location == NULL)
-    {
+    if (button->location == NULL){
         failMessage("error in button location! ");
         free(button);
         return NULL;
     }
-    // printf("error\n");
+
     //Creating surface for enabling image
     SDL_Surface *loadingSurfaceEnable = SDL_LoadBMP(enable_image);
-    if (loadingSurfaceEnable == NULL)
-    {
-        // printf("error in loading surface enable\n");
+    if (loadingSurfaceEnable == NULL){
         free(button->location);
         free(button);
         failMessage("Couldn't create surface enable button! ");
         return NULL;
     }
-    // printf("error\n");
+
     //Creating surface for disabling image
     SDL_Surface *loadingSurfaceDisable = SDL_LoadBMP(disable_image);
-    if (loadingSurfaceDisable == NULL)
-    {
+    if (loadingSurfaceDisable == NULL){
         SDL_FreeSurface(loadingSurfaceEnable);
         free(button->location);
         free(button);
         failMessage("Couldn't create surface disable button! ");
         return NULL;
     }
+
     //Creating texture for enabling Button
     SDL_Texture *enableTexture = SDL_CreateTextureFromSurface(buttonRenderer, loadingSurfaceEnable);
-    if (enableTexture == NULL)
-    {
+    if (enableTexture == NULL){
         SDL_FreeSurface(loadingSurfaceEnable);
         SDL_FreeSurface(loadingSurfaceDisable);
         free(button->location);
@@ -72,6 +66,7 @@ Button *Create_Button(SDL_Rect *location, SDL_Renderer *buttonRenderer, const ch
         return NULL;
     }
     SDL_FreeSurface(loadingSurfaceEnable);
+
     //create texture for disable button
     SDL_Texture *disableTexture = SDL_CreateTextureFromSurface(buttonRenderer, loadingSurfaceDisable);
     if (disableTexture == NULL)
@@ -84,11 +79,12 @@ Button *Create_Button(SDL_Rect *location, SDL_Renderer *buttonRenderer, const ch
         failMessage("Couldn't create texture! ");
         return NULL;
     }
+    
     //update texture's fields
     SDL_FreeSurface(loadingSurfaceDisable);
     button->disable_buttonTexture = disableTexture;
     button->enable_buttonTexture = enableTexture;
-    // printf("error\n");
+
     return button;
 }
 

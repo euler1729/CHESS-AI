@@ -8,6 +8,24 @@
 #include "../ENGINE/ConsoleMode.h"
 #include "Sound.h"
 
+
+//enum that represents all load events possible
+typedef enum
+{
+	lOAD_EVENT_BACK,
+	lOAD_EVENT_lOAD,
+	lOAD_EVENT_SLOT1,
+	lOAD_EVENT_SLOT2,
+	lOAD_EVENT_SLOT3,
+	lOAD_EVENT_SLOT4,
+	lOAD_EVENT_SLOT5,
+	lOAD_EVENT_INVALID_ARGUMENT,
+	lOAD_EVENT_NONE,
+	LOAD_EVENT_QUIT
+} LOAD_EVENT;
+
+
+
 //BUTTONS
 #define SLOT1_BUTTON 0
 #define SLOT2_BUTTON 1
@@ -48,23 +66,8 @@
 #define ERROR_FLAG_LOAD -1
 #define LOAD_ARGS_INIT -1
 
-//enum that represents all load events possible
-typedef enum
-{
-	lOAD_EVENT_BACK,
-	lOAD_EVENT_lOAD,
-	lOAD_EVENT_SLOT1,
-	lOAD_EVENT_SLOT2,
-	lOAD_EVENT_SLOT3,
-	lOAD_EVENT_SLOT4,
-	lOAD_EVENT_SLOT5,
-	lOAD_EVENT_INVALID_ARGUMENT,
-	lOAD_EVENT_NONE,
-	LOAD_EVENT_QUIT
-} LOAD_EVENT;
 
 //Represents load window
-
 typedef struct
 {
 	SDL_Window *windowLoad;		//winodow name

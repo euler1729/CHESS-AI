@@ -39,12 +39,16 @@
         "guimanager.h": "c",
         "search.h": "c",
         "stdlib.h": "c",
-        "introduction.h": "c",
+        "InstructionWin.h": "c",
         "gamewindow.h": "c",
         "mainmenu.h": "c",
         "panel.h": "c",
         "assert.h": "c",
-        "stdbool.h": "c"
+        "stdbool.h": "c",
+        "loadwindow.h": "c",
+        "ctype.h": "c",
+        "string.h": "c",
+        "stdio.h": "c"
     },
     "terminal.integrated.shell.windows": "cmd.exe"
 }

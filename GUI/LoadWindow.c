@@ -3,6 +3,7 @@
 int isClickedOnLoad(int x, int y, LoadWin *src)
 {
 	ASSERT(src != NULL);
+	
 	int start_x = LOAD_ARGS_INIT;
 	int end_x = LOAD_ARGS_INIT;
 	int start_y = LOAD_ARGS_INIT;
@@ -24,6 +25,8 @@ int isClickedOnLoad(int x, int y, LoadWin *src)
 	}
 	return ERROR_FLAG_LOAD;
 }
+
+
 LoadWin *LoadWindowCreate(int num_of_saved_games)
 {
 	LoadWin *win = NULL;
@@ -68,6 +71,8 @@ LoadWin *LoadWindowCreate(int num_of_saved_games)
 	}
 	return win;
 }
+
+
 bool loadButtonInit(LoadWin *win, int num_of_saved_games)
 {
 	//create rect to represent buttons
@@ -111,6 +116,8 @@ bool loadButtonInit(LoadWin *win, int num_of_saved_games)
 	}
 	return true;
 }
+
+
 void LoadWindowDraw(LoadWin *src)
 {
 	ASSERT(src != NULL);
@@ -137,6 +144,7 @@ void LoadWindowDraw(LoadWin *src)
 	SDL_RenderPresent(src->rendererLoad);
 }
 
+
 LOAD_EVENT LoadWindowHandleEvent(LoadWin *src, SDL_Event *event)
 {
 	if ((!event) || (!src))
@@ -150,46 +158,54 @@ LOAD_EVENT LoadWindowHandleEvent(LoadWin *src, SDL_Event *event)
 	case SDL_MOUSEBUTTONUP:
 		switch (win)
 		{ //checks which button was clicked
-		case SLOT1_BUTTON:
-			activateAfterClick(src, lOAD_EVENT_SLOT1);
-			playSound("./resources/sound/click2.wav", SDL_MIX_MAXVOLUME);
-			return lOAD_EVENT_NONE;
-		case SLOT2_BUTTON:
-			activateAfterClick(src, lOAD_EVENT_SLOT2);
-			playSound("./resources/sound/click2.wav", SDL_MIX_MAXVOLUME);
-			return lOAD_EVENT_NONE;
-		case SLOT3_BUTTON:
-			activateAfterClick(src, lOAD_EVENT_SLOT3);
-			playSound("./resources/sound/click2.wav", SDL_MIX_MAXVOLUME);
-			return lOAD_EVENT_NONE;
-		case SLOT4_BUTTON:
-			activateAfterClick(src, lOAD_EVENT_SLOT4);
-			playSound("./resources/sound/click2.wav", SDL_MIX_MAXVOLUME);
-			return lOAD_EVENT_NONE;
-		case SLOT5_BUTTON:
-			activateAfterClick(src, lOAD_EVENT_SLOT5);
-			playSound("./resources/sound/click2.wav", SDL_MIX_MAXVOLUME);
-			return lOAD_EVENT_NONE;
-		case LOAD_BACK_BUTTON:
-			playSound("./resources/sound/click2.wav", SDL_MIX_MAXVOLUME);
-			return lOAD_EVENT_BACK;
-		case LOAD_LOAD_BUTTON:
-			playSound("./resources/sound/click2.wav", SDL_MIX_MAXVOLUME);
-			return lOAD_EVENT_lOAD;
+			case SLOT1_BUTTON:
+			{	activateAfterClick(src, lOAD_EVENT_SLOT1);
+				playSound("./resources/sound/click2.wav", SDL_MIX_MAXVOLUME);
+				return lOAD_EVENT_NONE;
+			}
+			case SLOT2_BUTTON:
+			{	activateAfterClick(src, lOAD_EVENT_SLOT2);
+				playSound("./resources/sound/click2.wav", SDL_MIX_MAXVOLUME);
+				return lOAD_EVENT_NONE;
+			}
+			case SLOT3_BUTTON:
+			{	activateAfterClick(src, lOAD_EVENT_SLOT3);
+				playSound("./resources/sound/click2.wav", SDL_MIX_MAXVOLUME);
+				return lOAD_EVENT_NONE;
+			}
+			case SLOT4_BUTTON:
+			{	activateAfterClick(src, lOAD_EVENT_SLOT4);
+				playSound("./resources/sound/click2.wav", SDL_MIX_MAXVOLUME);
+				return lOAD_EVENT_NONE;
+			}
+			case SLOT5_BUTTON:
+			{	activateAfterClick(src, lOAD_EVENT_SLOT5);
+				playSound("./resources/sound/click2.wav", SDL_MIX_MAXVOLUME);
+				return lOAD_EVENT_NONE;
+			}
+			case LOAD_BACK_BUTTON:
+			{	playSound("./resources/sound/click2.wav", SDL_MIX_MAXVOLUME);
+				return lOAD_EVENT_BACK;
+			}
+			case LOAD_LOAD_BUTTON:
+			{	playSound("./resources/sound/click2.wav", SDL_MIX_MAXVOLUME);
+				return lOAD_EVENT_lOAD;
+			}
 		}
-		break;
-	case SDL_WINDOWEVENT:
-		//checks whether the user tried to close the window
-		if (event->window.event == SDL_WINDOWEVENT_CLOSE)
-		{
+			break;
+			case SDL_WINDOWEVENT:
+			//checks whether the user tried to close the window
+			if (event->window.event == SDL_WINDOWEVENT_CLOSE)
+			{
 			return LOAD_EVENT_QUIT;
-		}
-		break;
-	default:
-		return lOAD_EVENT_NONE;
+			}
+			break;
+		default:
+			return lOAD_EVENT_NONE;
 	}
 	return lOAD_EVENT_NONE;
 }
+
 
 void activateAfterClick(LoadWin *src, int event)
 {
@@ -221,16 +237,20 @@ void activateAfterClick(LoadWin *src, int event)
 	}
 }
 
+
 void LoadWindowHide(LoadWin *src)
 {
 	ASSERT(src != NULL);
 	SDL_HideWindow(src->windowLoad);
 }
+
+
 void LoadWindowShow(LoadWin *src)
 {
 	ASSERT(src != NULL);
 	SDL_ShowWindow(src->windowLoad);
 }
+
 
 void LoadWindowDestroy(LoadWin *src)
 {
@@ -247,7 +267,7 @@ void LoadWindowDestroy(LoadWin *src)
 		}
 		free(src->buttonList);
 	}
-	// destroy all struct fields
+	// destroys all struct fields
 	src->buttonList = NULL;
 	if (src->rendererLoad != NULL)
 	{

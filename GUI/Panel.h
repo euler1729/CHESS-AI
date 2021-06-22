@@ -5,9 +5,6 @@
 #include "Sound.h"
 
 
-
-
-
 #define NUM_OF_SET_PANEL_BUTTONS 6
 
 //Window define
@@ -35,6 +32,8 @@ typedef struct panel{
     SDL_Texture* panelTexture;
     SDL_Rect* location;
 }Panel;
+
+
 /**
  * @brief Create a Panel object
  * 
@@ -46,27 +45,27 @@ typedef struct panel{
  */
 extern Panel* CreatePanel(SDL_Renderer* renderer,SDL_Surface* image, SDL_Rect* location, bool isSetPanel);
 /**
- * @brief Create a Game Panel Cells object
+ * @brief Creates a Game Panel Cells object
  * 
  * @param renderer 
  * @return Cell** 
  */
 extern Cell** CreateGamePanelCells(SDL_Renderer* renderer);
 /**
- * @brief Create a Set Panel Buttons object
+ * @brief Creates a Set Panel Buttons object
  * 
  * @param renderer 
  * @return Button** 
  */
 extern Button** CreateSetPanelButtons(SDL_Renderer* renderer);
 /**
- * @brief 
+ * @brief Frees memory of panel
  * 
  * @param panel 
  */
 extern void DestroyPanel(Panel* panel);
 /**
- * @brief 
+ * @brief Draws Panle. Applied in GameWindow
  * 
  * @param panel 
  */

@@ -15,11 +15,14 @@ int isClickedOnSetting(int x, int y, SettingsWin *src)
 		start_y = src->buttonList[i]->location->y;
 		end_y = src->buttonList[i]->location->y + src->buttonList[i]->location->h;
 		shown = src->buttonList[i]->toShow;
-		if (inRange(x, start_x, end_x) && inRange(y, start_y, end_y) && shown) //check click
+		if (inRange(x, start_x, end_x) && inRange(y, start_y, end_y) && shown){ //check click
 			return i;
+		}	
 	}
 	return -1;
 }
+
+
 SettingsWin *SettingsWindowCreate()
 {
 
@@ -67,6 +70,8 @@ SettingsWin *SettingsWindowCreate()
 	}
 	return win;
 }
+
+
 bool setButtonsInit(SettingsWin *src)
 {
 	ASSERT(src != NULL);
@@ -121,6 +126,7 @@ bool setButtonsInit(SettingsWin *src)
 	return true;
 }
 
+
 void SettingsWindowDestroy(SettingsWin *src)
 {
 	if (!src)
@@ -149,6 +155,8 @@ void SettingsWindowDestroy(SettingsWin *src)
 	src->window = NULL;
 	free(src);
 }
+
+
 void SettingsWindowDraw(SettingsWin *src)
 {
 	if (src == NULL)
@@ -168,6 +176,7 @@ void SettingsWindowDraw(SettingsWin *src)
 	}
 	SDL_RenderPresent(src->renderer);
 }
+
 
 void SettingsChangeToGameMode(SettingsWin *src)
 {
@@ -191,6 +200,7 @@ void SettingsChangeToGameMode(SettingsWin *src)
 	src->curr_screen = GameModeScreen;
 	SDL_RenderPresent(src->renderer);
 }
+
 
 void SettingsChangeToDifficulty(SettingsWin *src)
 {
@@ -216,6 +226,7 @@ void SettingsChangeToDifficulty(SettingsWin *src)
 	SDL_RenderPresent(src->renderer);
 }
 
+
 void SettingsChangeToColor(SettingsWin *src)
 {
 	if (src == NULL)
@@ -238,6 +249,7 @@ void SettingsChangeToColor(SettingsWin *src)
 	src->curr_screen = ColorScreen;
 	SDL_RenderPresent(src->renderer);
 }
+
 
 SETTINGS_EVENT SettingsWindowHandleEvent(SettingsWin *src, SDL_Event *event, CH_Game *game)
 {
@@ -306,6 +318,7 @@ SETTINGS_EVENT SettingsWindowHandleEvent(SettingsWin *src, SDL_Event *event, CH_
 	return SETTINGS_EVENT_NONE;
 }
 
+
 void gameModeChanges(SettingsWin *src, CH_Game *game, bool one_player)
 {
 	if (one_player)
@@ -325,6 +338,7 @@ void gameModeChanges(SettingsWin *src, CH_Game *game, bool one_player)
 	src->buttonList[SET_NEXT_BUTTON]->toShow = one_player;
 	src->buttonList[SET_START_BUTTON]->toShow = (!one_player);
 }
+
 
 void gameDiffChanges(SettingsWin *src, CH_Game *game, int diff)
 {
@@ -360,6 +374,7 @@ void gameDiffChanges(SettingsWin *src, CH_Game *game, int diff)
 	}
 }
 
+
 void gameColorChanges(SettingsWin *src, CH_Game *game, int color)
 {
 	ASSERT(src != NULL);
@@ -371,10 +386,12 @@ void gameColorChanges(SettingsWin *src, CH_Game *game, int color)
 	src->buttonList[BLACK_BUTTON]->isEnabled = (!color);
 }
 
+
 void SettingsWindowHide(SettingsWin *src)
 {
 	SDL_HideWindow(src->window);
 }
+
 
 void SettingsWindowShow(SettingsWin *src)
 {

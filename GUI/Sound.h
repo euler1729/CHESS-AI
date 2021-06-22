@@ -6,32 +6,6 @@
 #include <stdint.h>
 #include <SDL2/SDL.h>
 
-// Queue for all loaded sound
-typedef struct audio{
-
-    uint32_t length;
-    uint32_t lengthTrue;
-    uint8_t* bufferTrue;
-    uint8_t* buffer;
-    uint8_t loop;
-    uint8_t fade;
-    uint8_t free;
-    uint8_t volume;
-
-    SDL_AudioSpec audioSpec;
-
-    struct audio *next;
-
-}Audio;
-
-// Global Sound Device
-typedef struct privateAudioDevice{
-    
-    SDL_AudioDeviceID device;
-    SDL_AudioSpec audioSpec;
-    uint8_t audioEnabled;
-
-}PrivateAudioDevice;
 
 
 // SDL_AudioFormat of sound
@@ -60,9 +34,36 @@ typedef struct privateAudioDevice{
 #define SDL_AUDIO_ALLOW_CHANGES SDL_AUDIO_ALLOW_ANY_CHANGE
 
 
+// Queue for all loaded sound
+typedef struct audio{
+
+    uint32_t length;
+    uint32_t lengthTrue;
+    uint8_t* bufferTrue;
+    uint8_t* buffer;
+    uint8_t loop;
+    uint8_t fade;
+    uint8_t free;
+    uint8_t volume;
+    SDL_AudioSpec audioSpec;
+    struct audio *next;
+}Audio;
+
+// Global Sound Device
+typedef struct privateAudioDevice{
+    
+    SDL_AudioDeviceID device;
+    SDL_AudioSpec audioSpec;
+    uint8_t audioEnabled;
+
+}PrivateAudioDevice;
+
+
+
+
+
 /**
  * @brief Play a wave file currently must be S16LE format 2 channel stereo
- *
  * @param filename  Filename to open, use getAbsolutePath
  * @param volume    Volume 0 - 128. SDL_MIX_MAXVOLUME constant for max volume
  * 
@@ -78,7 +79,6 @@ extern void playMusic(const char* file, int volume);
 /**
  * @brief Plays a sound from a createAudio object (clones), only 1 at a time plays
  * Advantage to this method is no more disk reads, only once, data is stored and constantly reused
- *
  * @param audio Audio object to clone and use
  * @param volume Volume read playSound for moree
  */
@@ -93,22 +93,18 @@ extern void playSoundFromMemory(Audio* audio, int volume);
 extern void playMusicFromMemory(Audio* audio, int volume);
 /**
  * @brief Pause audio from playing
- * 
  */
 extern void pauseAudio(void);
 /**
- * @brief 
- * Unpause audio from playing
+ * @brief Unpause audio from playing
  */
 extern void unPauseAudio(void);
 /**
- * @brief 
- * 
+ * @brief ends an audio
  */
 extern void endAudio(void);
 /**
  * @brief Frees as many chained Audios as given
- * 
  *  @param audio Chain of sounds to free 
  */
 void freeAudio(Audio * audio);

@@ -74,7 +74,9 @@ int miniMaxRec(Node *src, int level, int maxDepth, bool maximize, int alpha, int
                     src->best_move[START_ROW_PLACE] = ALLOC_ERROR_FLAG;
                     return ALLOC_ERROR_VALUE;
                 }
-                size = numOfMoves(src->game_copy->gameBoard[i][j]); //maximum number of moves possible of that figure
+
+                //maximum number of moves possible of the piece
+                size = numOfMoves(src->game_copy->gameBoard[i][j]); 
                 for (int k = 0; (k < size) && (alpha < beta); ++k)
                 {
                     if (arr[k][0] == NO_MOVES_FLAG)
