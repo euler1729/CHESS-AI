@@ -71,7 +71,7 @@ void IntroWindowDraw(Intro_Window *src)
 {
     ASSERT(src != NULL);
     //Drawing Background
-    SDL_Surface *surface = SDL_LoadBMP("./resources/images/pic/instructins.bmp");
+    SDL_Surface *surface = SDL_LoadBMP("./resources/images/pic/instructionWin.bmp");
     if (!surface)
     {
         failMessage("Couldn't Load Surface on IntroWindow!\n");
