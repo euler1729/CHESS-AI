@@ -273,9 +273,9 @@ elem *ArrayListGetFirst(SPArrayList *src)
 }
 elem *ArrayListGetLast(SPArrayList *src)
 {
-    if (!src)
+    if (src==NULL)
     {
-        printf("error\n");
+        printf("error in line 278 of ArrayList.h\n");
         return NULL;
     }
     return ArrayListGetAt(src,(src->actualSize)-1);

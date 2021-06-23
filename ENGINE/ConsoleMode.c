@@ -345,13 +345,14 @@ bool gameUndoMove(CH_Game* game)
         printf("Empty history, move cannot be undone.\n");
         return false;
     }
-    // elem* element;
-    // element = ArrayListGetLast(game->undo_hist);
+    elem* element;
+    element = ArrayListGetLast(game->undo_hist);
     status = undoPrevMove(game);
     if(status != CH_SUCCESS){
         return false;
     }
-    // printf("Undo move for player %s: <%c%d> -> <%c%d>\n",color(game->currentPlayer),element->destinationCol+ASCII_OFFSET+1,element->destinationRow+1,element->startCol+ASCII_OFFSET+1,element->startRow+1);
+    game->mv_cnt -=1;
+    printf("Undo move for player %s: <%c%d> -> <%c%d>\n",color(game->currentPlayer),element->destinationCol+ASCII_OFFSET+1,element->destinationRow+1,element->startCol+ASCII_OFFSET+1,element->startRow+1);
     return true;
 }
 void statusCheck(CH_Game* game)

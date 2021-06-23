@@ -71,7 +71,7 @@ void InstrcWindowDraw(InstrcWin *src)
 {
     ASSERT(src != NULL);
     //Drawing Background
-    SDL_Surface *surface = IMG_Load("./resources/images/pic/instruct1.png");
+    SDL_Surface *surface = IMG_Load("./resources/images/pic/instrcWin.png");
     if (!surface)
     {
         failMessage("Couldn't Load Surface on InstrcWindow!\n");

@@ -2,17 +2,17 @@
 <game>
 	<current_turn>1</current_turn>
 	<game_mode>1</game_mode>
-	<diffifcult>3</difficulty>
+	<diffifcult>2</difficulty>
 	<user_color>1</user_color>
-	<move_count>29</move_count>
+	<move_count>74</move_count>
 	<board>
-		<row_8>RN__KBNR</row_8>
-		<row_7>_B__PP_P</row_7>
-		<row_6>_____Q__</row_6>
-		<row_5>Pp_p__P_</row_5>
-		<row_4>p______p</row_4>
-		<row_3>b_n__npb</row_3>
-		<row_2>__pp_p__</row_2>
-		<row_1>_r_qk__r</row_1>
+		<row_8>__B____p</row_8>
+		<row_7>R_KN__q_</row_7>
+		<row_6>________</row_6>
+		<row_5>Pp______</row_5>
+		<row_4>Q_p_____</row_4>
+		<row_3>______p_</row_3>
+		<row_2>___nbp__</row_2>
+		<row_1>___rk__r</row_1>
 	</board>
 </game>

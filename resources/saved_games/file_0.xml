@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <game>
 	<current_turn>1</current_turn>
-	<game_mode>1</game_mode>
-	<diffifcult>5</difficulty>
-	<user_color>1</user_color>
-	<move_count>6</move_count>
+	<game_mode>2</game_mode>
+	<move_count>2</move_count>
 	<board>
 		<row_8>RNBQKBNR</row_8>
-		<row_7>__PPPPPP</row_7>
-		<row_6>_P______</row_6>
-		<row_5>_n______</row_5>
-		<row_4>P__p____</row_4>
+		<row_7>PP_PPPPP</row_7>
+		<row_6>________</row_6>
+		<row_5>__P_____</row_5>
+		<row_4>___p____</row_4>
 		<row_3>________</row_3>
 		<row_2>ppp_pppp</row_2>
-		<row_1>r_bqkbnr</row_1>
+		<row_1>rnbqkbnr</row_1>
 	</board>
 </game>
