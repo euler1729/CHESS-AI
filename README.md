@@ -14,8 +14,8 @@
   - _[Installation](#installation)_
   - _[Build and Run](#Build-and-Run)_
 
-- **[References](#references)**
-- **[Author Info](#author-info)**
+- **[REFERENCES](#references)**
+- **[AUTHORS](#author-info)**
 
 ---
 
