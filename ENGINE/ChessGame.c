@@ -1556,7 +1556,7 @@ CH_GAME_MESSAGE getMovesBonus(CH_Game *src, int row, int col, char **board, bool
 			fig = copy->gameBoard[arr[i][0]][arr[i][1]];
 			copy->gameBoard[arr[i][0]][arr[i][1]] = copy->gameBoard[row][col]; //make the move
 			copy->gameBoard[row][col] = CH_EMPTY_ENTRY;
-			printf("<%d,%c>", arr[i][0] + 1, arr[i][1] + 65);
+			// printf("<%d,%c>", arr[i][0] + 1, arr[i][1] + 65);
 			if(gui)
 			{
                 board[arr[i][0]][arr[i][1]] = '0'; //can move to this cell
@@ -1564,7 +1564,7 @@ CH_GAME_MESSAGE getMovesBonus(CH_Game *src, int row, int col, char **board, bool
 			if(pieceUnderAttack(copy, arr[i][0], arr[i][1]))
 			{ 
                 //checks if the piece is threatened
-				printf("*");
+				// printf("*");
 				if (gui)
                 {
                     board[arr[i][0]][arr[i][1]] = '1'; // piece can be attacked
@@ -1572,7 +1572,7 @@ CH_GAME_MESSAGE getMovesBonus(CH_Game *src, int row, int col, char **board, bool
 			}
 			if (isOppPiece(src, arr[i][0], arr[i][1]))
 			{ //check if the piece eats other fig
-				printf("^");
+				// printf("^");
 				if (gui)
 				{
 					if (board[arr[i][0]][arr[i][1]] != '1') // can eat opp piece
@@ -1581,7 +1581,7 @@ CH_GAME_MESSAGE getMovesBonus(CH_Game *src, int row, int col, char **board, bool
                     }	
 				}
 			}
-			printf("\n");
+			// printf("\n");
 			copy->gameBoard[row][col] = copy->gameBoard[arr[i][0]][arr[i][1]]; //undo the move
 			copy->gameBoard[arr[i][0]][arr[i][1]] = fig;
 		}
