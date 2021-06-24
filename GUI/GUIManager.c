@@ -1,5 +1,6 @@
 #include "GUIManager.h"
 
+
 GuiManager *ManagerCreate()
 {
 	GuiManager *mangr = (GuiManager *)malloc(sizeof(GuiManager));

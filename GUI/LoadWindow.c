@@ -1,5 +1,6 @@
 #include "LoadWindow.h"
 
+
 int isClickedOnLoad(int x, int y, LoadWin *src)
 {
 	ASSERT(src != NULL);

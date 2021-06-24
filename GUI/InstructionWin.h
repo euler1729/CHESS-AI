@@ -1,6 +1,7 @@
 #ifndef INSTRUCTIONWIN_H_
 #define INSTRUCTIONWIN_H_
 
+
 #include <SDL2/SDL_image.h>
 #include <stdbool.h>
 #include <stdio.h>

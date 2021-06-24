@@ -1,5 +1,6 @@
 #include "ChessGame.h"
 
+
 CH_Game* gameCreate(int historySize, int diff, int color, int mode)
 {
     if(historySize<=0){

@@ -1,5 +1,6 @@
 #include "SettingWindow.h"
 
+
 int isClickedOnSetting(int x, int y, SettingsWin *src)
 {
 	ASSERT(src != NULL);

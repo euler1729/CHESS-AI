@@ -1,5 +1,6 @@
 #include "GuiMode.h"
 
+
 int startGuiMode()
 {
     //Initialize SDL_videos and Audio_system

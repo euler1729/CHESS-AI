@@ -1,5 +1,6 @@
 #include "XMLREADWRITE.h"
 
+
 char *boardRowToLine(CH_Game *src, int row)
 {
     ASSERT(src != NULL);

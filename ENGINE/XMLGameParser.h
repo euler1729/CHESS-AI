@@ -1,12 +1,14 @@
 #ifndef XMLGAMEPARSER_H_
 #define XMLGAMEPARSER_H_
 
+
 #include <stdio.h>
 #include <stdalign.h>
 #include <stdbool.h>
 #include <string.h>
 #include <ctype.h>
 #include <assert.h>
+
 
 #define SP_MAX_LINE_LENGTH 1024 
 #define PATH_COMMANDS_FLAG_GAME 3

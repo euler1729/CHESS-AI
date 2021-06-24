@@ -1,6 +1,7 @@
 #ifndef LOADWINDOW_H_
 #define LOADWINDOW_H_
 
+
 #include <stdio.h>
 #include <stdbool.h>
 #include <assert.h>

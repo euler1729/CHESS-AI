@@ -1,6 +1,7 @@
 #ifndef CONSOLEMODE_H_
 #define CONSOLEMODE_H_
 
+
 #include <stdlib.h>
 #include "Search.h"
 #include "XMLREADWRITE.h"

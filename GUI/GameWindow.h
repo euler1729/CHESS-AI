@@ -1,6 +1,7 @@
 #ifndef GameWindow_H_
 #define GameWindow_H_
 
+
 #include <stdio.h>
 #include <math.h>
 #include <time.h>
@@ -8,6 +9,7 @@
 #include "Button.h"
 #include "Panel.h"
 #include "Sound.h"
+
 
 //Represernts all events in game window
 typedef enum

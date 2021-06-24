@@ -1,5 +1,6 @@
 #include "Search.h"
 
+
 int *miniMax(CH_Game *currentGame, unsigned int maxDepth)
 {
     ASSERT(currentGame != NULL);

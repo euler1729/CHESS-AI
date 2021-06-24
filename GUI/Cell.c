@@ -1,5 +1,6 @@
 #include "Cell.h"
 
+
 Cell *CreateCell(SDL_Rect *location, SDL_Renderer *renderer, const char *cell_image)
 {
     ASSERT((renderer != NULL) && (location != NULL));

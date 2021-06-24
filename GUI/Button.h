@@ -1,6 +1,7 @@
 #ifndef BUTTON_H_
 #define BUTTON_H_
 
+
 #include <stdio.h>
 #include <stdbool.h>
 #include <SDL2/SDL.h>

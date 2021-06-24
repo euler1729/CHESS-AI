@@ -1,5 +1,6 @@
 #include "Button.h"
 
+
 void initButtons(Button **buttonsList, int size)
 {
     ASSERT(buttonsList != NULL);

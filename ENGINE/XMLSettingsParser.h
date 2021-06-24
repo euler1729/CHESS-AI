@@ -1,11 +1,13 @@
 #ifndef XMLSETTINGSPARSER_H_
 #define XMLSETTINGSPARSER_H_
 
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
 #include <ctype.h>
+
 
 #define SP_MAX_LINE_LENGTH 1024
 #define PATH_COMMAND_FLAG 2

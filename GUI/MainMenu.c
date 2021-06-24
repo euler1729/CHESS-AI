@@ -1,5 +1,6 @@
 #include "MainMenu.h"
 
+
 MainWin *CreateMainWindow()
 {
 	MainWin *res = NULL;

@@ -1,6 +1,7 @@
 #include "GameWindow.h"
 
 
+
 int isClickedOnGame(int x, int y, GameWindow *src)
 {
 	ASSERT(src != NULL);

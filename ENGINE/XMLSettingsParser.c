@@ -1,6 +1,7 @@
 #include "XMLSettingsParser.h"
 
 
+
 bool parserIsInt(const char* str)
 {
     if(str==NULL)

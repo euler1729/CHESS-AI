@@ -1,5 +1,6 @@
 #include "Panel.h"
 
+
 Panel *CreatePanel(SDL_Renderer *renderer, SDL_Surface *image, SDL_Rect *location, bool isSetPanel)
 {
 	if ((image == NULL) || (renderer == NULL))

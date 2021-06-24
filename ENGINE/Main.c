@@ -1,6 +1,7 @@
 #include "../GUI/GuiMode.h"
 #include "ConsoleMode.h"
 
+
 int main(int argc, char *args[])
 {
 	assert((argc == 1) || (argc == 2));

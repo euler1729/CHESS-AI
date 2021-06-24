@@ -1,5 +1,6 @@
 #include "ConsoleMode.h"
 
+
 void startGame()
 {
     CH_Game* game = gameCreate(HISTORY_SIZE, DEFAULT_DIFFICULTY, DEFAULT_COLOR, DEFAULT_MODE);
