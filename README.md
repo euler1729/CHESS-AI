@@ -1,9 +1,39 @@
 # QUEEN'S GAMBIT
+
 ![Project Image](resources/images/pic/logo.png)
 
-**QUEEN'S GAMBIT is an AI based Chess Game.**
 
-The game can be played in both Console mode and GUI mode.The whole game is written in C. SDL2 libraries have been used to build the game.
+
+# CONTENTS
+
+- **[ABOUT](#about)**
+- **[FEATURES](#features)**
+- **[OBJECTIVES](#objectives)**
+- **[INSTALLATION PROCEDURE](#installation-procedures)**
+
+  - _[Installation](#installation)_
+  - _[Build and Run](#Build-and-Run)_
+
+- **[References](#references)**
+- **[Author Info](#author-info)**
+
+---
+
+# ABOUT
+
+"QUEEN'S GAMBIT" is a computer chess game. TWO persons can play the game sitting side by side. If anyone wants to play against the computer, he/she can also do so. The game rules and method of playing the game are given on the instruction menu of the game. The game written in C and SDL2 libraries has been used for GUI. Currently available on LINUX Kernel-based Operating Systems.
+
+
+# FEATURES
+
+- HUMAN vs HUMAN (Two player mode)
+- HUMAN vs Computer (One player mode)
+- Game can be saved anytime and can be continued at convenient time
+- Four Difficulty Levels
+
+
+
+# OBJECTIVES
 
 **The main objectives of the game:**
 1. To improve skill in playing chess
@@ -12,37 +42,74 @@ The game can be played in both Console mode and GUI mode.The whole game is writt
 4. To improve programming and problem solving skill in C
 
 
-# FEATURES
-- HUMAN vs HUMAN (Two player mode)
-- HUMAN vs Computer (One player mode)
-- Game can be saved anytime and can be continued at convenient time
-- Four Difficulty Levels
+## PROGRAMMING LANGUAGE
 
-# Availability
-- Now available on **LINUX** based Operating Systems such as **Ubuntu**, **POP OS** etc.
-# Requirements
-  ## LINUX:
-  - Libraries for Debian Based Distributoins : ```build-essential``` ```libsdl2-dev```
-  - make
+- C
 
-# Clone the Repository
+## LIBRARIES
+
+- SDL2
+- SDL2_image
+
+[Back To The Top](#contents)
+
+
+---
+
+## Now Available On
+
+- **LINUX** kernel based Operating Systems such as **Ubuntu**, **POP OS** etc.
+
+
+# INSTALLATION PROCEDURES
+
+### **Installation**
+
+*Run the following commands on your Linux terminal.*
+
+
+#### **SDL2 Library:**
+
+```console
+$ sudo apt-get install libsdl2-dev
 ```
+#### **Additional SDL2 Library:**
+
+- ##### SDL Image
+
+```console
+$ sudo apt-get install libsdl2-image-dev
+```
+
+
+#### Clone the Repository
+
+```console
 git clone https://github.com/Eulers2020/CHESS-AI.git
 ```
 
-# Commands to run
- Go to the the CHESS-AI directory run the following command:
-  - make
-  - make clean(to clean object files)
-  * To play in GUI Mode: ./QueensGambit -g
-  * To play in Console Mode: ./QueensGambit -c or anything else instead of c
-  * To quit in console mode, just write quit and enter.
-  
-  
-# Future Plan
-- Improve searching algorithm
-- Adding Multiplayer mode
-- EnPassant and Castling implementation
-# Resources
-The following resources helped me to build the game in the long run of the project. I learned many things from those resources.
--   [ChessProgrammingWiki](https://www.chessprogramming.org/Main_Page)
+#### **Build and Run**
+
+Go to the CHESS-AI directory and run the following command
+
+```console
+$ make && make clean && ./QueensGambit -g
+```
+
+
+---
+
+## REFERENCES
+- [ChessProgrammingWiki](https://www.chessprogramming.org/Main_Page)
+- [SDL Wiki](https://wiki.libsdl.org/Tutorials)
+- [Lazyfoo SDL Tutorials](https://lazyfoo.net/tutorials/SDL/index.php)
+
+
+
+## AUTHORS
+
+- Mahmudul Hasan - [@Eulers2020](https://github.com/Eulers2020)
+- Ahad Bin Islam Shoeb - [@ShoebAhad](https://github.com/ShoebAhad)
+
+
+[Back To The Top](#contents)
