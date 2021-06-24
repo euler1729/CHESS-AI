@@ -561,7 +561,7 @@ int PCMove(GameWindow *src, const char **board_images)
 		src->check_printed = false; //updates flag fields
 		playSound("./resources/sound/simple_move.wav",SDL_MIX_MAXVOLUME);
 		src->game->mv_cnt +=1;
-		printf("pc move: %d\n", src->game->mv_cnt);
+		// printf("pc move: %d\n", src->game->mv_cnt);
 	}
 
 	return 1;
@@ -667,7 +667,7 @@ int Moving(GameWindow *src, int cell_src, int res, const char **board_images)
 		}
 		
 		src->game->mv_cnt +=1;
-		printf("player %s count: %d\n",getCurrentPlayer(src->game)=='S'?"white":"black",src->game->mv_cnt);
+		// printf("player %s count: %d\n",getCurrentPlayer(src->game)=='S'?"white":"black",src->game->mv_cnt);
 
 		src->check_printed = false;
 		src->save_the_game = false;					   //the saved game is not up to date
