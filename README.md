@@ -85,7 +85,7 @@ $ sudo apt-get install libsdl2-image-dev
 #### Clone the Repository
 
 ```console
-git clone https://github.com/Eulers2020/CHESS-AI.git
+git clone https://github.com/euler1729/CHESS-AI.git
 ```
 
 #### **Build and Run**
@@ -108,7 +108,7 @@ $ make && make clean && ./QueensGambit -g
 
 ## AUTHORS
 
-- Mahmudul Hasan - [@Eulers2020](https://github.com/Eulers2020)
+- Mahmudul Hasan - [@euler1729](https://github.com/euler1729)
 - Ahad Bin Islam Shoeb - [@ShoebAhad](https://github.com/ShoebAhad)
 
 
