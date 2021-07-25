@@ -109,7 +109,7 @@ $ make && make clean && ./QueensGambit -g
 ## AUTHORS
 
 - Mahmudul Hasan - [@euler1729](https://github.com/euler1729)
-- Ahad Bin Islam Shoeb - [@ShoebAhad](https://github.com/ShoebAhad)
+- Ahad Bin Islam Shoeb -[@ShoebAhad](https://github.com/ShoebAhad)
 
 
 [Back To The Top](#contents)
